@@ -5,24 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './core/index/index.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PessoaComponent } from './services/pessoa/pessoa/pessoa.component';
-import { ProdutoComponent } from './services/produto/produto/produto.component';
-import { PessoaServiceComponent } from './services/pessoa/pessoa.service/pessoa.service.component';
-import { ProdutoServiceComponent } from './services/produto/produto.service/produto.service.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    SidebarComponent,
-    PessoaComponent,
-    ProdutoComponent,
-    PessoaServiceComponent,
-    ProdutoServiceComponent
+    SidebarComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
