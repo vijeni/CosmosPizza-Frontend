@@ -1,0 +1,6 @@
+export enum Status {
+    AGUARDANDO_CONFIRMACAO,
+    PREPARANDO_PEDIDO,
+    EM_ROTA,
+    ENCERRADO
+}
