@@ -5,10 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './core/index/index.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PessoaComponent } from './services/pessoa/pessoa/pessoa.component';
-import { ProdutoComponent } from './services/produto/produto/produto.component';
-import { PessoaServiceComponent } from './services/pessoa/pessoa.service/pessoa.service.component';
-import { ProdutoServiceComponent } from './services/produto/produto.service/produto.service.component';
 import { PessoasListComponent } from './views/pessoas/pessoas-list/pessoas-list.component';
 import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas-details.component';
 import { IngredienteListComponent } from './views/ingredientes/ingrediente-list/ingrediente-list.component';
@@ -23,16 +19,15 @@ import { SaborListaComponent } from './views/sabor/sabor-lista/sabor-lista.compo
 import { SaborDetailsComponent } from './views/sabor/sabor-details/sabor-details.component';
 import { TamanhoListComponent } from './views/tamanho/tamanho-list/tamanho-list.component';
 import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho-details.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     SidebarComponent,
-    PessoaComponent,
-    ProdutoComponent,
-    PessoaServiceComponent,
-    ProdutoServiceComponent,
     PessoasListComponent,
     PessoasDetailsComponent,
     IngredienteListComponent,
@@ -46,13 +41,23 @@ import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho
     SaborListaComponent,
     SaborDetailsComponent,
     TamanhoListComponent,
-    TamanhoDetailsComponent
+    TamanhoDetailsComponent,
+    PedidosListComponent,
+    PedidosDetailsComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
+
 export class AppModule { }
