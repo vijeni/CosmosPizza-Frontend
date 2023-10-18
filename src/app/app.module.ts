@@ -9,6 +9,8 @@ import { PessoaComponent } from './services/pessoa/pessoa/pessoa.component';
 import { ProdutoComponent } from './services/produto/produto/produto.component';
 import { PessoaServiceComponent } from './services/pessoa/pessoa.service/pessoa.service.component';
 import { ProdutoServiceComponent } from './services/produto/produto.service/produto.service.component';
+import { PessoasListComponent } from './views/pessoas/pessoas-list/pessoas-list.component';
+import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ProdutoServiceComponent } from './services/produto/produto.service/prod
     PessoaComponent,
     ProdutoComponent,
     PessoaServiceComponent,
-    ProdutoServiceComponent
+    ProdutoServiceComponent,
+    PessoasListComponent,
+    PessoasDetailsComponent
   ],
   imports: [
     BrowserModule,
