@@ -8,6 +8,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PedidosListComponent } from './views/pedidos/pedidos-list/pedidos-list.component';
+import { PedidosDetailsComponent } from './views/pedidos/pedidos-details/pedidos-details.component';
 
 
 
@@ -15,7 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     IndexComponent,
-    SidebarComponent
+    SidebarComponent,
+    PedidosListComponent,
+    PedidosDetailsComponent
   ],
   imports: [    
     BrowserModule,
