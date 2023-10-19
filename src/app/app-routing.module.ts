@@ -18,12 +18,11 @@ const routes: Routes = [
     ]},
     {path: "produtos", component: ProdutoListComponent},
     {path: "produto", component: ProdutoListComponent, children: [
-      {path: ":id", component: ProdutoListComponent},
       {path: "novo", component: ProdutoListComponent},
       {path: "editar/:id", component: ProdutoListComponent},
-      {path: "cancelar/:id", component: ProdutoListComponent}
-    ]},
-    {path: "pessoas", component: PessoasListComponent}
+      {path: "cancelar/:id", component: ProdutoListComponent},
+      {path: ":id", component: ProdutoListComponent},
+    ]}
   ]}
 ];
 
