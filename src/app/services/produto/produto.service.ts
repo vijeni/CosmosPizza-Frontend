@@ -17,11 +17,11 @@ export class ProdutoService {
     getAll(): Observable<Produto[]> {
       return this.http.get<Produto[]>(`${this.API}/todos`);
     }
-    post(pedido: Produto): Observable<Produto> {
-      return this.http.post<Produto>(`${this.API}/cadastrar`, pedido);
+    post(produto: Produto): Observable<Produto> {
+      return this.http.post<Produto>(`${this.API}/cadastrar`, produto);
     }
-    put(id: number, pedido: Produto): Observable<Produto> {
-      return this.http.put<Produto>(`${this.API}/editar/${id}`, pedido);
+    put(id: number, produto: Produto): Observable<Produto> {
+      return this.http.put<Produto>(`${this.API}/editar/${id}`, produto);
     }
     delete(id: number): Observable<any> {
       return this.http.get<any>(`${this.API}/delete/${id}`);
