@@ -7,7 +7,7 @@ import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
   providedIn: 'root',
 })
 export class IngredientesService {
-  API: string = 'http://localhost:8080/ingrediente';
+  API: string = 'http://localhost:8080/api/ingrediente';
   http = inject(HttpClient);
 
   constructor() {}
@@ -23,6 +23,9 @@ export class IngredientesService {
   }
   put(id: number, ingrediente: Ingrediente): Observable<Ingrediente> {
     return this.http.put<Ingrediente>(`${this.API}/editar/${id}`, ingrediente);
+  }
+  finalizarPedido(id: number): Observable<Ingrediente> {
+    return this.http.put<Ingrediente>(`${this.API}/finalizar/${id}`, null);
   }
   delete(id: number): Observable<any> {
     return this.http.get<any>(`${this.API}/delete/${id}`);
