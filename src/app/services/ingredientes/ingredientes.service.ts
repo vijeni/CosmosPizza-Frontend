@@ -24,9 +24,6 @@ export class IngredientesService {
   put(id: number, ingrediente: Ingrediente): Observable<Ingrediente> {
     return this.http.put<Ingrediente>(`${this.API}/editar/${id}`, ingrediente);
   }
-  finalizarPedido(id: number): Observable<Ingrediente> {
-    return this.http.put<Ingrediente>(`${this.API}/finalizar/${id}`, null);
-  }
   delete(id: number): Observable<any> {
     return this.http.get<any>(`${this.API}/delete/${id}`);
   }
