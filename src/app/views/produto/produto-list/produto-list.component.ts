@@ -26,7 +26,7 @@ export class ProdutoListComponent {
         this.produtos = produtos;
       },
       error: (erro) => {
-        alert(erro.error);
+        console.log(erro.error);
       },
     });
   }

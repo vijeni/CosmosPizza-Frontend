@@ -22,12 +22,12 @@ import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
-    SidebarComponent,
     PessoasListComponent,
     PessoasDetailsComponent,
     IngredienteListComponent,
@@ -43,7 +43,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TamanhoListComponent,
     TamanhoDetailsComponent,
     PedidosListComponent,
-    PedidosDetailsComponent
+    PedidosDetailsComponent,
+    
+    
   ],
   imports: [    
     BrowserModule,
@@ -52,6 +54,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    SidebarComponent,
+    BrowserAnimationsModule,
     
   ],
   providers: [],
