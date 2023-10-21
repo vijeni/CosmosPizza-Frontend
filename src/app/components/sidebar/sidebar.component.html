@@ -63,6 +63,7 @@
         </p>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="cozinhaCollapse">
           <div class="card">
+            <ul>
             <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Produtos
@@ -79,6 +80,7 @@
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Sabores
             </button>
+            </ul>
           </div>
         </div>
         <li class="border-top my-3"></li>
@@ -104,10 +106,12 @@
             </p>
             <div #collapse="ngbCollapse" [(ngbCollapse)]="configuracoesCollapse">
               <div class="card">
+                <ul>
                 <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
                   <img src="../../../assets/siderbar/configuracoes-icon.svg" height="20vh" alt="">
                   Funcionários
                 </button>
+              </ul>
               </div>
             </div>
             
