@@ -1,33 +1,36 @@
-<div class="d-flex justify-content-between ">
-    <h4>Clientes</h4>
-    <button [routerLink]="['/web/pessoas/novo']" class="btn btn-warning">CADASTRAR CLIENTE</button>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+  <div class="w-90">
+      <div class="d-flex justify-content-between header">
+          <h5 class="m-0 fw-bold">Pessoas</h5>
+          <button type="button" [routerLink]="['/web/pessoas/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
+      </div>
+      <hr>
+      <table class="table table-striped">
+          <thead>
+              <tr class="sem-borda">
+                  <th scope="col" class="col-md-1 text-center">Código</th>
+                  <th scope="col" class="col-md-2 text-center">Nome</th>
+                  <th scope="col" class="col-md-1 text-center">Telefone</th>
+                  <th scope="col" class="col-md-2 text-center">CPF</th>
+                  <th scope="col" class=" col-md-2 text-center">Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="sem-borda">
+                  <th class="align-middle text-center col-md-1" scope="row">#1</th>
+                  <td class="align-middle text-center col-md-2">Jean</td>
+                  <td class="align-middle text-center col-md-2">015918916</td>
+                  <td class="align-middle text-center col-md-2">48646486</td>
+                  <td class="align-middle text-center col-md-2">Ativo
+                    <a [routerLink]="['/']">
+                      <img src="../../../../assets/tabelas/editar-icon.svg" class="ms-2" alt="editar">
+                  </a>
+                  <a [routerLink]="['/']">
+                      <img src="../../../../assets/tabelas/trash-icon.svg" class="ms-2" alt="deletar">
+                  </a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 </div>
-<ul>
-<div class="border-top w-80 p-3 my-3"></div>
-</ul>
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Telefone</th>
-        <th>CPF</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr id="conteudo-tabelas">
-        <td>João</td>
-        <td>(123) 456-7890</td>
-        <td>123.456.789-00</td>
-        <td class="d-flex align-items-center">Ativo
-            <a [routerLink]="['/']">
-                <img src="../../../../assets/tabelas/editar-icon.svg" class="ms-2" alt="editar">
-            </a>
-            <a [routerLink]="['/']">
-                <img src="../../../../assets/tabelas/trash-icon.svg" class="ms-2" alt="deletar">
-            </a>
-        </td>
-      </tr>
-      <!-- Outras linhas de dados -->
-    </tbody>
-  </table>
