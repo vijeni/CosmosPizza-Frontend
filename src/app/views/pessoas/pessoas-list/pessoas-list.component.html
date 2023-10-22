@@ -1,4 +1,3 @@
-
 <div class="d-flex justify-content-between ">
     <h4>Clientes</h4>
     <button type="button" class="btn btn-warning " id="clientes-botao">CADASTRAR CLIENTE</button>
@@ -16,11 +15,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr id="conteudo-tabelas">
         <td>João</td>
         <td>(123) 456-7890</td>
         <td>123.456.789-00</td>
-        <td>Ativo</td>
+        <td>Ativo
+            <a [routerLink]="['/']">
+                <img src="../../../../assets/tabelas/editar-icon.svg" alt="editar">
+            </a>
+            <a [routerLink]="['/']">
+                <img src="../../../../assets/tabelas/trash-icon.svg" alt="deletar">
+            </a>
+        </td>
       </tr>
       <!-- Outras linhas de dados -->
     </tbody>
