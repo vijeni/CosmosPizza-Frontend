@@ -1,7 +1,28 @@
-<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-    <div class="d-flex justify-content-between w-90 header">
-        <h5 class="m-0 fw-bold">Estoque de Produtos</h5>
-        <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Produto</button>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold">Produtos</h5>
+            <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Produto</button>
+        </div>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+                <tr class="sem-borda">
+                    <th scope="col" class="col-md-1 text-center">Código</th>
+                    <th scope="col" class="col-md-2 text-center">Nome</th>
+                    <th scope="col" class="col-md-1 text-center">Quantidade</th>
+                    <th scope="col" class="col-md-2 text-center">Valor Unitário</th>
+                    <th scope="col" class=" col-md-2 text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="sem-borda" *ngFor="let produto of produtos; index as i">
+                    <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
+                    <td class="align-middle text-center col-md-2">{{ produto.nome }}</td>
+                    <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
+                    <td class="align-middle text-center col-md-2">{{ produto.valorUnitario }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <hr class="w-90">
 </div>
