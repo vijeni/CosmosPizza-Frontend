@@ -44,15 +44,15 @@
               <td class="align-middle text-center">
                 <mat-form-field hintLabel="Com DDD. Ex: (45)">
                   <mat-label>Digite o telefone</mat-label>
-                  <input matInput #input maxlength="20" placeholder="Com DDD. Ex: (45)" class="w-100">
-                  <mat-hint align="end">{{input.value.length}}/20</mat-hint>
+                  <input matInput #inputTelefone maxlength="20" placeholder="Com DDD. Ex: (45)" class="w-100">
+                  <mat-hint align="end">{{inputTelefone.value.length}}/20</mat-hint>
                 </mat-form-field>
               </td>
               <td class="align-middle text-center">
                 <mat-form-field hintLabel="Não vamos divulgar para ninguém.">
                   <mat-label>Digite o CPF</mat-label>
-                  <input matInput #input maxlength="15" placeholder="Com DDD. Ex: (45)" class="w-100">
-                  <mat-hint align="end">{{input.value.length}}/15</mat-hint>
+                  <input matInput #inputCpf maxlength="14" placeholder="Com DDD. Ex: (45)" class="w-100">
+                  <mat-hint align="end">{{inputCpf.value.length}}/14</mat-hint>
                 </mat-form-field>
               </td>
             </tr>
