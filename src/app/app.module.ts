@@ -29,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     IndexComponent,
     PessoasListComponent,
-    PessoasDetailsComponent,
     IngredienteListComponent,
     IngredientesDetailsComponent,
     PedidosListComponent,
@@ -56,6 +55,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     SidebarComponent,
     BrowserAnimationsModule,
+    PessoasDetailsComponent,
     
   ],
   providers: [],
