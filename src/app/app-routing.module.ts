@@ -24,9 +24,8 @@ const routes: Routes = [
       {path: "cancelar/:id", component: ProdutoListComponent},
       {path: ":id", component: ProdutoListComponent},
     ]},
-    {path: "pessoas", component: PessoasListComponent, children: [
-      {path: "novo", component: PessoasDetailsComponent}
-    ]}
+    {path: "pessoas", component: PessoasListComponent},
+    {path: "pessoas/novo", component: PessoasDetailsComponent}
   ]}
 ];
 
