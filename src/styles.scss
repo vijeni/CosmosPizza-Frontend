@@ -6,20 +6,14 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
-<<<<<<< HEAD
 
-body,html{
+body,html, app-pessoas-list, app-produtos-list{
     height: 100%;
     width: 100%;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-=======
-body{
-    background-color: #f8eded;
 }
 .w-80{
     width: 80%;
 }
->>>>>>> 3be27cc5c9ca265538451e7a1fa993b34303d140
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
