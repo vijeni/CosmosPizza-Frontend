@@ -1,4 +1,33 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between ">
     <h4>Clientes</h4>
-<button type="button" class="btn btn-warning">CADASTRAR CLIENTE</button>
+    <button [routerLink]="['/web/pessoas/novo']" class="btn btn-warning">CADASTRAR CLIENTE</button>
 </div>
+<ul>
+<div class="border-top w-80 p-3 my-3"></div>
+</ul>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>CPF</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="conteudo-tabelas">
+        <td>João</td>
+        <td>(123) 456-7890</td>
+        <td>123.456.789-00</td>
+        <td class="d-flex align-items-center">Ativo
+            <a [routerLink]="['/']">
+                <img src="../../../../assets/tabelas/editar-icon.svg" class="ms-2" alt="editar">
+            </a>
+            <a [routerLink]="['/']">
+                <img src="../../../../assets/tabelas/trash-icon.svg" class="ms-2" alt="deletar">
+            </a>
+        </td>
+      </tr>
+      <!-- Outras linhas de dados -->
+    </tbody>
+  </table>
