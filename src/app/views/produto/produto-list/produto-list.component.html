@@ -5,22 +5,23 @@
             <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Produto</button>
         </div>
         <hr>
-        <table class="table table-striped">
-            <thead>
-                <tr class="sem-borda">
+        <table class="d-grid">
+            <thead class="d-grid container">
+                <tr class="row">
                     <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-2 text-center">Nome</th>
-                    <th scope="col" class="col-md-1 text-center">Quantidade</th>
+                    <th scope="col" class="col-md-3 text-center">Nome</th>
+                    <th scope="col" class="col-md-2 text-center">Quantidade</th>
                     <th scope="col" class="col-md-2 text-center">Valor Unitário</th>
-                    <th scope="col" class=" col-md-2 text-center">Status</th>
+                    <th scope="col" class=" col-md-4 text-center">Status</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="sem-borda" *ngFor="let produto of produtos; index as i">
+            <tbody class="d-grid container">
+                <tr class="row" *ngFor="let produto of produtos; index as i">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
-                    <td class="align-middle text-center col-md-2">{{ produto.nome }}</td>
+                    <td class="align-middle text-center col-md-3">{{ produto.nome }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.valorUnitario }}</td>
+                    <td class="align-middle text-center col-md-4">{{ produto.valorUnitario }}</td>
                 </tr>
             </tbody>
         </table>
