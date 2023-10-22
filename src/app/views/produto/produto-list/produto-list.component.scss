@@ -8,6 +8,15 @@ thead tr th{
     color: #ACACAC;
 }
 
-.sem-borda{
+tr{
+    border-style: hidden;
     border-width: 0;
+}
+
+tbody tr {
+    align-items: center;
+    background-color: #f8f8f8b7;
+    height: 4rem;
+    border-radius: .5rem;
+    margin-block: .5rem
 }
