@@ -7,13 +7,20 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body,html, app-pessoas-list, app-produtos-list{
+body,html{
     height: 100%;
     width: 100%;
 }
 .w-80{
     width: 80%;
 }
+.w-90{
+    width: 90%;
+}
 
-html, body { height: 100%; }
+app-pessoas-list, app-produto-list{ 
+    width: 100%; 
+}
+
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
