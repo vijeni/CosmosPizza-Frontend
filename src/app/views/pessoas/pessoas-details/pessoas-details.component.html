@@ -1,30 +1,26 @@
-<div class="w-70 h-100 d-flex flex-column pt-5 align-items-center">
-  <div class="w-90">
-      <div class="d-flex justify-content-between header">
-          <h5 class="m-0 fw-bold">Nova Pessoa</h5>
-          <button type="button" [routerLink]="['/web/pessoas/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Salvar</button>
-      </div>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+  <div class="w-90 h-50">
+    <div class="d-flex justify-content-between header">
+      <h5 class="m-0 fw-bold">Nova Pessoa</h5>
+  </div>
       <hr>
       <table class="table table-striped">
           <thead>
               <tr class="sem-borda">
-                  
-                  <th scope="col" class="col-md-2 text-center">Nome</th>
-                  <th scope="col" class="col-md-2 text-center">Tipo</th>
-                  <th scope="col" class="col-md-1 text-center">Telefone</th>
-                  <th scope="col" class="col-md-2 text-center">CPF</th>
-                  <th scope="col" class=" col-md-2 text-center">Status</th>
+                  <th scope="col" class="text-center">Nome</th>
+                  <th scope="col" class="text-center">Tipo</th>
               </tr>
           </thead>
           <tbody>
-              <tr class="sem-borda"> <!--FORMULÁRIO DE NOME AQUI-->
-                  <td class="align-middle text-center col-md-2"> 
+              <tr class="sem-borda"> <!-- FORMULÁRIO DE NOME AQUI -->
+                  <td class="align-middle text-center">
                     <mat-form-field hintLabel="No máx 40 digitos.">
-                    <mat-label>Diga o nome</mat-label>
-                    <input matInput #input maxlength="40" placeholder="Ex: Vinícius" class="w-100"> <!-- Adicione a classe w-100 aqui -->
-                    <mat-hint align="end">{{input.value.length}}/40</mat-hint>
-                  </mat-form-field></td>
-                  <td class="align-middle text-center col-md-2"> <!--FORMULÁRIO DE TIPO AQUI-->
+                      <mat-label>Diga o nome</mat-label>
+                      <input matInput #input maxlength="40" placeholder="Ex: Vinícius" class="w-100">
+                      <mat-hint align="end">{{input.value.length}}/40</mat-hint>
+                    </mat-form-field>
+                  </td>
+                  <td class="align-middle text-center"> <!-- FORMULÁRIO DE TIPO AQUI -->
                     <mat-form-field>
                       <mat-label>Selecione o tipo.</mat-label>
                       <mat-select>
@@ -33,32 +29,55 @@
                       </mat-select>
                     </mat-form-field>
                   </td>
-                  <td class="align-middle text-center col-md-2">
-                    <mat-form-field hintLabel="Com DDD. Ex: (45)">
-                    <mat-label>Digite o telefone</mat-label>
-                    <input matInput #input maxlength="20" placeholder="Com DDD. Ex: (45)" class="w-100"> <!-- Adicione a classe w-100 aqui -->
-                    <mat-hint align="end">{{input.value.length}}/20</mat-hint>
-                  </mat-form-field>
-                  </td>
-                  <td class="align-middle text-center col-md-2">
-                    <mat-form-field hintLabel="Não vamos divulgar para ninguém.">
-                      <mat-label>Digite o CPF</mat-label>
-                      <input matInput #input maxlength="15" placeholder="Com DDD. Ex: (45)" class="w-100"> <!-- Adicione a classe w-100 aqui -->
-                      <mat-hint align="end">{{input.value.length}}/15</mat-hint>
-                    </mat-form-field>
-
-                  </td>
-                  <td class="align-middle text-center col-md-2">
-                    <mat-form-field>
-                      <mat-label>Selecione o status.</mat-label>
-                      <mat-select>
-                        <mat-option value="option">Ativo</mat-option>
-                        <mat-option value="option">Inativo</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
               </tr>
           </tbody>
       </table>
+      <table class="table table-striped">
+        <thead>
+            <tr class="sem-borda">
+                <th scope="col" class="text-center">Telefone</th>
+                <th scope="col" class="text-center">CPF</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="sem-borda"> <!-- FORMULÁRIO DE NOME AQUI -->
+              <td class="align-middle text-center">
+                <mat-form-field hintLabel="Com DDD. Ex: (45)">
+                  <mat-label>Digite o telefone</mat-label>
+                  <input matInput #input maxlength="20" placeholder="Com DDD. Ex: (45)" class="w-100">
+                  <mat-hint align="end">{{input.value.length}}/20</mat-hint>
+                </mat-form-field>
+              </td>
+              <td class="align-middle text-center">
+                <mat-form-field hintLabel="Não vamos divulgar para ninguém.">
+                  <mat-label>Digite o CPF</mat-label>
+                  <input matInput #input maxlength="15" placeholder="Com DDD. Ex: (45)" class="w-100">
+                  <mat-hint align="end">{{input.value.length}}/15</mat-hint>
+                </mat-form-field>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-striped">
+      <thead>
+          <tr class="sem-borda">
+              <th scope="col" class="text-center">Status</th>
+          </tr>
+      </thead>
+      <tbody>
+        <td class="align-start text-center">
+          <mat-form-field>
+            <mat-label>Selecione o status.</mat-label>
+            <mat-select>
+              <mat-option value="option">Ativo</mat-option>
+              <mat-option value="option">Inativo</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tbody>
+  </table>
+      <div class="d-flex justify-content-end">
+        <button type="button" [routerLink]="['/web/pessoas/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Salvar</button>
+    </div>
   </div>
 </div>
