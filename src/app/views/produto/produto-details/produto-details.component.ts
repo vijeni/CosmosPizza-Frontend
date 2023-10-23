@@ -16,14 +16,12 @@ export class ProdutoDetailsComponent implements OnInit {
   produto = new Produto();
   router = inject(Router);
   service = inject(ProdutoService);
-  constructor(private route: ActivatedRoute) {
-
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     if (!this.router.url.includes('novo')) {
-      this.id = this.route.snapshot.paramMap.get("id") as string;
-      console.log(this.id)
+      this.id = this.route.snapshot.paramMap.get('id') as string;
+      console.log(this.id);
       this.findById(Number(this.id));
     }
   }
@@ -39,6 +37,20 @@ export class ProdutoDetailsComponent implements OnInit {
       },
     });
     console.log(this.produto);
+  }
+
+  cadastrar() {
+    alert(this.produto.valorUnitario)
+    this.service.post(this.produto).subscribe({
+      next: (produto) => {
+        this.isErro = false;
+        this.mensagem = 'Produto cadastrado com sucesso!';
+      },
+      error: (resposta) => {
+        this.isErro = true;
+        this.mensagem = resposta.error;
+      },
+    });
   }
 
   voltar() {
