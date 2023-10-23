@@ -46,6 +46,7 @@ import { MatInputModule } from '@angular/material/input';
     TamanhoDetailsComponent,
     PedidosListComponent,
     PedidosDetailsComponent,
+    PessoasDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,6 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     SidebarComponent,
     BrowserAnimationsModule,
-    PessoasDetailsComponent,
     IconsModule,
     MatFormFieldModule,
     MatInputModule,

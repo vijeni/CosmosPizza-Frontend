@@ -11,13 +11,13 @@
                         <div class="card-body">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">*Nome:</h6>
+                                    <h6 class="mb-0"><span style="color:red">*</span>Nome:</h6>
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="No máx 40 digitos.">
-                                          <mat-label>*Diga o nome</mat-label>
-                                          <input matInput #input maxlength="40" placeholder="Ex: Vinícius" class="w-100">
+                                          <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
+                                          <input matInput #input maxlength="40" name="inputNome" [ngModel]="pessoa.nome" placeholder="Ex: Vinícius" class="w-100">
                                           <mat-hint align="end">{{input.value.length}}/40</mat-hint>
                                         </mat-form-field>
                                       </td>
@@ -26,15 +26,14 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">*Tipo Cliente:</h6>
+                                    <h6 class="mb-0"><span style="color:red">*</span>Tipo Cliente:</h6>
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center"> <!-- FORMULÁRIO DE TIPO AQUI -->
                                         <mat-form-field>
-                                          <mat-label>*Selecione o tipo.</mat-label>
+                                          <mat-label><span style="color:red">*</span>Selecione o tipo.</mat-label>
                                           <mat-select>
                                             <mat-option value="option">Cliente</mat-option>
-                                            <mat-option value="option">Funcionário</mat-option>
                                           </mat-select>
                                         </mat-form-field>
                                       </td>
@@ -43,12 +42,12 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0 text-center">*Telefone:</h6>
+                                    <h6 class="mb-0 text-center"><span style="color:red">*</span>Telefone:</h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Com DDD. Ex: (45)">
-                                          <mat-label>*Digite o telefone</mat-label>
+                                          <mat-label><span style="color:red">*</span>Digite o telefone</mat-label>
                                           <input matInput #inputTelefone maxlength="20" placeholder="Com DDD. Ex: (45)" class="w-100">
                                           <mat-hint align="end">{{inputTelefone.value.length}}/20</mat-hint>
                                         </mat-form-field>
@@ -59,12 +58,12 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">*CPF:</h6>
+                                    <h6 class="mb-0"><span style="color:red">*</span>CPF:</h6>
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Não vamos divulgar para ninguém.">
-                                          <mat-label>*Digite o CPF</mat-label>
+                                          <mat-label><span style="color:red">*</span>Digite o CPF</mat-label>
                                           <input matInput #inputCpf maxlength="14" placeholder="000.000.000-00" class="w-100">
                                           <mat-hint align="end">{{inputCpf.value.length}}/14</mat-hint>
                                         </mat-form-field>
@@ -74,12 +73,12 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">*CEP:</h6>
+                                    <h6 class="mb-0"><span style="color:red">*</span>CEP:</h6>
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O CEP da rua da pessoa.">
-                                          <mat-label>*Digite o CEP</mat-label>
+                                          <mat-label><span style="color:red">*</span>Digite o CEP</mat-label>
                                           <input matInput #inputCep maxlength="09" placeholder="CEP" class="w-100">
                                           <mat-hint align="end">{{inputCep.value.length}}/9</mat-hint>
                                         </mat-form-field>
@@ -118,12 +117,12 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">*Bairro:</h6>
+                                    <h6 class="mb-0"><span style="color:red">*</span>Bairro:</h6>
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O bairro do logradouro">
-                                          <mat-label>*Digite o bairro</mat-label>
+                                          <mat-label><span style="color:red">*</span>Digite o bairro</mat-label>
                                           <input matInput #inputBairro maxlength="40" placeholder="O bairro do logradouro" class="w-100">
                                           <mat-hint align="end">{{inputBairro.value.length}}/40</mat-hint>
                                         </mat-form-field>
