@@ -6,6 +6,7 @@ import { PedidosDetailsComponent } from './views/pedidos/pedidos-details/pedidos
 import { ProdutoListComponent } from './views/produto/produto-list/produto-list.component';
 import { PessoasListComponent } from './views/pessoas/pessoas-list/pessoas-list.component';
 import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas-details.component';
+import { ProdutoDetailsComponent } from './views/produto/produto-details/produto-details.component';
 
 const routes: Routes = [
   {path: "",  redirectTo: "web", pathMatch: "full"},
@@ -18,11 +19,11 @@ const routes: Routes = [
       {path: ":id", component: PedidosDetailsComponent}
     ]},
     {path: "produtos", component: ProdutoListComponent},
-    {path: "produto", component: ProdutoListComponent, children: [
-      {path: "novo", component: ProdutoListComponent},
-      {path: "editar/:id", component: ProdutoListComponent},
-      {path: "cancelar/:id", component: ProdutoListComponent},
-      {path: ":id", component: ProdutoListComponent},
+    {path: "produto", component: ProdutoDetailsComponent, children: [
+      {path: "novo", component: ProdutoDetailsComponent},
+      {path: "editar/:id", component: ProdutoDetailsComponent},
+      {path: "cancelar/:id", component: ProdutoDetailsComponent},
+      {path: ":id", component: ProdutoDetailsComponent},
     ]},
     {path: "pessoas", component: PessoasListComponent},
     {path: "pessoas/novo", component: PessoasDetailsComponent}
