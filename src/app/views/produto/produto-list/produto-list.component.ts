@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Produto from 'src/app/models/produto/produto';
@@ -8,7 +8,7 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
   templateUrl: './produto-list.component.html',
   styleUrls: ['./produto-list.component.scss']
 })
-export class ProdutoListComponent {
+export class ProdutoListComponent implements OnInit {
   produtos: Produto[] = [];
   index!: number;
   produtoSelecionado = new Produto;
@@ -19,7 +19,10 @@ export class ProdutoListComponent {
   router = inject(Router)
 
   constructor() {
-    this.getAll();
+    this.getAll()
+  }
+  ngOnInit(){
+    this.getAll()
   }
   getAll() {
     this.produtoService.getAll().subscribe({

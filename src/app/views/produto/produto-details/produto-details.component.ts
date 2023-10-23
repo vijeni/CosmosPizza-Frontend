@@ -9,8 +9,9 @@ import Produto from 'src/app/models/produto/produto';
   styleUrls: ['./produto-details.component.scss'],
 })
 export class ProdutoDetailsComponent implements OnInit {
+  disabled!: boolean
   id!: string;
-  modo!: boolean;
+  modoEditar!: boolean;
   isErro!: boolean;
   mensagem: string = '';
   produto = new Produto();
@@ -19,10 +20,18 @@ export class ProdutoDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    if (!this.router.url.includes('novo')) {
+    let url = this.router.url
+    if (!url.includes('novo')) {
       this.id = this.route.snapshot.paramMap.get('id') as string;
-      console.log(this.id);
       this.findById(Number(this.id));
+      if(url.includes('editar')){
+        this.modoEditar = true
+      }else if(url.includes('delete')){
+        this.disabled = true
+        this.modoEditar = false
+      }else{
+        this.disabled = true
+      }
     }
   }
 
@@ -40,7 +49,6 @@ export class ProdutoDetailsComponent implements OnInit {
   }
 
   cadastrar() {
-    alert(this.produto.valorUnitario)
     this.service.post(this.produto).subscribe({
       next: (produto) => {
         this.isErro = false;
@@ -53,6 +61,40 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
 
+  editar(){
+    this.service.put(this.produto.id, this.produto).subscribe({
+      next: (produto) => {
+        this.isErro = false;
+        this.mensagem = 'Produto editado com sucesso!';
+      },
+      error: (resposta) => {
+        this.isErro = true;
+        this.mensagem = resposta.error;
+      },
+    });
+  }
+  desativar(){
+    if(confirm(`Confirma a desativação do produto ${this.produto.id}?`)){
+      this.service.put(this.produto.id, this.produto).subscribe({
+        next: (produto) => {
+          this.isErro = true;
+          this.mensagem = 'Produto desativado com sucesso!';
+        },
+        error: (resposta) => {
+          this.isErro = true;
+          this.mensagem = resposta.error;
+        },
+      });
+    }
+  }
+  btnVoltar(): string{
+    if(this.id && this.modoEditar == null){
+      return 'Voltar'
+    }else{
+      return 'Cancelar'
+
+    }
+  }
   voltar() {
     this.router.navigate(['/web/produtos']);
   }
