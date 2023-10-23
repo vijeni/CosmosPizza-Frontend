@@ -17,19 +17,20 @@
           </thead>
           <tbody>
               <tr class="sem-borda"  *ngFor="let pessoa of pessoas; index as i">
-                  <th class="align-middle text-center col-md-1" scope="row">{{pessoa.id}}</th>
+                  <th class="align-middle text-center col-md-2" scope="row">{{pessoa.id}}</th>
                   <td class="align-middle text-center col-md-2">{{pessoa.nome}}</td>
                   <td class="align-middle text-center col-md-2">{{pessoa.telefone}}</td>
                   <td class="align-middle text-center col-md-2">{{pessoa.cpf}}</td>
-                  <td class="align-middle text-center col-md-2">
-                    <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
-                    <a [routerLink]="['/']">
-                      <img src="../../../../assets/tabelas/editar-icon.svg" class="ms-2" alt="editar">
-                  </a>
-                  <a [routerLink]="['/']">
-                      <img src="../../../../assets/tabelas/trash-icon.svg" class="ms-2" alt="deletar">
-                  </a>
-                  </td>
+                  <td class="status-cell align-center text-center">
+                    <div *ngIf="pessoa.delecao" class="inativo mb-4">
+                        <img src="../../../../assets/tabelas/inativo-icon.svg" alt="Inativo">
+                    </div>
+                    <div *ngIf="!pessoa.delecao" class="ativo mb-4">
+                        <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
+                    </div>
+                <bi class="acoes mb-4" type="button" name="pen"></bi>
+                <bi class="acoes mb-4" type="button" name="trash"></bi>
+            </td>
               </tr>
           </tbody>
       </table>
