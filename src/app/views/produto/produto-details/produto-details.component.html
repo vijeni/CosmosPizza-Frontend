@@ -4,8 +4,8 @@
             <h5 class="m-0 fw-bold">Novo Produto</h5>
         </div>
         <hr>
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-xl-9">
                     <div *ngIf="isErro && mensagem" class="alert alert-danger" role="alert">
                         {{mensagem}}
@@ -13,7 +13,7 @@
                     <div *ngIf="!isErro && mensagem" class="alert alert-success" role="alert">
                         {{mensagem}}
                     </div>
-                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card shadow p-3 bg-white rounded">
                         <form class="card-body">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-3 ps-5">
