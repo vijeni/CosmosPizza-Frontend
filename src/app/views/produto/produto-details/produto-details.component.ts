@@ -75,9 +75,11 @@ export class ProdutoDetailsComponent implements OnInit {
   }
   desativar(){
     if(confirm(`Confirma a desativação do produto ${this.produto.id}?`)){
+      alert('confirmou')
       this.service.put(this.produto.id, this.produto).subscribe({
         next: (produto) => {
           this.isErro = true;
+          console.log(produto)
           this.mensagem = 'Produto desativado com sucesso!';
         },
         error: (resposta) => {
