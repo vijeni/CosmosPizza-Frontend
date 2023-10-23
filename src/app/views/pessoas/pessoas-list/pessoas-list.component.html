@@ -16,12 +16,13 @@
               </tr>
           </thead>
           <tbody>
-              <tr class="sem-borda">
-                  <th class="align-middle text-center col-md-1" scope="row">#1</th>
-                  <td class="align-middle text-center col-md-2">Jean</td>
-                  <td class="align-middle text-center col-md-2">015918916</td>
-                  <td class="align-middle text-center col-md-2">48646486</td>
-                  <td class="align-middle text-center col-md-2">Ativo
+              <tr class="sem-borda"  *ngFor="let pessoa of pessoas; index as i">
+                  <th class="align-middle text-center col-md-1" scope="row">{{pessoa.id}}</th>
+                  <td class="align-middle text-center col-md-2">{{pessoa.nome}}</td>
+                  <td class="align-middle text-center col-md-2">{{pessoa.telefone}}</td>
+                  <td class="align-middle text-center col-md-2">{{pessoa.cpf}}</td>
+                  <td class="align-middle text-center col-md-2">
+                    <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
                     <a [routerLink]="['/']">
                       <img src="../../../../assets/tabelas/editar-icon.svg" class="ms-2" alt="editar">
                   </a>
