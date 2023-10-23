@@ -42,5 +42,11 @@ tbody tr {
 .acoes{
     height: 25px;
     width: 25px;
+    cursor: pointer;
     color: rgb(255, 224, 46)
+}
+
+bi:hover{
+    transition: 500ms;
+    color: rgb(141, 126, 42)
 }
