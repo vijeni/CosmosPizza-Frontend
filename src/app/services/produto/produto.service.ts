@@ -23,7 +23,7 @@ export class ProdutoService {
     put(id: number, produto: Produto): Observable<Produto> {
       return this.http.put<Produto>(`${this.API}/editar/${id}`, produto);
     }
-    delete(id: number): Observable<any> {
-      return this.http.get<any>(`${this.API}/deletar/${id}`);
+    delete(id: number): Observable<Produto> {
+      return this.http.delete<Produto>(`${this.API}/desativar/${id}`);
     }
 }

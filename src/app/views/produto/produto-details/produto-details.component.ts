@@ -75,9 +75,10 @@ export class ProdutoDetailsComponent implements OnInit {
   }
   desativar(){
     if(confirm(`Confirma a desativação do produto ${this.produto.id}?`)){
-      this.service.put(this.produto.id, this.produto).subscribe({
+      this.service.delete(this.produto.id).subscribe({
         next: (produto) => {
           this.isErro = true;
+          console.log(produto)
           this.mensagem = 'Produto desativado com sucesso!';
         },
         error: (resposta) => {
@@ -85,14 +86,6 @@ export class ProdutoDetailsComponent implements OnInit {
           this.mensagem = resposta.error;
         },
       });
-    }
-  }
-  btnVoltar(): string{
-    if(this.id && this.modoEditar == null){
-      return 'Voltar'
-    }else{
-      return 'Cancelar'
-
     }
   }
   voltar() {
