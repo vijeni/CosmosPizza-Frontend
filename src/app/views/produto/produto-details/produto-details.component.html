@@ -1,1 +1,66 @@
-<p>produto-details works!</p>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold">Novo Produto</h5>
+        </div>
+        <hr>
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-9">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Descrição:</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <input type="text" class="form-control form-control-md" />
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Observação:</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <textarea class="form-control" rows="3"
+                                        placeholder="Observação do produto"></textarea>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0 text-center">Quantidade Estoque:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <input type="number" class="form-control form-control-md" />
+                                </div>
+                            </div>
+
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Valor Unitário:</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <mat-form-field floatLabel="always">
+                                        <mat-label>Reais</mat-label>
+                                        <input matInput type="number" class="text-align-right" placeholder="0">
+                                        <span matTextPrefix>R$&nbsp;</span>
+                                        <span matTextSuffix>.00</span>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                                <button type="submit" class="btn btn-warning">Cadastrar</button>
+                                <button type="submit" class="btn btn-secondary">Cancelar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -37,7 +37,7 @@ import { IconsModule } from './modules/icons.modules';
     PizzaListComponent,
     PizzaDetailsComponent,
     ProdutoListComponent,
-    ProdutoDetailsComponent,
+    // ProdutoDetailsComponent,
     SaborListaComponent,
     SaborDetailsComponent,
     TamanhoListComponent,

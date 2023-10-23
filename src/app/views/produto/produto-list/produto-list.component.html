@@ -2,14 +2,15 @@
     <div class="w-90">
         <div class="d-flex justify-content-between header">
             <h5 class="m-0 fw-bold">Produtos</h5>
-            <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto" [routerLink]="['/web/produto/novo']">Novo Produto</button>
+            <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
+                [routerLink]="['/web/produto/novo']">Novo Produto</button>
         </div>
         <hr>
         <table class="d-grid">
             <thead class="d-grid container">
                 <tr class="row">
                     <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-3 text-center">Nome</th>
+                    <th scope="col" class="col-md-3 text-center">Descrição</th>
                     <th scope="col" class="col-md-2 text-center">Quantidade</th>
                     <th scope="col" class="col-md-2 text-center">Valor Unitário</th>
                     <th scope="col" class=" col-md-4 text-center">Status</th>
@@ -18,13 +19,12 @@
             <tbody class="d-grid container">
                 <tr class="row" *ngFor="let produto of produtos; index as i">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
-                    <td class="align-middle text-center col-md-3">{{ produto.nome }}</td>
+                    <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
                     <td class="align-middle text-center col-md-2">R$ {{ produto.valorUnitario }}</td>
                     <td class="status-cell align-middle text-center col-md-4">
-                        <div [ngClass]="{
-                            'estado ativado':'!produto.delecao',
-                            'estado  desativado':'produto.delecao'}"></div>
+                            <div *ngIf="produto.delecao" class="estado desativado"></div>
+                            <div *ngIf="!produto.delecao" class="estado ativado"></div>
                         <bi class="acoes" name="pen"></bi>
                         <bi class="acoes" name="trash"></bi>
                     </td>
