@@ -37,7 +37,7 @@ export class ProdutoListComponent implements OnInit {
   editar(id: number){
     this.router.navigate(['/web/produto/editar', id])
   }
-  deletar(id: number){
-    this.router.navigate(['/web/produto/delete', id])
+  toggle(id: number){
+    this.router.navigate(['/web/produto/toggle', id])
   }
 }

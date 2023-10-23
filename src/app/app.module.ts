@@ -26,6 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsModule } from './modules/icons.modules';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { MatInputModule } from '@angular/material/input';
     IconsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
+    RouterLink
   ],
   providers: [],
   bootstrap: [AppComponent],

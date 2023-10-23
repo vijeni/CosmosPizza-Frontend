@@ -28,7 +28,7 @@ const routes: Routes = [
       { path: 'produtos', component: ProdutoListComponent },
       { path: 'produto/novo', component: ProdutoDetailsComponent },
       { path: 'produto/editar/:id', component: ProdutoDetailsComponent },
-      { path: 'produto/delete/:id', component: ProdutoDetailsComponent },
+      { path: 'produto/toggle/:id', component: ProdutoDetailsComponent },
       { path: 'produto/:id', component: ProdutoDetailsComponent },
       { path: 'pessoas', component: PessoasListComponent },
       { path: 'pessoas/novo', component: PessoasDetailsComponent },
