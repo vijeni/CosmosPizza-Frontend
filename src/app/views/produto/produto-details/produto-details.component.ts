@@ -89,14 +89,6 @@ export class ProdutoDetailsComponent implements OnInit {
       });
     }
   }
-  btnVoltar(): string{
-    if(this.id && this.modoEditar == null){
-      return 'Voltar'
-    }else{
-      return 'Cancelar'
-
-    }
-  }
   voltar() {
     this.router.navigate(['/web/produtos']);
   }
