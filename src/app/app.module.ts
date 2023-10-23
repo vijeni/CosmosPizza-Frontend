@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsModule } from './modules/icons.modules';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,17 +39,15 @@ import { IconsModule } from './modules/icons.modules';
     PizzaListComponent,
     PizzaDetailsComponent,
     ProdutoListComponent,
-    // ProdutoDetailsComponent,
+    ProdutoDetailsComponent,
     SaborListaComponent,
     SaborDetailsComponent,
     TamanhoListComponent,
     TamanhoDetailsComponent,
     PedidosListComponent,
     PedidosDetailsComponent,
-    
-    
   ],
-  imports: [    
+  imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -57,12 +57,11 @@ import { IconsModule } from './modules/icons.modules';
     SidebarComponent,
     BrowserAnimationsModule,
     PessoasDetailsComponent,
-    IconsModule
+    IconsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-
-
-export class AppModule { }
+export class AppModule {}

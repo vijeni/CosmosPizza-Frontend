@@ -32,9 +32,9 @@ export class ProdutoListComponent {
     });
   }
   editar(id: number){
-    this.router.navigate([`/web/produto/editar/${id}`])
+    this.router.navigate(['/web/produto/editar', id])
   }
   deletar(id: number){
-    this.router.navigate([`/web/produto/delete/${id}`])
+    this.router.navigate(['/web/produto/delete', id])
   }
 }
