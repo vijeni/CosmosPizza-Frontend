@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {Router, RouterEvent, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-produto-details',
@@ -13,4 +14,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class ProdutoDetailsComponent {
 
+  router = inject(Router)
+  constructor(){}  
+
+  voltar(){
+    this.router.navigate(["/web/produtos"])
+  }
 }

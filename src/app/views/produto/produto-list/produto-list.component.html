@@ -25,8 +25,12 @@
                     <td class="status-cell align-middle text-center col-md-4">
                             <div *ngIf="produto.delecao" class="estado desativado"></div>
                             <div *ngIf="!produto.delecao" class="estado ativado"></div>
-                        <bi class="acoes" name="pen"></bi>
-                        <bi class="acoes" name="trash"></bi>
+                        <div (click)="editar(produto.id)">
+                            <bi class="acoes" name="pen"></bi>
+                        </div>
+                        <div (click)="deletar(produto.id)">
+                            <bi class="acoes" name="trash"></bi>
+                        </div>
                     </td>
                 </tr>
             </tbody>
