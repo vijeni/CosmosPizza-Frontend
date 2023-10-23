@@ -30,12 +30,7 @@ export class ProdutoDetailsComponent implements OnInit {
       } else if (url.includes('toggle')) {
         this.disabled = true;
         this.modoEditar = false;
-        if (this.produto.delecao != null) {
-          this.estado = false;
-        } else {
-          this.estado = true;
-        }
-      } else {
+        this.produto.delecao != null? this.estado = false: this.estado = true
         this.disabled = true;
       }
     }
@@ -81,7 +76,7 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
   toggleProduto() {
-    if (this.estado) {
+    if (this.estado == false) {
       if (confirm(`Confirma a ativação do produto ${this.produto.id}?`)) {
         this.service.ativar(this.produto.id).subscribe({
           next: (produto) => {
