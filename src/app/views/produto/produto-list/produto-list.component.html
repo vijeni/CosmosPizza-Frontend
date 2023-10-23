@@ -20,8 +20,14 @@
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ produto.nome }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
-                    <td class="align-middle text-center col-md-2">{{ produto.valorUnitario }}</td>
-                    <td class="align-middle text-center col-md-4">{{ produto.valorUnitario }}</td>
+                    <td class="align-middle text-center col-md-2">R$ {{ produto.valorUnitario }}</td>
+                    <td class="status-cell align-middle text-center col-md-4">
+                        <div [ngClass]="{
+                            'estado ativado':'!produto.delecao',
+                            'estado  desativado':'produto.delecao'}"></div>
+                        <bi class="acoes" name="pen"></bi>
+                        <bi class="acoes" name="trash"></bi>
+                    </td>
                 </tr>
             </tbody>
         </table>

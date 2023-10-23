@@ -17,7 +17,7 @@
 </div>
 -->
 <div class="flex-shrink-0 p-3 menu"style="width: 280px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none borda-bottom">
       <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
       <div class="cosmos-logo d-flex flex-column align-items-center"> 
         <img src="../../../assets/siderbar/logo-pizza.svg" alt="logo-pizza">
@@ -31,14 +31,14 @@
     Restaurante
   </button>
       </li>
-      <li class="border-top my-3"></li>
+      <li class="borda-top my-3"></li>
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/pessoas']" data-bs-target="#dashboard-collapse" aria-expanded="false">
           <img src="../../../assets/siderbar/clientes-icon.svg" height="20hv" alt="">
           Clientes
         </button>
       </li>
-      <li class="border-top my-3"></li>
+      <li class="borda-top my-3"></li>
 
       <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
@@ -46,7 +46,7 @@
           Pedidos
         </button>
       </li>
-      <li class="border-top my-3"></li>
+      <li class="borda-top my-3"></li>
       <li class="mb-1">
         <p>
           <button
@@ -64,7 +64,7 @@
         <div #collapse="ngbCollapse" [(ngbCollapse)]="cozinhaCollapse">
           <div class="card">
             <ul>
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/produtos']"data-bs-target="#account-collapse" aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Produtos
             </button>
@@ -83,13 +83,13 @@
             </ul>
           </div>
         </div>
-        <li class="border-top my-3"></li>
+        <li class="borda-top my-3"></li>
         <li class="mb-1">
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
             <img src="../../../assets/siderbar/entregas-icon.svg" height="20vh" alt="">
             Entregas
           </button>
-          <li class="border-top my-3"></li>
+          <li class="borda-top my-3"></li>
           <li class="mb-1">
             <p>
               <button

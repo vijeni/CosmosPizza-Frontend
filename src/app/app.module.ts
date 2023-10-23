@@ -23,6 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IconsModule } from './modules/icons.modules';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SidebarComponent,
     BrowserAnimationsModule,
     PessoasDetailsComponent,
-    
+    IconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
