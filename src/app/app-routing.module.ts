@@ -9,29 +9,36 @@ import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas
 import { ProdutoDetailsComponent } from './views/produto/produto-details/produto-details.component';
 
 const routes: Routes = [
-  {path: "",  redirectTo: "web", pathMatch: "full"},
-  {path: "web",  component: IndexComponent, children: [
-    {path: "pedidos", component: PedidosListComponent},
-    {path: "pedido", component: PedidosDetailsComponent, children:[
-      {path: "novo", component: PedidosDetailsComponent},
-      {path: "editar/:id", component: PedidosDetailsComponent},
-      {path: "cancelar/:id", component: PedidosDetailsComponent},
-      {path: ":id", component: PedidosDetailsComponent}
-    ]},
-    {path: "produtos", component: ProdutoListComponent},
-    {path: "produto", component: ProdutoDetailsComponent, children: [
-      {path: "novo", component: ProdutoDetailsComponent},
-      {path: "editar/:id",component: ProdutoDetailsComponent},
-      {path: "delete/:id", component: ProdutoDetailsComponent},
-      {path: ":id", component: ProdutoDetailsComponent},
-    ]},
-    {path: "pessoas", component: PessoasListComponent},
-    {path: "pessoas/novo", component: PessoasDetailsComponent}
-  ]}
+  { path: '', redirectTo: 'web', pathMatch: 'full' },
+  {
+    path: 'web',
+    component: IndexComponent,
+    children: [
+      { path: 'pedidos', component: PedidosListComponent },
+      {
+        path: 'pedido',
+        component: PedidosDetailsComponent,
+        children: [
+          { path: 'novo', component: PedidosDetailsComponent },
+          { path: 'editar/:id', component: PedidosDetailsComponent },
+          { path: 'cancelar/:id', component: PedidosDetailsComponent },
+          { path: ':id', component: PedidosDetailsComponent },
+        ],
+      },
+      { path: 'produtos', component: ProdutoListComponent },
+      { path: 'produto', component: ProdutoDetailsComponent },
+      { path: 'produto/novo', component: ProdutoDetailsComponent },
+      { path: 'produto/editar/:id', component: ProdutoDetailsComponent },
+      { path: 'produto/delete/:id', component: ProdutoDetailsComponent },
+      { path: 'produto/:id', component: ProdutoDetailsComponent },
+      { path: 'pessoas', component: PessoasListComponent },
+      { path: 'pessoas/novo', component: PessoasDetailsComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

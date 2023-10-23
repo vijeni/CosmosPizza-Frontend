@@ -1,7 +1,10 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold">Novo Produto</h5>
+            <h5 *ngIf="!id" class="m-0 fw-bold">Novo Produto</h5>
+            <h5 *ngIf="id && modoEditar" class="m-0 fw-bold">Editar Produto</h5>
+            <h5 *ngIf="id && modoEditar == false" class="m-0 fw-bold">Desativar Produto</h5>
+            <h5 *ngIf="id && modoEditar == null" class="m-0 fw-bold">Produto</h5>
         </div>
         <hr>
         <div class="container">
@@ -15,58 +18,113 @@
                     </div>
                     <div class="card shadow p-3 bg-white rounded">
                         <form class="card-body">
+                            <div *ngIf="id" class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Código:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 fw-bold">
+                                    # {{produto.id}}
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
                             <div class="row align-items-center pt-4 pb-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">Descrição<span style="color:red">*</span>:</h6>
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Descrição<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
-                                <div class="col-md-9 pe-5">
-                                    <input type="text text-center" [(ngModel)]="produto.descricao" name="descricao"
-                                        class="form-control form-control-md" required />
-                                </div>
-                            </div>
-                            <hr class="mx-n3">
-                            <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0 text-center">Observação:</h6>
-                                </div>
-                                <div class="col-md-9 pe-5">
-                                    <textarea class="form-control" rows="3" placeholder="Observação do produto"
-                                        name="observacao" [(ngModel)]="produto.observacao"></textarea>
+                                <div class="col-md-8 pe-5">
+                                    <input *ngIf="!disabled" type="text text-center" [(ngModel)]="produto.descricao"
+                                        name="descricao" class="form-control form-control-md" required />
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.descricao}}</p>
                                 </div>
                             </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0 text-center">Quantidade Estoque<span style="color:red">*</span>:
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Observação:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5">
+                                    <textarea *ngIf="!disabled" class="form-control" rows="3"
+                                        placeholder="Observação do produto" name="observacao"
+                                        [(ngModel)]="produto.observacao"></textarea>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.observacao}}</p>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Quantidade Estoque<span *ngIf="!disabled"
+                                            style="color:red">*</span>:
                                     </h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
-                                    <input type="number" class="form-control form-control-md" name="qntd"
-                                        [(ngModel)]="produto.quantidadeEstoque" required />
+                                    <input *ngIf="!disabled" type="number" class="form-control form-control-md"
+                                        name="qntd" [(ngModel)]="produto.quantidadeEstoque" required />
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.quantidadeEstoque}}</p>
                                 </div>
                             </div>
-
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0 text-center">Valor Unitário<span style="color:red">*</span>:</h6>
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Unitário<span *ngIf="!disabled" style="color:red">*</span>:
+                                    </h6>
                                 </div>
-                                <div class="col-md-9 pe-5">
-                                <mat-form-field floatLabel="always">
-                                        <mat-label>Reais</mat-label>
-                                    <input matInput type="number" required class="text-align-right" placeholder="0" >
-                                        <span matTextPrefix>R$&nbsp;</span>
-                                        <span matTextSuffix>.00</span>
-                                      </mat-form-field>
+                                <div class="flex-row d-flex col-md-3">
+                                    <h6 class="mb-0 pt-2 reais">R$ <span
+                                            *ngIf="disabled">{{produto.valorUnitario}}</span></h6>
+                                    <input *ngIf="!disabled" type="number" class="form-control form-control-md"
+                                        name="valor" [(ngModel)]="produto.valorUnitario" required />
                                 </div>
                             </div>
                             <hr class="mx-n3">
-                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-warning">Cadastrar</button>
-                                <button type="button" id="cancelar" (click)="voltar()"
-                                    class="btn btn-secondary">Cancelar</button>
+                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Data de Criação:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-3">
+                                    <p class="mb-0">{{produto.cadastro | date : 'dd/MM/yyyy'}}
+                                    </p>
+                                </div>
                             </div>
-
+                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Data de Edição:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-3">
+                                    <p class="mb-0">{{produto.edicao | date : 'dd/MM/yyyy'}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Status:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-3">
+                                    <span *ngIf="produto.delecao" class="badge bg-danger">Desativado</span>
+                                    <span *ngIf="!produto.delecao" class="badge bg-success">Ativado</span>
+                                    <!-- <p>{{produto.delecao}}</p> -->
+                                </div>
+                            </div>
+                            <div *ngIf="produto.delecao && modoEditar == null && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Desativado em:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-3">
+                                    <p>{{produto.delecao | date : 'dd/MM/yyyy'}}</p>
+                                </div>
+                            </div>
+                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                                <button *ngIf="modoEditar == null && !id" type="submit"
+                                    class="color-white btn btn-warning" (click)="cadastrar()">Cadastrar</button>
+                                <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
+                                    (click)="editar()">Editar</button>
+                                <button *ngIf="modoEditar == false" type="submit" class="btn btn-danger"
+                                    (click)="desativar()">Desativar</button>
+                                <button type="button" id="cancelar" (click)="voltar()"
+                                    class="btn btn-secondary">{{btnVoltar()}}</button>
+                            </div>
                         </form>
                     </div>
                 </div>
