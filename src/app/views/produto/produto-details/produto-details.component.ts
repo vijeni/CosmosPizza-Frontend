@@ -9,8 +9,9 @@ import Produto from 'src/app/models/produto/produto';
   styleUrls: ['./produto-details.component.scss'],
 })
 export class ProdutoDetailsComponent implements OnInit {
-  disabled!: boolean
+  disabled!: boolean;
   id!: string;
+  estado!: boolean;
   modoEditar!: boolean;
   isErro!: boolean;
   mensagem: string = '';
@@ -20,17 +21,22 @@ export class ProdutoDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    let url = this.router.url
+    let url = this.router.url;
     if (!url.includes('novo')) {
       this.id = this.route.snapshot.paramMap.get('id') as string;
       this.findById(Number(this.id));
-      if(url.includes('editar')){
-        this.modoEditar = true
-      }else if(url.includes('delete')){
-        this.disabled = true
-        this.modoEditar = false
-      }else{
-        this.disabled = true
+      if (url.includes('editar')) {
+        this.modoEditar = true;
+      } else if (url.includes('toggle')) {
+        this.disabled = true;
+        this.modoEditar = false;
+        if (this.produto.delecao != null) {
+          this.estado = false;
+        } else {
+          this.estado = true;
+        }
+      } else {
+        this.disabled = true;
       }
     }
   }
@@ -61,11 +67,12 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
 
-  editar(){
+  editar() {
     this.service.put(this.produto.id, this.produto).subscribe({
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Produto editado com sucesso!';
+        this.produto = produto;
       },
       error: (resposta) => {
         this.isErro = true;
@@ -73,21 +80,38 @@ export class ProdutoDetailsComponent implements OnInit {
       },
     });
   }
-  desativar(){
-    if(confirm(`Confirma a desativação do produto ${this.produto.id}?`)){
-      this.service.delete(this.produto.id).subscribe({
-        next: (produto) => {
-          this.isErro = true;
-          console.log(produto)
-          this.mensagem = 'Produto desativado com sucesso!';
-        },
-        error: (resposta) => {
-          this.isErro = true;
-          this.mensagem = resposta.error;
-        },
-      });
+  toggleProduto() {
+    if (this.estado) {
+      if (confirm(`Confirma a ativação do produto ${this.produto.id}?`)) {
+        this.service.ativar(this.produto.id).subscribe({
+          next: (produto) => {
+            this.produto = produto;
+            this.isErro = false;
+            this.mensagem = 'Produto ativado com sucesso!';
+          },
+          error: (resposta) => {
+            this.isErro = true;
+            this.mensagem = resposta.error;
+          },
+        });
+      }
+    }else{
+      if (confirm(`Confirma a desativação do produto ${this.produto.id}?`)) {
+        this.service.desativar(this.produto.id).subscribe({
+          next: (produto) => {
+            this.produto = produto;
+            this.isErro = true;
+            this.mensagem = 'Produto desativado com sucesso!';
+          },
+          error: (resposta) => {
+            this.isErro = true;
+            this.mensagem = resposta.error;
+          },
+        });
+      }
     }
   }
+
   voltar() {
     this.router.navigate(['/web/produtos']);
   }

@@ -120,8 +120,11 @@
                                     class="color-white btn btn-warning" (click)="cadastrar()">Cadastrar</button>
                                 <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
                                     (click)="editar()">Editar</button>
-                                <button *ngIf="modoEditar == false" type="submit" class="btn btn-danger"
-                                    (click)="desativar()">Desativar</button>
+                                <button *ngIf="!estado" type="submit" class="btn btn-danger"
+                                    (click)="toggleProduto()">Desativar</button>
+
+                                    <button *ngIf="estado" type="submit" class="btn btn-success"
+                                    (click)="toggleProduto()">Ativar</button>
                                 
                                     <button type="button" id="cancelar" (click)="voltar()"
                                     class="btn btn-secondary">Voltar</button>
