@@ -66,7 +66,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O CEP da rua da pessoa.">
                                           <mat-label><span style="color:red">*</span>Digite o CEP</mat-label>
-                                          <input matInput #inputCep maxlength="09" placeholder="CEP" class="w-100">
+                                          <input matInput #inputCep maxlength="09" (change)="viaCep()" [(ngModel)]="pessoa.endereco.cep" placeholder="CEP" class="w-100">
                                           <mat-hint align="end">{{inputCep.value.length}}/9</mat-hint>
                                         </mat-form-field>
                                       </td>
@@ -81,7 +81,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Nome da Rua, Avenida ou Travessa.">
                                           <mat-label>Digite o logradouro</mat-label>
-                                          <input matInput #inputLogradouro maxlength="40" placeholder="Logradouro" class="w-100">
+                                          <input matInput #inputLogradouro maxlength="40" placeholder="Logradouro" [(ngModel)]="pessoa.endereco.logradouro" class="w-100">
                                           <mat-hint align="end">{{inputLogradouro.value.length}}/40</mat-hint>
                                         </mat-form-field>
                                       </td>
@@ -96,7 +96,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field>
                                           <mat-label>Digite o número</mat-label>
-                                          <input matInput #inputNumero placeholder="O número de residência, se possuir." class="w-100">
+                                          <input matInput #inputNumero placeholder="O número de residência, se possuir." [(ngModel)] = "pessoa.endereco.numero" class="w-100">
                                         </mat-form-field>
                                       </td>
                                 </div>
@@ -110,7 +110,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O bairro do logradouro">
                                           <mat-label><span style="color:red">*</span>Digite o bairro</mat-label>
-                                          <input matInput #inputBairro maxlength="40" placeholder="O bairro do logradouro" class="w-100">
+                                          <input matInput #inputBairro maxlength="40" placeholder="O bairro do logradouro" [(ngModel)]="pessoa.endereco.bairro" class="w-100">
                                           <mat-hint align="end">{{inputBairro.value.length}}/40</mat-hint>
                                         </mat-form-field>
                                       </td>
@@ -125,8 +125,36 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Um complemento do endereço">
                                           <mat-label>Digite um complemento:</mat-label>
-                                          <input matInput #inputComplemento maxlength="40" placeholder="Digite um complemento" class="w-100">
+                                          <input matInput #inputComplemento maxlength="40" [(ngModel)]="pessoa.endereco.complemento" placeholder="Digite um complemento" class="w-100">
                                           <mat-hint align="end">{{inputComplemento.value.length}}/40</mat-hint>
+                                        </mat-form-field>
+                                      </td>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">Cidade:</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <td class="align-middle text-center">
+                                        <mat-form-field hintLabel="Um complemento do endereço">
+                                          <mat-label>Digite a cidade:</mat-label>
+                                          <input matInput #inputCidade maxlength="40" placeholder="A cidade"[(ngModel)]="pessoa.endereco.cidade" class="w-100">
+                                        </mat-form-field>
+                                      </td>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0">UF:</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <td class="align-middle text-center">
+                                        <mat-form-field hintLabel="A Unidade Federal">
+                                          <mat-label>Digite a UF:</mat-label>
+                                          <input matInput #inputUf  placeholder="Digite a UF" [(ngModel)]="pessoa.endereco.uf" class="w-100">
                                         </mat-form-field>
                                       </td>
                                 </div>

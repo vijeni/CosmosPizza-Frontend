@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -8,6 +8,9 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { FormControl } from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
+import { CEPError, NgxViacepService } from "@brunoc/ngx-viacep"; // Importando o serviço
+import { EMPTY, catchError } from 'rxjs';
+import { Endereco, EnderecoInterface } from 'src/app/models/endereco/endereco';
 
 
 @Component({
@@ -18,14 +21,22 @@ import {MatChipsModule} from '@angular/material/chips';
   imports: [MatFormFieldModule, MatInputModule, MatSelectModule, RouterLink]
   */
 })
-export class PessoasDetailsComponent {
-pessoa= new Pessoa() 
+export class PessoasDetailsComponent implements OnInit  {
+pessoa= new Pessoa(); 
+
 
 index! : number;
 service = inject(PessoaService);
 
-constructor(){
+constructor(private viacep: NgxViacepService){
+
+
 }
+
+ngOnInit(): void {
+  
+}
+
 cadastrar(){
   this.service.post(this.pessoa).subscribe({
     next: (pessoas) => {
@@ -67,6 +78,28 @@ getById(){
     error: (erro) => {
       console.log(erro.error);
     },
+  });
+}
+
+viaCep(){
+  this.viacep
+  .buscarPorCep(this.pessoa.endereco.cep)
+  .pipe(
+    catchError((error: CEPError) => {
+      // Ocorreu algum erro :/
+      console.log(error.message);
+      return EMPTY;
+    })
+  )
+  .subscribe((endereco: EnderecoInterface) => {
+    // Endereço retornado :)
+    console.log(endereco);
+    this.pessoa.endereco.logradouro = endereco.logradouro;
+    this.pessoa.endereco.bairro = endereco.bairro;
+    this.pessoa.endereco.cep = endereco.cep;
+    this.pessoa.endereco.uf = endereco.uf;
+    this.pessoa.endereco.cidade = endereco.localidade;
+
   });
 }
 

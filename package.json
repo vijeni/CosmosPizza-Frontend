@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@brunoc/ngx-viacep": "^3.4.1",
     "@ng-bootstrap/ng-bootstrap": "^15.1.1",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.3.2",
