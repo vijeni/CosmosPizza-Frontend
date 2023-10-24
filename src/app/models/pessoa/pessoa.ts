@@ -8,4 +8,13 @@ export class Pessoa extends AbstractEntity {
     telefone!: string
     endereco!: Endereco;
     tipoPessoa!: TipoPessoa
+
+    constructor(){
+        super();
+        this.nome = "";
+        this.cpf = "";
+        this.telefone = "";
+        this.tipoPessoa = TipoPessoa.CLIENTE;
+    }
+
 }

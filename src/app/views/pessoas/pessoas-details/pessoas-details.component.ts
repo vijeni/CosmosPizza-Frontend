@@ -5,6 +5,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { RouterModule, RouterLink, Router } from '@angular/router';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
+import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-pessoas-details',
@@ -15,13 +17,15 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
   */
 })
 export class PessoasDetailsComponent {
-pessoa!: Pessoa;
-pessoas : Pessoa[] = [];
+pessoa= new Pessoa() 
+
+
+tppessoa!: TipoPessoa
+
 index! : number;
 service = inject(PessoaService);
 
 constructor(){
-
 }
 cadastrar(){
   this.service.post(this.pessoa).subscribe({
@@ -67,16 +71,6 @@ getById(){
   });
 }
 
-getAll(){
-  this.service.getAll().subscribe({
-    next: (pessoas) => {
-      this.pessoas = pessoas;
-    },
-    error: (erro) => {
-      console.log(erro.error);
-    },
-  });
-}
 
 
 }
