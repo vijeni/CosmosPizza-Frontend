@@ -70,7 +70,8 @@ export class ProdutoListComponent {
       return (
         produto.descricao.toLowerCase().includes(term) ||
         pipe.transform(produto.quantidadeEstoque).includes(term) ||
-        pipe.transform(produto.valorUnitario).includes(term)
+        pipe.transform(produto.valorUnitario).includes(term) || 
+        pipe.transform(produto.id).includes(term)
       );
     });
   }
