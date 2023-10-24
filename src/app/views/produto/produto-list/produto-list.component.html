@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody class="d-grid container">
-                <tr class="row" *ngFor="let produto of produtos; index as i">
+                <tr [routerLink]="['/web/produto/', produto.id]" class="row produto-row" *ngFor="let produto of produtos; index as i">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>

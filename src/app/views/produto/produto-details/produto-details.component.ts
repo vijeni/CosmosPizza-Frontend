@@ -31,6 +31,9 @@ export class ProdutoDetailsComponent implements OnInit {
         this.modoEditar = false;
         this.disabled = true;
       }
+      else{
+        this.disabled = true;
+      }
     }
   }
 

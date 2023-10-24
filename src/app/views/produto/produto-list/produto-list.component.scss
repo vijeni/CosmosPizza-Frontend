@@ -50,3 +50,13 @@ bi:hover{
     transition: 500ms;
     color: rgb(141, 126, 42)
 }
+
+.produto-row{
+    transition: 1000ms;
+    cursor: pointer;
+}
+.produto-row:hover{
+    background-color: rgba(250, 218, 159, 0.445);
+    transition: 500ms;
+    height: 5rem;
+}

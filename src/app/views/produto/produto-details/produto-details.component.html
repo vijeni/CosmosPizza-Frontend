@@ -47,7 +47,7 @@
                                     <textarea *ngIf="!disabled" class="form-control" rows="3"
                                         placeholder="Observação do produto" name="observacao"
                                         [(ngModel)]="produto.observacao"></textarea>
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.observacao}}</p>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.observacao? produto.observacao: "---"}}</p>
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -70,7 +70,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-3">
-                                    <h6 class="mb-0 pt-2 reais"><span
+                                    <h6 class="mb-0 pt-2 reais"><span *ngIf="!disabled">R$</span><span
                                             *ngIf="disabled">{{produto.valorUnitario | currency: 'R$ '}}</span></h6>
                                     <input *ngIf="!disabled" type="number" class="form-control form-control-md"
                                         name="valor" [(ngModel)]="produto.valorUnitario" required />
@@ -82,8 +82,8 @@
                                     <h6 class="mb-0">Data de Criação:
                                     </h6>
                                 </div>
-                                <div class="flex-row d-flex col-md-3">
-                                    <p class="mb-0">{{produto.cadastro | date : 'dd/MM/yyyy'}}
+                                <div class="flex-row d-flex col-md-4">
+                                    <p class="mb-0">{{produto.cadastro | date : 'dd/MM/yyyy - hh:mm'}}
                                     </p>
                                 </div>
                             </div>
@@ -92,8 +92,8 @@
                                     <h6 class="mb-0">Data de Edição:
                                     </h6>
                                 </div>
-                                <div class="flex-row d-flex col-md-3">
-                                    <p class="mb-0">{{produto.edicao | date : 'dd/MM/yyyy'}}</p>
+                                <div class="flex-row d-flex col-md-4">
+                                    <p class="mb-0">{{produto.edicao? (produto.edicao | date : 'dd/MM/yyyy - hh:mm'): 'Nunca editado.'}}</p>
                                 </div>
                             </div>
                             <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
@@ -104,7 +104,6 @@
                                 <div class="flex-row d-flex col-md-3">
                                     <span *ngIf="produto.delecao" class="badge bg-danger">Desativado</span>
                                     <span *ngIf="!produto.delecao" class="badge bg-success">Ativado</span>
-                                    <!-- <p>{{produto.delecao}}</p> -->
                                 </div>
                             </div>
                             <div *ngIf="produto.delecao && modoEditar == null && id"
@@ -113,8 +112,8 @@
                                     <h6 class="mb-0">Desativado em:
                                     </h6>
                                 </div>
-                                <div class="flex-row d-flex col-md-3">
-                                    <p>{{produto.delecao | date : 'dd/MM/yyyy'}}</p>
+                                <div class="flex-row d-flex col-md-4">
+                                    <p class="mb-0">{{produto.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
                                 </div>
                             </div>
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
@@ -122,7 +121,7 @@
                                     class="color-white btn btn-warning" (click)="cadastrar()">Cadastrar</button>
                                 <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
                                     (click)="editar()">Editar</button>
-                                <button *ngIf="!modoEditar" [ngClass]="
+                                <button *ngIf="!modoEditar && id" [ngClass]="
                                 {
                                     'btn btn-danger': produto.delecao === null,
                                     'btn btn-success': produto.delecao != null
