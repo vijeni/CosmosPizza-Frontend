@@ -21,15 +21,18 @@
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
-                    <td class="align-middle text-center col-md-2">R$ {{ produto.valorUnitario }}</td>
+                    <td class="align-middle text-center col-md-2">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
                     <td class="status-cell align-middle text-center col-md-4">
-                            <div *ngIf="produto.delecao" class="estado desativado"></div>
-                            <div *ngIf="!produto.delecao" class="estado ativado"></div>
+                        <div *ngIf="produto.delecao" class="estado desativado"></div>
+                        <div *ngIf="!produto.delecao" class="estado ativado"></div>
                         <div (click)="editar(produto.id)">
                             <bi class="acoes" name="pen"></bi>
                         </div>
-                        <div (click)="toggle(produto.id)">
+                        <div *ngIf="produto.delecao === null" (click)="toggle(produto.id)">
                             <bi class="acoes" name="trash"></bi>
+                        </div>
+                        <div *ngIf="produto.delecao != null" (click)="toggle(produto.id)">
+                            <bi class="acoes" name="arrow-counterclockwise"></bi>
                         </div>
                     </td>
                 </tr>
