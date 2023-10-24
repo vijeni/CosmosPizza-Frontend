@@ -11,7 +11,6 @@ import Produto from 'src/app/models/produto/produto';
 export class ProdutoDetailsComponent implements OnInit {
   disabled!: boolean;
   id!: string;
-  estado!: boolean;
   modoEditar!: boolean;
   isErro!: boolean;
   mensagem: string = '';
@@ -30,7 +29,6 @@ export class ProdutoDetailsComponent implements OnInit {
       } else if (url.includes('toggle')) {
         this.disabled = true;
         this.modoEditar = false;
-        this.produto.delecao != null? this.estado = false: this.estado = true
         this.disabled = true;
       }
     }
@@ -76,7 +74,7 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
   toggleProduto() {
-    if (this.estado == false) {
+    if (this.produto.delecao != null) {
       if (confirm(`Confirma a ativação do produto ${this.produto.id}?`)) {
         this.service.ativar(this.produto.id).subscribe({
           next: (produto) => {
