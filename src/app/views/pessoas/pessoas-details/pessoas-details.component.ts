@@ -7,6 +7,8 @@ import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { FormControl } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @Component({
   selector: 'app-pessoas-details',
@@ -18,9 +20,6 @@ import { FormControl } from '@angular/forms';
 })
 export class PessoasDetailsComponent {
 pessoa= new Pessoa() 
-
-
-tppessoa!: TipoPessoa
 
 index! : number;
 service = inject(PessoaService);

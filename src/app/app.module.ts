@@ -28,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+import { MatChipOption, MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    RouterLink
+    RouterLink,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
