@@ -30,6 +30,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
 import { MatChipOption, MatChipsModule } from '@angular/material/chips';
+import { NgxViacepModule } from "@brunoc/ngx-viacep"; // Importando o módulo
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { MatChipOption, MatChipsModule } from '@angular/material/chips';
     TamanhoDetailsComponent,
     PedidosListComponent,
     PedidosDetailsComponent,
-    PessoasDetailsComponent
+    PessoasDetailsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,10 @@ import { MatChipOption, MatChipsModule } from '@angular/material/chips';
     AsyncPipe,
     ReactiveFormsModule,
     NgbTypeaheadModule,
-    MatChipsModule
+    MatChipsModule,
+    BrowserModule,
+    NgxViacepModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

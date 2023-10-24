@@ -15,6 +15,7 @@ export class Pessoa extends AbstractEntity {
         this.cpf = "";
         this.telefone = "";
         this.tipoPessoa = TipoPessoa.CLIENTE;
+        this.endereco = new Endereco(); 
     }
 
 }
