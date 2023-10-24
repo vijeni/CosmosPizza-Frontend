@@ -29,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
+import { MatChipOption, MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
     TamanhoDetailsComponent,
     PedidosListComponent,
     PedidosDetailsComponent,
+    PessoasDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,6 @@ import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
     HttpClientModule,
     SidebarComponent,
     BrowserAnimationsModule,
-    PessoasDetailsComponent,
     IconsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -70,6 +71,7 @@ import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
     AsyncPipe,
     ReactiveFormsModule,
     NgbTypeaheadModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
