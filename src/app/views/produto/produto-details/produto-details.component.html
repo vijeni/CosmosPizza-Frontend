@@ -11,10 +11,12 @@
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-xl-9">
-                    <div *ngIf="isErro && mensagem" class="alert alert-danger" role="alert">
-                        {{mensagem}}
-                    </div>
-                    <div *ngIf="!isErro && mensagem" class="alert alert-success" role="alert">
+                    <div [ngClass]="
+                    {
+                        'alert alert-success': !isErro && mensagem,
+                        'alert alert-danger': isErro && mensagem
+                    }
+                    " class="alert alert-success" role="alert">
                         {{mensagem}}
                     </div>
                     <div class="card shadow p-3 bg-white rounded">
@@ -47,7 +49,8 @@
                                     <textarea *ngIf="!disabled" class="form-control" rows="3"
                                         placeholder="Observação do produto" name="observacao"
                                         [(ngModel)]="produto.observacao"></textarea>
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.observacao? produto.observacao: "---"}}</p>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{produto.observacao? produto.observacao:
+                                        "---"}}</p>
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -93,7 +96,8 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{produto.edicao? (produto.edicao | date : 'dd/MM/yyyy - hh:mm'): 'Nunca editado.'}}</p>
+                                    <p class="mb-0">{{produto.edicao? (produto.edicao | date : 'dd/MM/yyyy - hh:mm'):
+                                        'Nunca editado.'}}</p>
                                 </div>
                             </div>
                             <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">

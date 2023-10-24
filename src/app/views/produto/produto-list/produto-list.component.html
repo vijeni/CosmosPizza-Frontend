@@ -6,6 +6,22 @@
                 [routerLink]="['/web/produto/novo']">Novo Produto</button>
         </div>
         <hr>
+        <form>
+            <div class="mb-3 row">
+                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer campo:</label>
+                <div class="col-xs-3 col-sm-auto">
+                    <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                </div>
+            </div>
+        </form>
+        <div [ngClass]="
+        {
+            'alert alert-success': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " class="alert alert-success" role="alert">
+            {{mensagem}}
+        </div>
         <table class="d-grid">
             <thead class="d-grid container">
                 <tr class="row">
@@ -16,8 +32,8 @@
                     <th scope="col" class=" col-md-4 text-center">Status</th>
                 </tr>
             </thead>
-            <tbody class="d-grid container">
-                <tr [routerLink]="['/web/produto/', produto.id]" class="row" *ngFor="let produto of produtos; index as i">
+            <tbody #tabela class="d-grid container">
+                <tr [routerLink]="['/web/produto/', produto.id]" class="row" *ngFor="let produto of produtos$ | async; index as i">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
@@ -38,5 +54,8 @@
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="produtos.length == 0" class="alert alert-secondary" role="alert">
+            Nenhuma produto encontrado
+          </div>
     </div>
 </div>

@@ -21,13 +21,14 @@ import { TamanhoListComponent } from './views/tamanho/tamanho-list/tamanho-list.
 import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsModule } from './modules/icons.modules';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,12 @@ import { RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    RouterLink
+    RouterLink,
+    DecimalPipe,
+    NgFor,
+    AsyncPipe,
+    ReactiveFormsModule,
+    NgbTypeaheadModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
