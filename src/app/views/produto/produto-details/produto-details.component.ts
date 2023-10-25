@@ -54,6 +54,8 @@ export class ProdutoDetailsComponent implements OnInit {
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Produto cadastrado com sucesso!';
+        this.voltar()
+        
       },
       error: (resposta) => {
         this.isErro = true;
@@ -62,12 +64,23 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
 
+  voltar(){
+    this.moveTo()
+    setTimeout(() =>{
+      this.router.navigate(['/web/produtos'])
+    }, 1500)
+  }
+  moveTo() {
+    window.scrollTo(0, 0);
+  }
+
   editar() {
     this.service.put(this.produto.id, this.produto).subscribe({
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Produto editado com sucesso!';
         this.produto = produto;
+        this.voltar()        
       },
       error: (resposta) => {
         this.isErro = true;
@@ -105,9 +118,5 @@ export class ProdutoDetailsComponent implements OnInit {
         });
       }
     }
-  }
-
-  voltar() {
-    this.router.navigate(['/web/produtos']);
   }
 }

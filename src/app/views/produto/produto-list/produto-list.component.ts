@@ -89,11 +89,6 @@ export class ProdutoListComponent implements OnInit{
     this.router.navigate(['/web/produto/toggle', id]);
   }
   search(text: string, pipe: PipeTransform): Produto[] {
-    // if (this.switchEstado.value) {
-    //   this.getAllAtivos();
-    // } else {
-    //   this.getAll();
-    // }
     return this.produtos.filter((produto) => {
       const term = text.toLowerCase();
       return (
@@ -106,16 +101,7 @@ export class ProdutoListComponent implements OnInit{
     });
   }
   filtrarEstado() {
-    // console.log(this.switchEstado.value)
     this.filter.setValue(this.filter.value);
-    // if(this.switchEstado.value){
-    //   this.getAll()
-    //   this.filter.setValue('')
-    // }else{
-    //   this.filter.setValue('')
-    //   this.getAllAtivos()
-    //   this.filter.setValue('')
 
-    // }
   }
 }
