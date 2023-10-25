@@ -1,7 +1,7 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject, OnInit, PipeTransform } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, RouterLink } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { map, startWith } from 'rxjs';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
