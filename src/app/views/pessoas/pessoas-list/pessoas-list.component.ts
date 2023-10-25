@@ -14,6 +14,7 @@ export class PessoasListComponent {
 pessoas : Pessoa[] = [];
 index! : number;
 service = inject(PessoaService);
+  router: any;
 constructor() {
   this.getAll();
 }
@@ -26,6 +27,14 @@ constructor() {
         console.log(erro.error);
       },
     });
+  }
+
+  editar(id: number) {
+    this.router.navigate(['/web/pessoa/editar', id]);
+  }
+
+  toggle(id: number) {
+    this.router.navigate(['/web/pessoa/toggle', id]);
   }
 
 
