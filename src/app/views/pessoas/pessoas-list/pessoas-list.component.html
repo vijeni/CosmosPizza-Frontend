@@ -28,7 +28,7 @@
                     <div *ngIf="!pessoa.delecao" class="ativo mb-4">
                         <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
                     </div>
-                <bi class="acoes mb-4" type="button" name="pen"></bi>
+                <bi class="acoes mb-4" type="button" name="pen" (click)="editar(pessoa.id)"></bi>
                 <bi class="acoes mb-4" type="button" name="trash"></bi>
             </td>
               </tr>
