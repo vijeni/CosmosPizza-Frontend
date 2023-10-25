@@ -6,6 +6,8 @@ export class Sabor extends AbstractEntity {
   descricao!: string;
   ingredientes!: Ingrediente[];
 
+  // ingredientes: Ingrediente[] = [];
+
 
   constructor(nome? : string, descricao?: string, ingredientes? : Ingrediente[]){
     super();

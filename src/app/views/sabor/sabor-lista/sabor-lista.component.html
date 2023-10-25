@@ -19,6 +19,7 @@
             </thead>
             <tbody>
                 <tr class="sem-borda"  *ngFor="let sabor of sabores; index as i">
+                    <div *ngFor="ingrediente of ingredientes; index as i">
                     <th class="align-middle text-center col-md-2" scope="row">{{sabor.id}}</th>
                     <td class="align-middle text-center col-md-2">{{sabor.nome}}</td>
                     <td class="align-middle text-center col-md-2">{{sabor.descricao}}</td>
@@ -34,6 +35,7 @@
                   <bi class="acoes mb-4" type="button" name="pen" (click)="editar(sabor.id)"></bi>
                   <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(sabor.id)"></bi>
               </td>
+                 </div>
                 </tr>
             </tbody>
         </table>

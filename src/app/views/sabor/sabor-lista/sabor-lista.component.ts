@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
 import { Sabor } from 'src/app/models/sabor/sabor';
 import { SaborService } from 'src/app/services/sabor/sabor.service';
 
@@ -15,6 +16,7 @@ export class SaborListaComponent implements OnInit {
   service = inject(SaborService);
   router = inject(Router)
   isFuncionario! : boolean;
+  ingredientes : Ingrediente[] = [];
   
   
   constructor() {

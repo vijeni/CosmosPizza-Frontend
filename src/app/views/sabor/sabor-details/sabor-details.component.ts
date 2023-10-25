@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
 import { Sabor } from 'src/app/models/sabor/sabor';
 import { SaborService } from 'src/app/services/sabor/sabor.service';
 
@@ -22,6 +23,8 @@ export class SaborDetailsComponent implements OnInit {
   modoEditar! : boolean;
   id! : string;
   disabled! : boolean;
+  ingredientes : Ingrediente[] = [];
+ 
   
   
   
@@ -107,14 +110,10 @@ export class SaborDetailsComponent implements OnInit {
      sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
     
      async voltar() {
-      this.injectRouter.navigate(['/web/pessoas']);
-       this.moveTo();
-    }
-    
-    async voltarFuncionario(){
       this.injectRouter.navigate(['/web/sabores']);
        this.moveTo();
     }
+    
   
     
   }
