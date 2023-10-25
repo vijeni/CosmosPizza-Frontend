@@ -25,7 +25,10 @@ export class PessoasDetailsComponent implements OnInit  {
 pessoa= new Pessoa(); 
 
 
+
 index! : number;
+isErro! : boolean;
+mensagem : string = "";
 service = inject(PessoaService);
 
 constructor(private viacep: NgxViacepService){
@@ -41,9 +44,13 @@ cadastrar(){
   this.service.post(this.pessoa).subscribe({
     next: (pessoas) => {
       this.pessoa = pessoas;
+      this.isErro = false;
+      this.mensagem = "Pessoa cadastrada com sucesso!"
     },
     error: (erro) => {
       console.log(erro.error);
+      this.isErro = true;
+      this.mensagem = (erro.error);
     },
   });
 }
@@ -103,6 +110,8 @@ viaCep(){
   });
 }
 
-
+moveTo(){
+  window.scrollTo(0, 0);
+}
 
 }
