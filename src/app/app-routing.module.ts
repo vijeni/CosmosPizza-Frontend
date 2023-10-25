@@ -32,6 +32,9 @@ const routes: Routes = [
       { path: 'produto/:id', component: ProdutoDetailsComponent },
       { path: 'pessoas', component: PessoasListComponent },
       { path: 'pessoas/novo', component: PessoasDetailsComponent },
+      { path: 'pessoas/id', component: PessoasDetailsComponent},
+      { path: 'pessoas/toggle/:id', component: PessoasDetailsComponent}
+
     ],
   },
 ];
