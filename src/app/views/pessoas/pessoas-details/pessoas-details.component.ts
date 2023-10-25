@@ -34,6 +34,7 @@ injectRouter = inject(Router)
 modoEditar! : boolean;
 id! : string;
 disabled! : boolean;
+isFuncionario!: boolean;
 
 
 
@@ -62,6 +63,10 @@ ngOnInit(): void {
 
   }
   
+  if(url.includes('funcionario')){
+    this.pessoa.tipoPessoa = TipoPessoa.FUNCIONARIO
+    this.isFuncionario = true;
+  }
 
 
 
