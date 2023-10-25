@@ -8,7 +8,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, map, pipe, startWith } from 'rxjs';
@@ -23,7 +23,6 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
 })
 export class ProdutoListComponent {
   @ViewChild('tabela', { static: false }) tabelaBody!: ElementRef;
-
   produtos: Produto[] = [];
   produtos$!: Observable<Produto[]>;
   index!: number;
@@ -35,6 +34,7 @@ export class ProdutoListComponent {
   router = inject(Router);
   filter = new FormControl('');
   decimalPipe = inject(DecimalPipe);
+  switchEstado = new FormControl(false)
 
   constructor() {}
   async ngOnInit() {
@@ -48,6 +48,19 @@ export class ProdutoListComponent {
   }
   async getAll() {
     this.produtoService.getAll().subscribe({
+      next: (produtos) => {
+        this.produtos = produtos;
+      },
+      error: (erro) => {
+        this.isErro = true;
+        this.mensagem = 'Ocorreu um erro!';
+        console.log(erro.error);
+      },
+    });
+  }
+  async getAllAtivos() {
+    console.log('aq')
+    this.produtoService.getAllAtivos().subscribe({
       next: (produtos) => {
         this.produtos = produtos;
       },
@@ -74,5 +87,18 @@ export class ProdutoListComponent {
         pipe.transform(produto.id).includes(term)
       );
     });
+  }
+  filtrarEstado(){
+    console.log(this.switchEstado.value)
+    if(this.switchEstado.value){
+      this.filter.setValue('')
+      this.getAll()
+      this.filter.setValue('')
+    }else{
+      this.filter.setValue('')
+      this.getAllAtivos()
+      this.filter.setValue('')
+      
+    }
   }
 }

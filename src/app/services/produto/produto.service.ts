@@ -17,6 +17,9 @@ export class ProdutoService {
     getAll(): Observable<Produto[]> {
       return this.http.get<Produto[]>(`${this.API}/todos`);
     }
+    getAllAtivos(): Observable<Produto[]> {
+      return this.http.get<Produto[]>(`${this.API}/todos/ativos`);
+    }
     post(produto: Produto): Observable<Produto> {
       return this.http.post<Produto>(`${this.API}/cadastrar`, produto);
     }

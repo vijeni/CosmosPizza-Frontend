@@ -125,16 +125,10 @@
                                     class="color-white btn btn-warning" (click)="cadastrar()">Cadastrar</button>
                                 <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
                                     (click)="editar()">Editar</button>
-                                <button *ngIf="!modoEditar && id" [ngClass]="
-                                {
-                                    'btn btn-danger': produto.delecao === null,
-                                    'btn btn-success': produto.delecao != null
-                                }
-                                " type="submit" (click)="toggleProduto()">{{ this.produto.delecao != null? 'Ativar':
-                                    'Desativar'}}</button>
-                                <!-- <button *ngIf="estado == false" type="submit" class="btn btn-success"
-                                    (click)="toggleProduto()">Ativar</button> -->
-
+                                <button *ngIf="modoEditar == false && id && produto.delecao === null" type="submit" class="btn btn-danger"
+                                    (click)="toggleProduto()">Desativar</button>
+                                <button *ngIf="modoEditar == false && id && produto.delecao != null" type="submit" class="btn btn-success"
+                                    (click)="toggleProduto()">Ativar</button>
                                 <button type="button" id="cancelar" (click)="voltar()"
                                     class="btn btn-secondary">Voltar</button>
                             </div>

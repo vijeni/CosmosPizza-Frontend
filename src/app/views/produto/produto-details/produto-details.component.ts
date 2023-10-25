@@ -29,7 +29,6 @@ export class ProdutoDetailsComponent implements OnInit {
       } else if (url.includes('toggle')) {
         this.disabled = true;
         this.modoEditar = false;
-        this.disabled = true;
       }
       else{
         this.disabled = true;
