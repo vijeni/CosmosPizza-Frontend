@@ -37,24 +37,6 @@
             </td>
               </tr>
           </tbody>
-          <tbody *ngIf="isFuncionario">
-            <tr class="sem-borda"  *ngFor="let pessoa of pessoas; index as i">
-                <th class="align-middle text-center col-md-2" scope="row">{{pessoa.id}}</th>
-                <td class="align-middle text-center col-md-2">{{pessoa.nome}}</td>
-                <td class="align-middle text-center col-md-2">{{pessoa.telefone}}</td>
-                <td class="align-middle text-center col-md-2">{{pessoa.cpf}}</td>
-                <td class="status-cell align-center text-center">
-                  <div *ngIf="pessoa.delecao" class="inativo mb-4">
-                      <img src="../../../../assets/tabelas/inativo-icon.svg" alt="Inativo">
-                  </div>
-                  <div *ngIf="!pessoa.delecao" class="ativo mb-4">
-                      <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
-                  </div>
-              <bi class="acoes mb-4" type="button" name="pen" (click)="editar(pessoa.id)"></bi>
-              <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(pessoa.id)"></bi>
-          </td>
-            </tr>
-        </tbody>
       </table>
   </div>
 </div>
