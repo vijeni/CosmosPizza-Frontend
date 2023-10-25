@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
@@ -14,7 +14,8 @@ export class PessoasListComponent {
 pessoas : Pessoa[] = [];
 index! : number;
 service = inject(PessoaService);
-  router: any;
+router = inject(Router)
+
 constructor() {
   this.getAll();
 }
