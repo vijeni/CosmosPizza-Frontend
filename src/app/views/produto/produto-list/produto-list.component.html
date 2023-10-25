@@ -8,11 +8,15 @@
         <hr>
         <form>
             <div class="mb-3 row d-flex flex-row justify-content-between">
-                <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer campo:</label>
-                <div class="col-xs-3 col-sm-auto">
-                    <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                <div class="w-50 d-flex flex-row gap-3">
+                    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer
+                        campo:</label>
+                    <div class="col-xs-3 col-sm-auto">
+                        <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                    </div>
                 </div>
-                <mat-slide-toggle class="w-25 pt-2" color="warn">Ativados</mat-slide-toggle>
+                <mat-slide-toggle class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                    (change)="filtrarEstado()" color="warn">Mostrar apenas ativos</mat-slide-toggle>
             </div>
         </form>
         <div [ngClass]="
@@ -20,7 +24,7 @@
             'alert alert-success': !isErro && mensagem,
             'alert alert-danger': isErro && mensagem
         }
-        " class="alert alert-success" role="alert">
+        " role="alert">
             {{mensagem}}
         </div>
         <table class="d-grid">
@@ -34,7 +38,8 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/produto/', produto.id]" class="row" *ngFor="let produto of produtos$ | async; index as i">
+                <tr [routerLink]="['/web/produto/', produto.id]" class="row"
+                    *ngFor="let produto of produtos$ | async; index as i">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
@@ -55,8 +60,18 @@
                 </tr>
             </tbody>
         </table>
+        <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+                [collectionSize]="collectionSize"
+                [(page)]="page"
+                [pageSize]="pageSize"
+                (pageChange)="refreshProdutos()"
+            >
+            </ngb-pagination>
+
+        </div>
         <div *ngIf="produtos.length == 0" class="alert alert-secondary" role="alert">
-            Nenhuma produto encontrado
-          </div>
+            Nenhum produto encontrado
+        </div>
     </div>
 </div>
