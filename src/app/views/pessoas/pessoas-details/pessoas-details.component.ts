@@ -70,10 +70,13 @@ ngOnInit(): void {
 
 cadastrar(){
   this.service.post(this.pessoa).subscribe({
-    next: (pessoas) => {
+    next: async (pessoas) => {
       this.pessoa = pessoas;
       this.isErro = false;
-      this.mensagem = "Pessoa cadastrada com sucesso!"
+      this.mensagem = "Pessoa cadastrada com sucesso!" 
+      await this.sleep(1500);
+      this.injectRouter.navigate(['/web/pessoas']);
+      
     },
     error: (erro) => {
       console.log(erro.error);
@@ -83,8 +86,8 @@ cadastrar(){
   });
 }
 
-editar(){
-  this.service.put(this.index,this.pessoa).subscribe({
+editar(id: number){
+  this.service.put(id,this.pessoa).subscribe({
     next: (pessoas) => {
       this.pessoa = pessoas;
     },
@@ -94,8 +97,8 @@ editar(){
   });
 }
 
-deletar(){
-  this.service.delete(this.index).subscribe({
+deletar(id: number){
+  this.service.delete(id).subscribe({
     next: (pessoas) => {
       this.pessoa = pessoas;
     },
@@ -142,4 +145,7 @@ moveTo(){
   window.scrollTo(0, 0);
 }
 
+ sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  
 }

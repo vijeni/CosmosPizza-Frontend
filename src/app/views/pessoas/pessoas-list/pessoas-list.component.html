@@ -2,7 +2,7 @@
   <div class="w-90">
       <div class="d-flex justify-content-between header">
           <h5 class="m-0 fw-bold">Pessoas</h5>
-          <button type="button" [routerLink]="['/web/pessoas/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
+          <button type="button" [routerLink]="['/web/pessoa/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
       </div>
       <hr>
       <table class="table table-striped">
@@ -29,7 +29,7 @@
                         <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
                     </div>
                 <bi class="acoes mb-4" type="button" name="pen" (click)="editar(pessoa.id)"></bi>
-                <bi class="acoes mb-4" type="button" name="trash"></bi>
+                <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(pessoa.id)"></bi>
             </td>
               </tr>
           </tbody>

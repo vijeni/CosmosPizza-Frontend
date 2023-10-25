@@ -16,6 +16,7 @@ index! : number;
 service = inject(PessoaService);
 router = inject(Router)
 
+
 constructor() {
   this.getAll();
 }
