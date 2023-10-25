@@ -38,6 +38,9 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { Pagamento } from './models/enums/pagamento/pagamento';
+
 
 @NgModule({
   declarations: [
@@ -59,9 +62,10 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     PedidosListComponent,
     PedidosDetailsComponent,
     PessoasDetailsComponent,
-    CpfPipe
+    CpfPipe,
   ],
   imports: [
+    MatCheckboxModule,
     BrowserModule,
     NgxMaskPipe,
     NgxMaskDirective,

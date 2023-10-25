@@ -26,7 +26,10 @@ export class PedidoService {
     finalizarPedido(id: number): Observable<Pedido> {
       return this.http.put<Pedido>(`${this.API}/finalizar/${id}`, null);
     }
-    delete(id: number): Observable<any> {
-      return this.http.get<any>(`${this.API}/delete/${id}`);
+    cancelar(id: number): Observable<any> {
+      return this.http.delete<any>(`${this.API}/cancelar/${id}`);
+    }
+    reabrir(id: number): Observable<any> {
+      return this.http.put<any>(`${this.API}/reabrir/${id}`, null);
     }
 }

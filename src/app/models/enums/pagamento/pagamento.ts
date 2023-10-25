@@ -1,7 +1,7 @@
 export enum Pagamento {
-    CREDITO,
-    DEBITO,
-    DINHEIRO,
-    PIX,
-    OUTRO
+    CREDITO = 'CREDITO',
+    DEBITO = 'DEBITO',
+    DINHEIRO = 'DINHEIRO',
+    PIX = 'PIX',
+    OUTRO = 'OUTRO'
 }

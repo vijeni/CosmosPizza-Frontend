@@ -18,7 +18,7 @@ body,html{
     width: 90%;
 }
 
-app-pessoas-list, app-produto-list, app-produto-details, app-pessoas-details, app-sabor-lista, app-sabor-details, app-pedidos-list{ 
+app-pessoas-list, app-produto-list, app-produto-details, app-pessoas-details, app-sabor-lista, app-sabor-details, app-pedidos-list, app-pedidos-details{ 
     width: 100%; 
 }
 
@@ -93,4 +93,18 @@ tbody tr:hover{
 bi:hover{
     transition: 500ms;
     color: rgb(141, 126, 42)
+}
+
+.text-align-right{
+    text-align: right;
+}
+#cancelar{
+    cursor: pointer;
+}
+h6.reais{
+    font-weight: bold;
+    margin-right: .5rem;
+}
+.btn-edit{
+    background-color: orange;
 }
