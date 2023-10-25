@@ -33,7 +33,8 @@ const routes: Routes = [
       { path: 'pessoas', component: PessoasListComponent },
       { path: 'pessoa/novo', component: PessoasDetailsComponent },
       { path: 'pessoa/editar/:id', component: PessoasDetailsComponent},
-      { path: 'pessoa/toggle/:id', component: PessoasDetailsComponent}
+      { path: 'pessoa/toggle/:id', component: PessoasDetailsComponent},
+      { path: 'pessoa/:id', component: PessoasDetailsComponent},
 
     ],
   },

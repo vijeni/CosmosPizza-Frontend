@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { RouterModule, RouterLink, Router } from '@angular/router';
+import { RouterModule, RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
@@ -30,13 +30,41 @@ index! : number;
 isErro! : boolean;
 mensagem : string = "";
 service = inject(PessoaService);
+injectRouter = inject(Router)
+modoEditar! : boolean;
+id! : string;
+disabled! : boolean;
 
-constructor(private viacep: NgxViacepService){
+
+
+constructor(private viacep: NgxViacepService, private route: ActivatedRoute){
 
 
 }
 
 ngOnInit(): void {
+  let url = this.injectRouter.url;
+
+
+  if(!url.includes('novo')){
+    this.id = this.route.snapshot.paramMap.get("id") as string; //pegando a rota
+    this.getById(Number(this.id));
+    if(url.includes('editar')){
+      this.modoEditar = true;
+    } 
+    else if(url.includes('toggle')){
+      this.modoEditar = false;
+      this.disabled = true;
+    }
+    else{
+      this.disabled = true;
+    }
+
+  }
+  
+
+
+
   
 }
 
@@ -77,8 +105,8 @@ deletar(){
   });
 }
 
-getById(){
-  this.service.findById(this.index).subscribe({
+getById(id: number){
+  this.service.findById(id).subscribe({
     next: (pessoas) => {
       this.pessoa = pessoas;
     },
