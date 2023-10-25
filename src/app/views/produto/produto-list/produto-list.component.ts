@@ -21,7 +21,7 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
   styleUrls: ['./produto-list.component.scss'],
   providers: [DecimalPipe],
 })
-export class ProdutoListComponent {
+export class ProdutoListComponent implements OnInit{
   @ViewChild('tabela', { static: false }) tabelaBody!: ElementRef;
   produtos: Produto[] = [];
   produtos$: Produto[] = [];

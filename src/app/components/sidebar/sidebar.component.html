@@ -33,7 +33,7 @@
       </li>
       <li class="borda-top my-3"></li>
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/pessoas']" data-bs-target="#dashboard-collapse" aria-expanded="false">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/clientes']" data-bs-target="#dashboard-collapse" aria-expanded="false">
           <img src="../../../assets/siderbar/clientes-icon.svg" height="20hv" alt="">
           Clientes
         </button>
@@ -41,7 +41,7 @@
       <li class="borda-top my-3"></li>
 
       <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+        <button class="btn btn-toggle align-items-center rounded collapsed" [routerLink]="['/web/pedidos']" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
           <img src="../../../assets/siderbar/pedidos-icon.svg" height="20vh" alt="">
           Pedidos
         </button>
@@ -64,7 +64,7 @@
         <div #collapse="ngbCollapse" [(ngbCollapse)]="cozinhaCollapse">
           <div class="card">
             <ul>
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/produtos']"data-bs-target="#account-collapse" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/produtos']" data-bs-target="#account-collapse" aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Produtos
             </button>
