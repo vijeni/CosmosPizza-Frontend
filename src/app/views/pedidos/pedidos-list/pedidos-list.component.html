@@ -5,7 +5,7 @@
             <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
                 [routerLink]="['/web/produto/novo']">Novo Produto</button>
         </div>
-        <hr>
+        <hr class="w-90">
         <form>
             <div class="mb-3 row d-flex flex-row justify-content-between">
                 <div class="w-50 d-flex flex-row gap-3">
@@ -27,25 +27,29 @@
         " role="alert">
             {{mensagem}}
         </div>
-        <div class="mb-3 resultados">Resultados: {{produtos$.length}}</div>
+        <div class="mb-3 resultados">Resultados: {{pedidos$.length}}</div>
         <table class="d-grid">
             <thead class="d-grid container">
                 <tr class="row">
                     <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-3 text-center">Descrição</th>
-                    <th scope="col" class="col-md-2 text-center">Quantidade</th>
-                    <th scope="col" class="col-md-2 text-center">Valor Unitário</th>
-                    <th scope="col" class=" col-md-4 text-center">Status</th>
+                    <th scope="col" class="col-md-1 text-center">Cliente</th>
+                    <th scope="col" class="col-md-2 text-center">Funcionário</th>
+                    <th scope="col" class="col-md-2 text-center">Data Abertura</th>
+                    <th scope="col" class="col-md-2 text-center">Data Conclusão</th>
+                    <th scope="col" class="col-md-2 text-center">Valor</th>
+                    <th scope="col" class=" col-md-2 text-center">Status</th>
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
                 <tr [routerLink]="['/web/produto/', produto.id]" class="row"
-                    *ngFor="let produto of produtos$ ; index as i">
+                    *ngFor="let produto of pedidos$">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
-                    <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
-                    <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
-                    <td class="align-middle text-center col-md-2">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
-                    <td class="status-cell align-middle text-center col-md-4">
+                    <td class="align-middle text-center col-md-1" scope="row">{{produto.descricao}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{produto.descricao}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{produto.cadastro | date : 'dd/MM/yyyy - hh:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{produto.cadastro | date : 'dd/MM/yyyy - hh:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
+                    <td class="status-cell align-middle text-center col-md-2">
                         <div *ngIf="produto.delecao" class="estado desativado"></div>
                         <div *ngIf="!produto.delecao" class="estado ativado"></div>
                         <div (click)="editar(produto.id)">
@@ -61,7 +65,7 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="produtos.length == 0 || produtos$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+        <div *ngIf="pedidos.length == 0 || pedidos$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
             Nenhum produto encontrado
         </div>
     </div>

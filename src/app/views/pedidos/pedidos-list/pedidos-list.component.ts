@@ -8,27 +8,26 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, map, pipe, startWith } from 'rxjs';
+import { map, startWith } from 'rxjs';
 import Produto from 'src/app/models/produto/produto';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 
 @Component({
   selector: 'app-pedidos-list',
   templateUrl: './pedidos-list.component.html',
-  styleUrls: ['./pedidos-list.component.scss']
+  styleUrls: ['./pedidos-list.component.scss'],
+  providers: [DecimalPipe]
 })
 export class PedidosListComponent implements OnInit {
-  produtos: Produto[] = [];
-  produtos$: Produto[] = [];
-  index!: number;
-  produtoSelecionado = new Produto();
+  pedidos: Produto[] = [];
+  pedidos$: Produto[] = [];
   isErro!: boolean;
   mensagem: string = '';
   modalService = inject(NgbModal);
-  produtoService = inject(ProdutoService);
+  pedidoService = inject(ProdutoService);
   router = inject(Router);
   filter = new FormControl('');
   decimalPipe = inject(DecimalPipe);
@@ -42,16 +41,16 @@ export class PedidosListComponent implements OnInit {
       this.filter.valueChanges.pipe(
         startWith(''),
         map((text) => this.search(text as string, this.decimalPipe))
-      ).subscribe({next: (produtosFiltados) => {
-        this.produtos$ = produtosFiltados
+      ).subscribe({next: (pedidosFiltrados) => {
+        this.pedidos$ = pedidosFiltrados
       }});
     }, 1000);
   }
  
   async getAll() {
-    this.produtoService.getAll().subscribe({
+    this.pedidoService.getAll().subscribe({
       next: (produtos) => {
-        this.produtos = produtos;
+        this.pedidos = produtos;
         },
       error: (erro) => {
         this.isErro = true;
@@ -61,9 +60,9 @@ export class PedidosListComponent implements OnInit {
     });
   }
   async getAllAtivos() {
-    this.produtoService.getAllAtivos().subscribe({
+    this.pedidoService.getAllAtivos().subscribe({
       next: (produtos) => {
-        this.produtos = produtos;
+        this.pedidos = produtos;
       },
       error: (erro) => {
         this.isErro = true;
@@ -73,10 +72,10 @@ export class PedidosListComponent implements OnInit {
     });
   }
   editar(id: number) {
-    this.router.navigate(['/web/produto/editar', id]);
+    this.router.navigate(['/web/pedido/editar', id]);
   }
   toggle(id: number) {
-    this.router.navigate(['/web/produto/toggle', id]);
+    this.router.navigate(['/web/pedido/toggle', id]);
   }
   search(text: string, pipe: PipeTransform): Produto[] {
     // if (this.switchEstado.value) {
@@ -84,7 +83,7 @@ export class PedidosListComponent implements OnInit {
     // } else {
     //   this.getAll();
     // }
-    return this.produtos.filter((produto) => {
+    return this.pedidos.filter((produto) => {
       const term = text.toLowerCase();
       return (
         (produto.descricao.toLowerCase().includes(term) ||

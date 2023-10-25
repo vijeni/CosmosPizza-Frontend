@@ -25,8 +25,6 @@ export class ProdutoListComponent implements OnInit{
   @ViewChild('tabela', { static: false }) tabelaBody!: ElementRef;
   produtos: Produto[] = [];
   produtos$: Produto[] = [];
-  index!: number;
-  produtoSelecionado = new Produto();
   isErro!: boolean;
   mensagem: string = '';
   modalService = inject(NgbModal);
@@ -46,8 +44,8 @@ export class ProdutoListComponent implements OnInit{
       this.filter.valueChanges.pipe(
         startWith(''),
         map((text) => this.search(text as string, this.decimalPipe))
-      ).subscribe({next: (produtosFiltados) => {
-        this.produtos$ = produtosFiltados
+      ).subscribe({next: (produtosFiltrados) => {
+        this.produtos$ = produtosFiltrados
       }});
     }, 1000);
   }
