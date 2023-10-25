@@ -161,5 +161,8 @@ moveTo(){
 
  sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-  
+ async voltar() {
+  this.injectRouter.navigate(['/web/pessoas']);
+   this.moveTo();
+}
 }
