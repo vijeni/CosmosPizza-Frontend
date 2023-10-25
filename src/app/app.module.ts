@@ -21,7 +21,11 @@ import { TamanhoListComponent } from './views/tamanho/tamanho-list/tamanho-list.
 import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho-details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModule,
+  NgbPaginationModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsModule } from './modules/icons.modules';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,10 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
 import { MatChipOption, MatChipsModule } from '@angular/material/chips';
-import { NgxViacepModule } from "@brunoc/ngx-viacep";
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     PedidosListComponent,
     PedidosDetailsComponent,
     PessoasDetailsComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -79,7 +80,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatChipsModule,
     BrowserModule,
     NgxViacepModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgbTypeaheadModule,
+    NgbPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
