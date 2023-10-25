@@ -19,7 +19,7 @@
                   <th scope="col" class=" col-md-2 text-center">Status</th>
               </tr>
           </thead>
-          <tbody *ngIf="!isFuncionario">
+          <tbody>
               <tr class="sem-borda"  *ngFor="let pessoa of pessoas; index as i">
                   <th class="align-middle text-center col-md-2" scope="row">{{pessoa.id}}</th>
                   <td class="align-middle text-center col-md-2">{{pessoa.nome}}</td>

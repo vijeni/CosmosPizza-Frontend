@@ -54,5 +54,6 @@ ngOnInit(): void {
     this.router.navigate(['/web/pessoa/toggle', id]);
   }
 
+  
 
 }
