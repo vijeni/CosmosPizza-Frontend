@@ -21,10 +21,10 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
   styleUrls: ['./produto-list.component.scss'],
   providers: [DecimalPipe],
 })
-export class ProdutoListComponent {
+export class ProdutoListComponent implements OnInit{
   @ViewChild('tabela', { static: false }) tabelaBody!: ElementRef;
   produtos: Produto[] = [];
-  produtos$!: Observable<Produto[]>;
+  produtos$: Produto[] = [];
   index!: number;
   produtoSelecionado = new Produto();
   isErro!: boolean;
@@ -43,10 +43,12 @@ export class ProdutoListComponent {
   async ngOnInit() {
     await this.getAll();
     setTimeout(() => {
-      this.produtos$ = this.filter.valueChanges.pipe(
+      this.filter.valueChanges.pipe(
         startWith(''),
         map((text) => this.search(text as string, this.decimalPipe))
-      );
+      ).subscribe({next: (produtosFiltados) => {
+        this.produtos$ = produtosFiltados
+      }});
     }, 1000);
   }
   refreshProdutos() {
@@ -87,11 +89,6 @@ export class ProdutoListComponent {
     this.router.navigate(['/web/produto/toggle', id]);
   }
   search(text: string, pipe: PipeTransform): Produto[] {
-    // if (this.switchEstado.value) {
-    //   this.getAllAtivos();
-    // } else {
-    //   this.getAll();
-    // }
     return this.produtos.filter((produto) => {
       const term = text.toLowerCase();
       return (
@@ -104,16 +101,7 @@ export class ProdutoListComponent {
     });
   }
   filtrarEstado() {
-    // console.log(this.switchEstado.value)
     this.filter.setValue(this.filter.value);
-    // if(this.switchEstado.value){
-    //   this.getAll()
-    //   this.filter.setValue('')
-    // }else{
-    //   this.filter.setValue('')
-    //   this.getAllAtivos()
-    //   this.filter.setValue('')
 
-    // }
   }
 }

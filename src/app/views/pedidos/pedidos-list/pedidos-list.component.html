@@ -1,0 +1,68 @@
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold">Produtos</h5>
+            <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
+                [routerLink]="['/web/produto/novo']">Novo Produto</button>
+        </div>
+        <hr>
+        <form>
+            <div class="mb-3 row d-flex flex-row justify-content-between">
+                <div class="w-50 d-flex flex-row gap-3">
+                    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer
+                        campo:</label>
+                    <div class="col-xs-3 col-sm-auto">
+                        <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                    </div>
+                </div>
+                <mat-slide-toggle class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                    (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
+            </div>
+        </form>
+        <div [ngClass]="
+        {
+            'alert alert-success': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " role="alert">
+            {{mensagem}}
+        </div>
+        <div class="mb-3 resultados">Resultados: {{produtos$.length}}</div>
+        <table class="d-grid">
+            <thead class="d-grid container">
+                <tr class="row">
+                    <th scope="col" class="col-md-1 text-center">Código</th>
+                    <th scope="col" class="col-md-3 text-center">Descrição</th>
+                    <th scope="col" class="col-md-2 text-center">Quantidade</th>
+                    <th scope="col" class="col-md-2 text-center">Valor Unitário</th>
+                    <th scope="col" class=" col-md-4 text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody #tabela class="d-grid container">
+                <tr [routerLink]="['/web/produto/', produto.id]" class="row"
+                    *ngFor="let produto of produtos$ ; index as i">
+                    <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
+                    <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
+                    <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
+                    <td class="align-middle text-center col-md-2">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
+                    <td class="status-cell align-middle text-center col-md-4">
+                        <div *ngIf="produto.delecao" class="estado desativado"></div>
+                        <div *ngIf="!produto.delecao" class="estado ativado"></div>
+                        <div (click)="editar(produto.id)">
+                            <bi class="acoes" name="pen"></bi>
+                        </div>
+                        <div *ngIf="produto.delecao === null" (click)="toggle(produto.id)">
+                            <bi class="acoes" name="trash"></bi>
+                        </div>
+                        <div *ngIf="produto.delecao != null" (click)="toggle(produto.id)">
+                            <bi class="acoes" name="arrow-counterclockwise"></bi>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="produtos.length == 0 || produtos$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+            Nenhum produto encontrado
+        </div>
+    </div>
+</div>

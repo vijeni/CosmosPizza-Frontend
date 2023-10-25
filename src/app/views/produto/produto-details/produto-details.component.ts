@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 import Produto from 'src/app/models/produto/produto';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-produto-details',
@@ -29,8 +30,7 @@ export class ProdutoDetailsComponent implements OnInit {
       } else if (url.includes('toggle')) {
         this.disabled = true;
         this.modoEditar = false;
-      }
-      else{
+      } else {
         this.disabled = true;
       }
     }
@@ -54,6 +54,8 @@ export class ProdutoDetailsComponent implements OnInit {
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Produto cadastrado com sucesso!';
+        this.voltar()
+        
       },
       error: (resposta) => {
         this.isErro = true;
@@ -62,12 +64,23 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
 
+  voltar(){
+    this.moveTo()
+    setTimeout(() =>{
+      this.router.navigate(['/web/produtos'])
+    }, 1500)
+  }
+  moveTo() {
+    window.scrollTo(0, 0);
+  }
+
   editar() {
     this.service.put(this.produto.id, this.produto).subscribe({
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Produto editado com sucesso!';
         this.produto = produto;
+        this.voltar()        
       },
       error: (resposta) => {
         this.isErro = true;
@@ -90,7 +103,7 @@ export class ProdutoDetailsComponent implements OnInit {
           },
         });
       }
-    }else{
+    } else {
       if (confirm(`Confirma a desativação do produto ${this.produto.id}?`)) {
         this.service.desativar(this.produto.id).subscribe({
           next: (produto) => {
@@ -105,9 +118,5 @@ export class ProdutoDetailsComponent implements OnInit {
         });
       }
     }
-  }
-
-  voltar() {
-    this.router.navigate(['/web/produtos']);
   }
 }

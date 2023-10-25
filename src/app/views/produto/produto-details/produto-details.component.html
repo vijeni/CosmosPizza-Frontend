@@ -35,7 +35,7 @@
                                     <h6 class="mb-0">Descrição<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5">
-                                    <input *ngIf="!disabled" type="text text-center" [(ngModel)]="produto.descricao"
+                                    <input *ngIf="!disabled"  type="text text-center" [(ngModel)]="produto.descricao"
                                         name="descricao" class="form-control form-control-md" required />
                                     <p *ngIf="disabled" class="m-0 fw-bold">{{produto.descricao}}</p>
                                 </div>
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <hr class="mx-n3">
-                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Data de Criação:
                                     </h6>
@@ -90,7 +90,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Data de Edição:
                                     </h6>
@@ -100,7 +100,7 @@
                                         'Nunca editado.'}}</p>
                                 </div>
                             </div>
-                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Status:
                                     </h6>
