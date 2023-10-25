@@ -33,9 +33,7 @@ export class PedidosListComponent implements OnInit {
   filter = new FormControl('');
   decimalPipe = inject(DecimalPipe);
   switchEstado = new FormControl(false);
-  page = 1;
-	pageSize = 2;
-	collectionSize!: number;
+
 
   constructor() {}
   async ngOnInit() {
@@ -49,18 +47,12 @@ export class PedidosListComponent implements OnInit {
       }});
     }, 1000);
   }
-  refreshProdutos() {
-		this.produtos = this.produtos.slice(
-			(this.page -1) * this.pageSize,
-			(this.page -1) * this.pageSize + this.pageSize,
-		);
-	}
+ 
   async getAll() {
     this.produtoService.getAll().subscribe({
       next: (produtos) => {
         this.produtos = produtos;
-        this.collectionSize = this.produtos.length
-      },
+        },
       error: (erro) => {
         this.isErro = true;
         this.mensagem = 'Ocorreu um erro!';
@@ -104,16 +96,7 @@ export class PedidosListComponent implements OnInit {
     });
   }
   filtrarEstado() {
-    // console.log(this.switchEstado.value)
     this.filter.setValue(this.filter.value);
-    // if(this.switchEstado.value){
-    //   this.getAll()
-    //   this.filter.setValue('')
-    // }else{
-    //   this.filter.setValue('')
-    //   this.getAllAtivos()
-    //   this.filter.setValue('')
 
-    // }
   }
 }

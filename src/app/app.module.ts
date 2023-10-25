@@ -36,6 +36,8 @@ import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
 import { MatChipOption, MatChipsModule } from '@angular/material/chips';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CpfPipe } from './pipes/cpf.pipe';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -57,9 +59,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     PedidosListComponent,
     PedidosDetailsComponent,
     PessoasDetailsComponent,
+    CpfPipe
   ],
   imports: [
     BrowserModule,
+    NgxMaskPipe,
+    NgxMaskDirective,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,

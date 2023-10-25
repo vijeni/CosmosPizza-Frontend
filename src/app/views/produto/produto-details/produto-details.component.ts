@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 import Produto from 'src/app/models/produto/produto';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-produto-details',
@@ -29,8 +30,7 @@ export class ProdutoDetailsComponent implements OnInit {
       } else if (url.includes('toggle')) {
         this.disabled = true;
         this.modoEditar = false;
-      }
-      else{
+      } else {
         this.disabled = true;
       }
     }
@@ -90,7 +90,7 @@ export class ProdutoDetailsComponent implements OnInit {
           },
         });
       }
-    }else{
+    } else {
       if (confirm(`Confirma a desativação do produto ${this.produto.id}?`)) {
         this.service.desativar(this.produto.id).subscribe({
           next: (produto) => {

@@ -79,7 +79,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Não vamos divulgar para ninguém." *ngIf="!disabled">
                                           <mat-label><span style="color:red">*</span>Digite o CPF</mat-label>
-                                          <input matInput #inputCpf maxlength="14" [(ngModel)]="pessoa.cpf" placeholder="000.000.000-00" class="w-100">
+                                          <input matInput #inputCpf maxlength="14" [(ngModel)]="pessoa.cpf" placeholder="000.000.000-00" [mask]="cpfMask()" class="w-100">
                                           <mat-hint align="end">{{inputCpf.value.length}}/14</mat-hint>
                                         </mat-form-field>
                                       </td>
