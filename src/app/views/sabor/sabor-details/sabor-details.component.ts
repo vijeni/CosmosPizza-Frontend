@@ -3,7 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
 import { Sabor } from 'src/app/models/sabor/sabor';
 import { SaborService } from 'src/app/services/sabor/sabor.service';
-
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.service';
 @Component({
   selector: 'app-sabor-details',
   templateUrl: './sabor-details.component.html',
@@ -12,6 +16,11 @@ import { SaborService } from 'src/app/services/sabor/sabor.service';
 export class SaborDetailsComponent implements OnInit {
 
   sabor= new Sabor(); 
+  toppings = new FormControl('');
+  ingredientesBanco : Ingrediente[] = [];
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
+
 
 
 
@@ -19,12 +28,12 @@ export class SaborDetailsComponent implements OnInit {
   isErro! : boolean;
   mensagem : string = "";
   service = inject(SaborService);
+  serviceIngrediente = inject(IngredientesService);
   injectRouter = inject(Router)
   modoEditar! : boolean;
   id! : string;
   disabled! : boolean;
-  ingredientes : Ingrediente[] = [];
- 
+  sabores : Sabor[] = [];
   
   
   
@@ -34,7 +43,11 @@ export class SaborDetailsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    
+      this.serviceIngrediente.getAll().subscribe({
+        next:async (ingredientes) => {
+          this.ingredientesBanco = ingredientes;
+        }
+      })
     }
   
     cadastrar(){

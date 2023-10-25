@@ -35,7 +35,7 @@
                                         <td class="align-middle text-center">
                                           <mat-form-field hintLabel="No máx 20 dígitos." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
-                                            <input matInput #input maxlength="20" name="inputNome" [(ngModel)]="sabor.nome" placeholder="Ex: Vinícius" class="w-100">
+                                            <input matInput #input maxlength="20" name="inputNome" [(ngModel)]="sabor.nome" placeholder="Ex: Bacon" class="w-100">
                                             <mat-hint align="end">{{input.value.length}}/20</mat-hint>
                                           </mat-form-field>
                                         </td>
@@ -57,7 +57,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Com DDD. Ex: (45)" *ngIf="!disabled">
                                           <mat-label><span style="color:red">*</span>Digite a descrição:</mat-label>
-                                          <input matInput #inputDescricao maxlength="50" [(ngModel)]="sabor.descricao" placeholder="Com DDD. Ex: (45)" class="w-100">
+                                          <input matInput #inputDescricao maxlength="50" [(ngModel)]="sabor.descricao" placeholder="Uma vez um porco" class="w-100">
                                           <mat-hint align="end">{{inputDescricao.value.length}}/50</mat-hint>
                                         </mat-form-field>
                                       </td>
@@ -65,36 +65,34 @@
                                         <td class="align-middle text-center">
                                             <p *ngIf="disabled" class="m-0 fw-bold">{{sabor.descricao}}</p>
                                         </td>
-                                      </form>
+                                      </form>      
                                 </div>
                             </div>
-
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0"><span style="color:red">*</span>Ingrediente:</h6>
-                                </div>
-                                <div class="col-md-9 pe-5">
-                                    <td class="align-middle text-center">
-                                        <div class="form-check" *ngFor="let ingrediente of ingredientes; index as i">
-                                            <input class="form-check-input" [(ngModel)]="sabor.ingredientes" type="checkbox" value="" id="flexCheckDefault" >
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                              {{ingrediente.nome}}
-                                            </label>
-                                            <td class="align-middle text-center" *ngIf="ingrediente == null">
-                                                <p class="m-0 fw-bold">Nenhum ingrediente cadastrado ainda.</p>
-                                            </td>
-                                          </div>
-                                      </td>
-                                        
-
-                                      <form #form="ngForm" *ngIf="disabled" >
-                                        <td class="align-middle text-center" *ngFor="let ingrediente of ingredientes; index as i" >
-                                            <p *ngIf="disabled" class="m-0 fw-bold">{{ingrediente.nome}}</p>
-                                        </td>
-                                      </form>
-                                </div>
+                            <div class="col-md-3 ps-5">
+                                <h6 class="mb-0 text-center"><span style="color:red">*</span>Ingrediente:</h6>
                             </div>
+                            <div class="col-md-9 pe-5">
+                                <td class="align-middle text-center">
+                                    <mat-form-field [(ngModel)]="sabor.ingredientes">
+                                        <mat-label>Ingredientes</mat-label>
+                                        <mat-select [formControl]="toppings" multiple>
+                                          <mat-option *ngFor="let ingrediente of ingredientesBanco" [value]="ingrediente">{{ingrediente.nome}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                  </td>
+                                  <form #form="ngForm" *ngIf="disabled">
+                                    <td class="align-middle text-center">
+                                        <p *ngIf="disabled" class="m-0 fw-bold">{{sabor.descricao}}</p>
+                                    </td>
+                                  </form>      
+                            </div>
+                        </div>
+
+                            <hr class="mx-n3">
+
+                            <div class="row align-items-center py-3">
                             <td>
                                 <form>
                                     <div>

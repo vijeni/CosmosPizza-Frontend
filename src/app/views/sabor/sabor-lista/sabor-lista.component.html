@@ -13,18 +13,14 @@
                     <th scope="col" class="col-md-1 text-center">Código</th>
                     <th scope="col" class="col-md-2 text-center">Nome</th>
                     <th scope="col" class="col-md-1 text-center">Descrição</th>
-                    <th scope="col" class="col-md-2 text-center">Ingrediente</th>
-                    <th scope="col" class=" col-md-2 text-center">Quantidade</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr class="sem-borda"  *ngFor="let sabor of sabores; index as i">
-                    <div *ngFor="ingrediente of ingredientes; index as i">
                     <th class="align-middle text-center col-md-2" scope="row">{{sabor.id}}</th>
                     <td class="align-middle text-center col-md-2">{{sabor.nome}}</td>
                     <td class="align-middle text-center col-md-2">{{sabor.descricao}}</td>
-                    <td class="align-middle text-center col-md-2">{{sabor.ingredientes}}</td>
-                    <td class="align-middle text-center col-md-2">{{sabor.ingredientes}}</td>
                     <td class="status-cell align-center text-center">
                       <div *ngIf="sabor.delecao" class="inativo mb-4">
                           <img src="../../../../assets/tabelas/inativo-icon.svg" alt="Inativo">
@@ -35,7 +31,6 @@
                   <bi class="acoes mb-4" type="button" name="pen" (click)="editar(sabor.id)"></bi>
                   <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(sabor.id)"></bi>
               </td>
-                 </div>
                 </tr>
             </tbody>
         </table>
