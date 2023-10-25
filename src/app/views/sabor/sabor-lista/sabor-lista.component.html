@@ -1,1 +1,41 @@
-<p>sabor-lista works!</p>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold">Sabores</h5>
+  
+            <button type="button"  [routerLink]="['/web/sabor/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Funcionário</button>
+  
+        </div>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+                <tr class="sem-borda">
+                    <th scope="col" class="col-md-1 text-center">Código</th>
+                    <th scope="col" class="col-md-2 text-center">Nome</th>
+                    <th scope="col" class="col-md-1 text-center">Descrição</th>
+                    <th scope="col" class="col-md-2 text-center">Ingrediente</th>
+                    <th scope="col" class=" col-md-2 text-center">Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="sem-borda"  *ngFor="let sabor of sabores; index as i">
+                    <th class="align-middle text-center col-md-2" scope="row">{{sabor.id}}</th>
+                    <td class="align-middle text-center col-md-2">{{sabor.nome}}</td>
+                    <td class="align-middle text-center col-md-2">{{sabor.descricao}}</td>
+                    <td class="align-middle text-center col-md-2">{{sabor.ingredientes.nome}}</td>
+                    <td class="align-middle text-center col-md-2">{{sabor.ingredientes.quantidade}}</td>
+                    <td class="status-cell align-center text-center">
+                      <div *ngIf="pessoa.delecao" class="inativo mb-4">
+                          <img src="../../../../assets/tabelas/inativo-icon.svg" alt="Inativo">
+                      </div>
+                      <div *ngIf="!pessoa.delecao" class="ativo mb-4">
+                          <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
+                      </div>
+                  <bi class="acoes mb-4" type="button" name="pen" (click)="editar(pessoa.id)"></bi>
+                  <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(pessoa.id)"></bi>
+              </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
