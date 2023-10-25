@@ -30,7 +30,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
 import { MatChipOption, MatChipsModule } from '@angular/material/chips';
-import { NgxViacepModule } from "@brunoc/ngx-viacep"; // Importando o módulo
+import { NgxViacepModule } from "@brunoc/ngx-viacep";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 @NgModule({
@@ -77,7 +79,7 @@ import { NgxViacepModule } from "@brunoc/ngx-viacep"; // Importando o módulo
     MatChipsModule,
     BrowserModule,
     NgxViacepModule,
-
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],

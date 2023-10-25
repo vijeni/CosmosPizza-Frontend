@@ -7,11 +7,12 @@
         </div>
         <hr>
         <form>
-            <div class="mb-3 row">
+            <div class="mb-3 row d-flex flex-row justify-content-between">
                 <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer campo:</label>
                 <div class="col-xs-3 col-sm-auto">
                     <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
                 </div>
+                <mat-slide-toggle class="w-25 pt-2" color="warn">Ativados</mat-slide-toggle>
             </div>
         </form>
         <div [ngClass]="
