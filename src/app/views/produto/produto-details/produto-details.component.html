@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                             <hr class="mx-n3">
-                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Data de Criação:
                                     </h6>
@@ -90,7 +90,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Data de Edição:
                                     </h6>
@@ -100,7 +100,7 @@
                                         'Nunca editado.'}}</p>
                                 </div>
                             </div>
-                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Status:
                                     </h6>
