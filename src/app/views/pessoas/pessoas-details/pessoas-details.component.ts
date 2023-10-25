@@ -103,7 +103,7 @@ export class PessoasDetailsComponent implements OnInit {
     this.service.delete(id).subscribe({
       next: async (pessoas) => {
         this.pessoa = pessoas;
-        this.mensagem = 'Pessoa deletada com sucesso!';
+        this.mensagem = 'Pessoa desativada com sucesso!';
         await this.sleep(1500);
         this.injectRouter.navigate(['/web/pessoas']);
       },
