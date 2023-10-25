@@ -35,6 +35,10 @@ const routes: Routes = [
       { path: 'pessoa/editar/:id', component: PessoasDetailsComponent},
       { path: 'pessoa/toggle/:id', component: PessoasDetailsComponent},
       { path: 'pessoa/:id', component: PessoasDetailsComponent},
+      { path: 'funcionarios', component: PessoasListComponent},
+      { path: 'funcionario/novo', component: PessoasDetailsComponent},
+      { path: 'funcionario/editar/:id', component: PessoasDetailsComponent},
+      { path: 'funcionario/toggle/:id', component: PessoasDetailsComponent}
 
     ],
   },
