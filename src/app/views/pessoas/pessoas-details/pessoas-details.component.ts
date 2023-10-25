@@ -74,7 +74,7 @@ cadastrar(){
       this.pessoa = pessoas;
       this.isErro = false;
       this.mensagem = "Pessoa cadastrada com sucesso!" 
-      await this.sleep(1500);
+      await this.sleep(1000);
       this.injectRouter.navigate(['/web/pessoas']);
       
     },
@@ -91,22 +91,28 @@ editar(id: number){
     next: async (pessoas) => {
       this.pessoa = pessoas;
       this.mensagem = "Pessoa editada com sucesso!" 
-      await this.sleep(1500);
+      await this.sleep(1000);
       this.injectRouter.navigate(['/web/pessoas']);
     },
     error: (erro) => {
       console.log(erro.error);
+      this.mensagem = (erro.error);
+
     },
   });
 }
 
 deletar(id: number){
   this.service.delete(id).subscribe({
-    next: (pessoas) => {
+    next: async (pessoas) => {
       this.pessoa = pessoas;
+      this.mensagem = "Pessoa deletada com sucesso!" 
+      await this.sleep(1500);
+      this.injectRouter.navigate(['/web/pessoas']);
     },
     error: (erro) => {
       console.log(erro.error);
+      this.mensagem = (erro.error);
     },
   });
 }

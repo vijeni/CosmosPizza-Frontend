@@ -23,7 +23,7 @@ export class PessoaService {
     put(id: number, pedido: Pessoa): Observable<Pessoa> {
       return this.http.put<Pessoa>(`${this.API}/editar/${id}`, pedido);
     }
-    delete(id: number): Observable<any> {
-      return this.http.delete<any>(`${this.API}/delete/${id}`);
+    delete(id: number): Observable<Pessoa> {
+      return this.http.delete<Pessoa>(`${this.API}/deletar/${id}`);
     }
 }
