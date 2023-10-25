@@ -1,18 +1,16 @@
 import { DecimalPipe } from '@angular/common';
 import {
   Component,
-  Directive,
-  ElementRef,
   OnInit,
   PipeTransform,
-  ViewChild,
   inject,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map, startWith } from 'rxjs';
-import Produto from 'src/app/models/produto/produto';
+import { Pedido } from 'src/app/models/pedido/pedido';
+import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 
 @Component({
@@ -22,12 +20,12 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
   providers: [DecimalPipe]
 })
 export class PedidosListComponent implements OnInit {
-  pedidos: Produto[] = [];
-  pedidos$: Produto[] = [];
+  pedidos: Pedido[] = [];
+  pedidos$: Pedido[] = [];
   isErro!: boolean;
   mensagem: string = '';
   modalService = inject(NgbModal);
-  pedidoService = inject(ProdutoService);
+  pedidoService = inject(PedidoService);
   router = inject(Router);
   filter = new FormControl('');
   decimalPipe = inject(DecimalPipe);
@@ -59,38 +57,22 @@ export class PedidosListComponent implements OnInit {
       },
     });
   }
-  async getAllAtivos() {
-    this.pedidoService.getAllAtivos().subscribe({
-      next: (produtos) => {
-        this.pedidos = produtos;
-      },
-      error: (erro) => {
-        this.isErro = true;
-        this.mensagem = 'Ocorreu um erro!';
-        console.log(erro.error);
-      },
-    });
-  }
   editar(id: number) {
     this.router.navigate(['/web/pedido/editar', id]);
   }
   toggle(id: number) {
     this.router.navigate(['/web/pedido/toggle', id]);
   }
-  search(text: string, pipe: PipeTransform): Produto[] {
-    // if (this.switchEstado.value) {
-    //   this.getAllAtivos();
-    // } else {
-    //   this.getAll();
-    // }
-    return this.pedidos.filter((produto) => {
+  search(text: string, pipe: PipeTransform): Pedido[] {
+    return this.pedidos.filter((pedido) => {
       const term = text.toLowerCase();
       return (
-        (produto.descricao.toLowerCase().includes(term) ||
-        pipe.transform(produto.quantidadeEstoque).includes(term) ||
-        pipe.transform(produto.valorUnitario).includes(term) ||
-        pipe.transform(produto.id).includes(term)) &&
-        ((!this.switchEstado.value) || (produto.delecao === null && this.switchEstado.value))
+        (
+        pedido.cliente.nome.toLowerCase().includes(term) ||
+        pedido.funcionario.nome.toLowerCase().includes(term) ||
+        pipe.transform(pedido.valorTotal).includes(term) ||
+        pipe.transform(pedido.id).includes(term)) &&
+        ((!this.switchEstado.value) || (pedido.dataConclusao === null && this.switchEstado.value))
       );
     });
   }

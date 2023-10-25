@@ -12,7 +12,7 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
   selector: 'app-pessoas-list',
   templateUrl: './pessoas-list.component.html',
   styleUrls: ['./pessoas-list.component.scss'],
-  providers: [DecimalPipe]
+  providers: [DecimalPipe],
 })
 export class PessoasListComponent implements OnInit {
   pessoas: Pessoa[] = [];
@@ -31,7 +31,13 @@ export class PessoasListComponent implements OnInit {
 
   async ngOnInit() {
     let url = this.router.url;
-    await this.getAll();
+    if (url.includes('funcionario')) {
+      this.isFuncionario = true;
+      await this.getAllFuncionarios();
+    } else {
+      this.isFuncionario = false;
+      await this.getAllClientes();
+    }
     setTimeout(() => {
       this.filter.valueChanges
         .pipe(
@@ -44,17 +50,8 @@ export class PessoasListComponent implements OnInit {
           },
         });
     }, 1000);
-    if (url.includes('funcionario')) {
-      this.pessoa.tipoPessoa = TipoPessoa.FUNCIONARIO;
-      this.isFuncionario = true;
-    }
   }
   search(text: string, pipe: PipeTransform): Pessoa[] {
-    // if (this.switchEstado.value) {
-    //   this.getAllAtivos();
-    // } else {
-    //   this.getAll();
-    // }
     return this.pessoas.filter((pessoa) => {
       const term = text.toLowerCase();
       return (
@@ -78,6 +75,26 @@ export class PessoasListComponent implements OnInit {
       },
     });
   }
+  async getAllClientes() {
+    this.service.getAllClientes().subscribe({
+      next: (pessoas) => {
+        this.pessoas = pessoas;
+      },
+      error: (erro) => {
+        console.log(erro.error);
+      },
+    });
+  }
+  async getAllFuncionarios() {
+    this.service.getAllFuncionarios().subscribe({
+      next: (pessoas) => {
+        this.pessoas = pessoas;
+      },
+      error: (erro) => {
+        console.log(erro.error);
+      },
+    });
+  }
 
   editar(id: number) {
     this.router.navigate(['/web/pessoa/editar', id]);
@@ -88,6 +105,5 @@ export class PessoasListComponent implements OnInit {
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
-
   }
 }

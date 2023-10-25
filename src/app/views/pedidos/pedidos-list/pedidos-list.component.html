@@ -1,9 +1,9 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold">Produtos</h5>
+            <h5 class="m-0 fw-bold">Pedidos</h5>
             <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
-                [routerLink]="['/web/produto/novo']">Novo Produto</button>
+                [routerLink]="['/web/produto/novo']">Novo Pedido</button>
         </div>
         <hr class="w-90">
         <form>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <mat-slide-toggle class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
-                    (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
+                    (change)="filtrarEstado()" color="primary">Mostrar apenas abertos</mat-slide-toggle>
             </div>
         </form>
         <div [ngClass]="
@@ -41,24 +41,24 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/produto/', produto.id]" class="row"
-                    *ngFor="let produto of pedidos$">
-                    <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
-                    <td class="align-middle text-center col-md-1" scope="row">{{produto.descricao}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{produto.descricao}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{produto.cadastro | date : 'dd/MM/yyyy - hh:mm'}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{produto.cadastro | date : 'dd/MM/yyyy - hh:mm'}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
+                <tr [routerLink]="['/web/produto/', pedido.id]" class="row"
+                    *ngFor="let pedido of pedidos$">
+                    <th class="align-middle text-center col-md-1" scope="row">{{pedido.id}}</th>
+                    <td class="align-middle text-center col-md-1" scope="row">{{pedido.cliente.nome}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.funcionario.nome}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataAbertura | date : 'dd/MM/yyyy - hh:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataConclusao | date : 'dd/MM/yyyy - hh:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{ pedido.valorTotal | currency: 'R$ ' }}</td>
                     <td class="status-cell align-middle text-center col-md-2">
-                        <div *ngIf="produto.delecao" class="estado desativado"></div>
-                        <div *ngIf="!produto.delecao" class="estado ativado"></div>
-                        <div (click)="editar(produto.id)">
+                        <div *ngIf="pedido.delecao" class="estado desativado"></div>
+                        <div *ngIf="!pedido.delecao" class="estado ativado"></div>
+                        <div (click)="editar(pedido.id)">
                             <bi class="acoes" name="pen"></bi>
                         </div>
-                        <div *ngIf="produto.delecao === null" (click)="toggle(produto.id)">
+                        <div *ngIf="pedido.delecao === null" (click)="toggle(pedido.id)">
                             <bi class="acoes" name="trash"></bi>
                         </div>
-                        <div *ngIf="produto.delecao != null" (click)="toggle(produto.id)">
+                        <div *ngIf="pedido.delecao != null" (click)="toggle(pedido.id)">
                             <bi class="acoes" name="arrow-counterclockwise"></bi>
                         </div>
                     </td>
@@ -66,7 +66,7 @@
             </tbody>
         </table>
         <div *ngIf="pedidos.length == 0 || pedidos$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
-            Nenhum produto encontrado
+            Nenhum pedido encontrado
         </div>
     </div>
 </div>
