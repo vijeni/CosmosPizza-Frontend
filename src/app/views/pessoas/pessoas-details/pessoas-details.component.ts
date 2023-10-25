@@ -170,4 +170,10 @@ moveTo(){
   this.injectRouter.navigate(['/web/pessoas']);
    this.moveTo();
 }
+
+async voltarFuncionario(){
+  this.injectRouter.navigate(['/web/funcionarios']);
+   this.moveTo();
+}
+
 }

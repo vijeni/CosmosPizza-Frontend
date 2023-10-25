@@ -1,7 +1,9 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold">Novo Cliente</h5>
+            <h5 class="m-0 fw-bold" *ngIf="!isFuncionario">Novo Cliente</h5>
+            <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Novo Funcionario</h5>
+
         </div>
         <hr>
         <div *ngIf="!modoEditar" [ngClass]="
@@ -232,7 +234,7 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-start text-center">
-                                        <form #form="ngForm" >
+                                        <form #form="ngForm"  >
                                             <td class="align-middle text-center">
                                                 <p class="m-0 fw-bold">{{pessoa.tipoPessoa}}</p>
 
@@ -286,7 +288,9 @@
                                 <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(pessoa.id)" (click)="moveTo()" >Desativar</button>
                                 <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
                                 <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(pessoa.id)" (click)="moveTo()" >Editar</button>
-                                <button type="submit" class="btn btn-secondary" (click)="voltar()">Cancelar</button>
+                                <button type="submit" class="btn btn-secondary" *ngIf="!isFuncionario" (click)="voltar()">Cancelar</button>
+                                <button type="submit" class="btn btn-secondary" *ngIf="isFuncionario" (click)="voltarFuncionario()">Cancelar</button>
+
                             </div>
 
                         </div>

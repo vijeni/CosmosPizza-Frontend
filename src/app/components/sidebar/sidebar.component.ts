@@ -19,4 +19,8 @@ export class SidebarComponent {
 	public cozinhaCollapse = false;
   public configuracoesCollapse = false;
 
+  moveTo(){
+    window.scrollTo(0, 0);
+  }
+
 }

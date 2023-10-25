@@ -1,8 +1,12 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
   <div class="w-90">
       <div class="d-flex justify-content-between header">
-          <h5 class="m-0 fw-bold">Pessoas</h5>
-          <button type="button" [routerLink]="['/web/pessoa/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
+          <h5 class="m-0 fw-bold" *ngIf="!isFuncionario">Clientes</h5>
+          <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Funcionários</h5>
+
+          <button type="button" *ngIf="!isFuncionario" [routerLink]="['/web/pessoa/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
+          <button type="button" *ngIf="isFuncionario" [routerLink]="['/web/funcionario/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Funcionário</button>
+
       </div>
       <hr>
       <table class="table table-striped">
@@ -15,7 +19,7 @@
                   <th scope="col" class=" col-md-2 text-center">Status</th>
               </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="!isFuncionario">
               <tr class="sem-borda"  *ngFor="let pessoa of pessoas; index as i">
                   <th class="align-middle text-center col-md-2" scope="row">{{pessoa.id}}</th>
                   <td class="align-middle text-center col-md-2">{{pessoa.nome}}</td>
@@ -33,6 +37,24 @@
             </td>
               </tr>
           </tbody>
+          <tbody *ngIf="pessoa">
+            <tr class="sem-borda"  *ngFor="let pessoa of pessoas; index as i">
+                <th class="align-middle text-center col-md-2" scope="row">{{pessoa.id}}</th>
+                <td class="align-middle text-center col-md-2">{{pessoa.nome}}</td>
+                <td class="align-middle text-center col-md-2">{{pessoa.telefone}}</td>
+                <td class="align-middle text-center col-md-2">{{pessoa.cpf}}</td>
+                <td class="status-cell align-center text-center">
+                  <div *ngIf="pessoa.delecao" class="inativo mb-4">
+                      <img src="../../../../assets/tabelas/inativo-icon.svg" alt="Inativo">
+                  </div>
+                  <div *ngIf="!pessoa.delecao" class="ativo mb-4">
+                      <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
+                  </div>
+              <bi class="acoes mb-4" type="button" name="pen" (click)="editar(pessoa.id)"></bi>
+              <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(pessoa.id)"></bi>
+          </td>
+            </tr>
+        </tbody>
       </table>
   </div>
 </div>

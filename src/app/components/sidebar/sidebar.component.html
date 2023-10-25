@@ -107,7 +107,7 @@
             <div #collapse="ngbCollapse" [(ngbCollapse)]="configuracoesCollapse">
               <div class="card">
                 <ul>
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/funcionarios']" (click)="moveTo()" data-bs-target="#account-collapse" aria-expanded="false">
                   <img src="../../../assets/siderbar/configuracoes-icon.svg" height="20vh" alt="">
                   Funcionários
                 </button>
