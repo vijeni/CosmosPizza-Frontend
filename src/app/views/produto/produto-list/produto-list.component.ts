@@ -24,7 +24,7 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
 export class ProdutoListComponent {
   @ViewChild('tabela', { static: false }) tabelaBody!: ElementRef;
   produtos: Produto[] = [];
-  produtos$!: Observable<Produto[]>;
+  produtos$: Produto[] = [];
   index!: number;
   produtoSelecionado = new Produto();
   isErro!: boolean;
@@ -43,10 +43,12 @@ export class ProdutoListComponent {
   async ngOnInit() {
     await this.getAll();
     setTimeout(() => {
-      this.produtos$ = this.filter.valueChanges.pipe(
+      this.filter.valueChanges.pipe(
         startWith(''),
         map((text) => this.search(text as string, this.decimalPipe))
-      );
+      ).subscribe({next: (produtosFiltados) => {
+        this.produtos$ = produtosFiltados
+      }});
     }, 1000);
   }
   refreshProdutos() {
