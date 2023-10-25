@@ -1,8 +1,12 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
   <div class="w-90">
       <div class="d-flex justify-content-between header">
-          <h5 class="m-0 fw-bold">Pessoas</h5>
-          <button type="button" [routerLink]="['/web/pessoas/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
+          <h5 class="m-0 fw-bold" *ngIf="!isFuncionario">Clientes</h5>
+          <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Funcionários</h5>
+
+          <button type="button" *ngIf="!isFuncionario" [routerLink]="['/web/pessoa/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Nova Pessoa</button>
+          <button type="button" *ngIf="isFuncionario" [routerLink]="['/web/funcionario/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Funcionário</button>
+
       </div>
       <hr>
       <table class="table table-striped">
@@ -28,8 +32,8 @@
                     <div *ngIf="!pessoa.delecao" class="ativo mb-4">
                         <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
                     </div>
-                <bi class="acoes mb-4" type="button" name="pen"></bi>
-                <bi class="acoes mb-4" type="button" name="trash"></bi>
+                <bi class="acoes mb-4" type="button" name="pen" (click)="editar(pessoa.id)"></bi>
+                <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(pessoa.id)"></bi>
             </td>
               </tr>
           </tbody>

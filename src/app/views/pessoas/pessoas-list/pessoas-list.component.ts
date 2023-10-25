@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 
@@ -10,13 +11,30 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
   styleUrls: ['./pessoas-list.component.scss'],
 
 })
-export class PessoasListComponent {
+export class PessoasListComponent implements OnInit {
 pessoas : Pessoa[] = [];
+pessoa = new Pessoa();
 index! : number;
 service = inject(PessoaService);
+router = inject(Router)
+isFuncionario! : boolean;
+
+
 constructor() {
   this.getAll();
 }
+
+ngOnInit(): void {
+  let url = this.router.url;
+
+   
+  if(url.includes('funcionario')){
+    this.pessoa.tipoPessoa = TipoPessoa.FUNCIONARIO
+    this.isFuncionario = true;
+  }
+
+}
+
   getAll(){
     this.service.getAll().subscribe({
       next: (pessoas) => {
@@ -28,5 +46,14 @@ constructor() {
     });
   }
 
+  editar(id: number) {
+    this.router.navigate(['/web/pessoa/editar', id]);
+  }
+
+  toggle(id: number) {
+    this.router.navigate(['/web/pessoa/toggle', id]);
+  }
+
+  
 
 }

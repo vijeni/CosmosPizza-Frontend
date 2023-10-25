@@ -7,6 +7,8 @@ import { ProdutoListComponent } from './views/produto/produto-list/produto-list.
 import { PessoasListComponent } from './views/pessoas/pessoas-list/pessoas-list.component';
 import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas-details.component';
 import { ProdutoDetailsComponent } from './views/produto/produto-details/produto-details.component';
+import { SaborListaComponent } from './views/sabor/sabor-lista/sabor-lista.component';
+import { SaborDetailsComponent } from './views/sabor/sabor-details/sabor-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
@@ -31,7 +33,20 @@ const routes: Routes = [
       { path: 'produto/toggle/:id', component: ProdutoDetailsComponent },
       { path: 'produto/:id', component: ProdutoDetailsComponent },
       { path: 'pessoas', component: PessoasListComponent },
-      { path: 'pessoas/novo', component: PessoasDetailsComponent },
+      { path: 'pessoa/novo', component: PessoasDetailsComponent },
+      { path: 'pessoa/editar/:id', component: PessoasDetailsComponent},
+      { path: 'pessoa/toggle/:id', component: PessoasDetailsComponent},
+      { path: 'pessoa/:id', component: PessoasDetailsComponent},
+      { path: 'funcionarios', component: PessoasListComponent},
+      { path: 'funcionario/novo', component: PessoasDetailsComponent},
+      { path: 'funcionario/editar/:id', component: PessoasDetailsComponent},
+      { path: 'funcionario/toggle/:id', component: PessoasDetailsComponent},
+      { path: 'sabores', component: SaborListaComponent},
+      { path: 'sabor/novo', component: SaborDetailsComponent},
+      { path: 'sabor/editar/:id', component: SaborDetailsComponent},
+      { path: 'sabor/toggle/:id', component: SaborDetailsComponent},
+      { path: 'sabor/:id', component: SaborDetailsComponent}
+
     ],
   },
 ];

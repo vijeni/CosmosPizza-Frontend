@@ -1,9 +1,27 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold">Novo Cliente</h5>
+            <h5 class="m-0 fw-bold" *ngIf="!isFuncionario">Novo Cliente</h5>
+            <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Novo Funcionario</h5>
+
         </div>
         <hr>
+        <div *ngIf="!modoEditar" [ngClass]="
+        {
+            'alert alert-success': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " class="alert alert-success" role="alert">
+            {{mensagem}}
+        </div>
+        <div *ngIf="modoEditar && id" [ngClass]="
+        {
+            'alert alert-warning': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " class="alert alert-warning" role="alert">
+            {{mensagem}}
+        </div>
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-xl-9">
@@ -16,11 +34,16 @@
                                 <div class="col-md-9 pe-5">
                                     <form #form="ngForm">
                                         <td class="align-middle text-center">
-                                          <mat-form-field hintLabel="No máx 40 dígitos.">
+                                          <mat-form-field hintLabel="No máx 40 dígitos." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
                                             <input matInput #input maxlength="40" name="inputNome" [(ngModel)]="pessoa.nome" placeholder="Ex: Vinícius" class="w-100">
                                             <mat-hint align="end">{{input.value.length}}/40</mat-hint>
                                           </mat-form-field>
+                                        </td>
+                                      </form>
+                                      <form #form="ngForm" *ngIf="disabled">
+                                        <td class="align-middle text-center">
+                                            <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.nome}}</p>
                                         </td>
                                       </form>
                                       
@@ -33,12 +56,17 @@
                                 </div>
                                 <div class="col-md-3 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="Com DDD. Ex: (45)">
+                                        <mat-form-field hintLabel="Com DDD. Ex: (45)" *ngIf="!disabled">
                                           <mat-label><span style="color:red">*</span>Digite o telefone</mat-label>
                                           <input matInput #inputTelefone maxlength="20" [(ngModel)]="pessoa.telefone" placeholder="Com DDD. Ex: (45)" class="w-100">
                                           <mat-hint align="end">{{inputTelefone.value.length}}/20</mat-hint>
                                         </mat-form-field>
                                       </td>
+                                      <form #form="ngForm" *ngIf="disabled">
+                                        <td class="align-middle text-center">
+                                            <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.telefone}}</p>
+                                        </td>
+                                      </form>
                                 </div>
                             </div>
 
@@ -49,12 +77,17 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="Não vamos divulgar para ninguém.">
+                                        <mat-form-field hintLabel="Não vamos divulgar para ninguém." *ngIf="!disabled">
                                           <mat-label><span style="color:red">*</span>Digite o CPF</mat-label>
                                           <input matInput #inputCpf maxlength="14" [(ngModel)]="pessoa.cpf" placeholder="000.000.000-00" class="w-100">
                                           <mat-hint align="end">{{inputCpf.value.length}}/14</mat-hint>
                                         </mat-form-field>
                                       </td>
+                                      <form #form="ngForm" *ngIf="disabled">
+                                        <td class="align-middle text-center">
+                                            <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.cpf}}</p>
+                                        </td>
+                                      </form>
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -64,11 +97,16 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="O CEP da rua da pessoa.">
+                                        <mat-form-field hintLabel="O CEP da rua da pessoa." *ngIf="!disabled">
                                           <mat-label><span style="color:red">*</span>Digite o CEP</mat-label>
                                           <input matInput #inputCep maxlength="09" (change)="viaCep()" [(ngModel)]="pessoa.endereco.cep" placeholder="CEP" class="w-100">
                                           <mat-hint align="end">{{inputCep.value.length}}/9</mat-hint>
                                         </mat-form-field>
+                                        <form #form="ngForm" *ngIf="disabled">
+                                            <td class="align-middle text-center">
+                                                <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.cep}}</p>
+                                            </td>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
@@ -79,11 +117,16 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="Nome da Rua, Avenida ou Travessa.">
+                                        <mat-form-field hintLabel="Nome da Rua, Avenida ou Travessa." *ngIf="!disabled">
                                           <mat-label>Digite o logradouro</mat-label>
                                           <input matInput #inputLogradouro maxlength="40" placeholder="Logradouro" [(ngModel)]="pessoa.endereco.logradouro" class="w-100">
                                           <mat-hint align="end">{{inputLogradouro.value.length}}/40</mat-hint>
                                         </mat-form-field>
+                                        <form #form="ngForm" *ngIf="disabled">
+                                            <td class="align-middle text-center">
+                                                <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.logradouro}}</p>
+                                            </td>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
@@ -94,10 +137,15 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field>
+                                        <mat-form-field *ngIf="!disabled">
                                           <mat-label>Digite o número</mat-label>
                                           <input matInput #inputNumero placeholder="O número de residência, se possuir." [(ngModel)] = "pessoa.endereco.numero" class="w-100">
                                         </mat-form-field>
+                                        <form #form="ngForm" *ngIf="disabled">
+                                            <td class="align-middle text-center">
+                                                <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.numero}}</p>
+                                            </td>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
@@ -108,12 +156,17 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="O bairro do logradouro">
+                                        <mat-form-field hintLabel="O bairro do logradouro" *ngIf="!disabled">
                                           <mat-label><span style="color:red">*</span>Digite o bairro</mat-label>
                                           <input matInput #inputBairro maxlength="40" placeholder="O bairro do logradouro" [(ngModel)]="pessoa.endereco.bairro" class="w-100">
                                           <mat-hint align="end">{{inputBairro.value.length}}/40</mat-hint>
                                         </mat-form-field>
                                       </td>
+                                      <form #form="ngForm" *ngIf="disabled">
+                                        <td class="align-middle text-center">
+                                            <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.bairro}}</p>
+                                        </td>
+                                      </form>
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -123,11 +176,16 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="Um complemento do endereço">
+                                        <mat-form-field hintLabel="Um complemento do endereço" *ngIf="!disabled">
                                           <mat-label>Digite um complemento:</mat-label>
                                           <input matInput #inputComplemento maxlength="40" [(ngModel)]="pessoa.endereco.complemento" placeholder="Digite um complemento" class="w-100">
                                           <mat-hint align="end">{{inputComplemento.value.length}}/40</mat-hint>
                                         </mat-form-field>
+                                        <form #form="ngForm" *ngIf="disabled">
+                                            <td class="align-middle text-center">
+                                                <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.complemento}}</p>
+                                            </td>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
@@ -138,10 +196,15 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="Um complemento do endereço">
+                                        <mat-form-field hintLabel="Um complemento do endereço" *ngIf="!disabled">
                                           <mat-label>Digite a cidade:</mat-label>
                                           <input matInput #inputCidade maxlength="40" placeholder="A cidade"[(ngModel)]="pessoa.endereco.cidade" class="w-100">
                                         </mat-form-field>
+                                        <form #form="ngForm" *ngIf="disabled">
+                                            <td class="align-middle text-center">
+                                                <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.cidade}}</p>
+                                            </td>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
@@ -152,41 +215,82 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field hintLabel="A Unidade Federal">
+                                        <mat-form-field hintLabel="A Unidade Federal" *ngIf="!disabled">
                                           <mat-label>Digite a UF:</mat-label>
                                           <input matInput #inputUf  placeholder="Digite a UF" [(ngModel)]="pessoa.endereco.uf" class="w-100">
                                         </mat-form-field>
+                                        <form #form="ngForm" *ngIf="disabled">
+                                            <td class="align-middle text-center">
+                                                <p *ngIf="disabled" class="m-0 fw-bold">{{pessoa.endereco.uf}}</p>
+                                            </td>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">Status:</h6>
+                                    <h6 class="mb-0">Tipo | Status:</h6>
                                 </div>
                                 <div class="col-md-9 pe-5">
                                     <td class="align-start text-center">
-                                        <mat-chip-listbox aria-label="Dog selection">
-                                            <mat-chip>
-                                              <img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
-                                              Dog one
-                                            </mat-chip>
-                                            <mat-chip color="primary">
-                                              <img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
-                                              Dog two
-                                            </mat-chip>
-                                            <mat-chip color="accent">
-                                              <img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
-                                              Dog three
-                                            </mat-chip>
-                                          </mat-chip-listbox>
+                                        <form #form="ngForm"  >
+                                            <td class="align-middle text-center">
+                                                <p class="m-0 fw-bold">{{pessoa.tipoPessoa}}</p>
+
+                                            </td>
+                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Data de Criação:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{pessoa.cadastro | date : 'dd/MM/yyyy - hh:mm'}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Data de Edição:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{pessoa.edicao? (pessoa.edicao | date : 'dd/MM/yyyy - hh:mm'):
+                                                        'Nunca editado.'}}</p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Status:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-3">
+                                                    <span *ngIf="pessoa.delecao" class="badge bg-danger">Desativado</span>
+                                                    <span *ngIf="!pessoa.delecao" class="badge bg-success">Ativado</span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="pessoa.delecao && modoEditar == null && id"
+                                                class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Desativado em:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{pessoa.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
+                                                </div>
+                                            </div>
+                                          </form>
                                       </td>
                                 </div>
                             </div>
                             <hr class="mx-n3">
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-warning">Cadastrar</button>
-                                <button type="submit" class="btn btn-secondary">Cancelar</button>
+                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(pessoa.id)" (click)="moveTo()" >Desativar</button>
+                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
+                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(pessoa.id)" (click)="moveTo()" >Editar</button>
+                                <button type="submit" class="btn btn-secondary" *ngIf="!isFuncionario" (click)="voltar()">Cancelar</button>
+                                <button type="submit" class="btn btn-secondary" *ngIf="isFuncionario" (click)="voltarFuncionario()">Cancelar</button>
+
                             </div>
 
                         </div>
