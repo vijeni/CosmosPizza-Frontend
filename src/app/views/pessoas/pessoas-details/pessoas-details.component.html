@@ -4,12 +4,20 @@
             <h5 class="m-0 fw-bold">Novo Cliente</h5>
         </div>
         <hr>
-        <div [ngClass]="
+        <div *ngIf="!modoEditar" [ngClass]="
         {
             'alert alert-success': !isErro && mensagem,
             'alert alert-danger': isErro && mensagem
         }
         " class="alert alert-success" role="alert">
+            {{mensagem}}
+        </div>
+        <div *ngIf="modoEditar && id" [ngClass]="
+        {
+            'alert alert-warning': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " class="alert alert-warning" role="alert">
             {{mensagem}}
         </div>
         <div class="container h-100">
@@ -193,9 +201,9 @@
                             </div>
                             <hr class="mx-n3">
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(pessoa.id)" >Desativar</button>
+                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(pessoa.id)" (click)="moveTo()" >Desativar</button>
                                 <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
-                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(pessoa.id)" >Editar</button>
+                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(pessoa.id)" (click)="moveTo()" >Editar</button>
                                 <button type="submit" class="btn btn-secondary">Cancelar</button>
                             </div>
 

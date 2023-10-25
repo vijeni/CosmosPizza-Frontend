@@ -24,6 +24,6 @@ export class PessoaService {
       return this.http.put<Pessoa>(`${this.API}/editar/${id}`, pedido);
     }
     delete(id: number): Observable<any> {
-      return this.http.get<any>(`${this.API}/delete/${id}`);
+      return this.http.delete<any>(`${this.API}/delete/${id}`);
     }
 }

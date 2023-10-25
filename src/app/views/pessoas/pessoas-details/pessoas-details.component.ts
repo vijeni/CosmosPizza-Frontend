@@ -88,8 +88,11 @@ cadastrar(){
 
 editar(id: number){
   this.service.put(id,this.pessoa).subscribe({
-    next: (pessoas) => {
+    next: async (pessoas) => {
       this.pessoa = pessoas;
+      this.mensagem = "Pessoa editada com sucesso!" 
+      await this.sleep(1500);
+      this.injectRouter.navigate(['/web/pessoas']);
     },
     error: (erro) => {
       console.log(erro.error);
