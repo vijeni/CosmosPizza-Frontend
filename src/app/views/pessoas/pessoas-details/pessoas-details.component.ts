@@ -158,7 +158,7 @@ export class PessoasDetailsComponent implements OnInit {
   sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
   async voltar() {
-    this.injectRouter.navigate(['/web/pessoas']);
+    this.injectRouter.navigate(['/web/clientes']);
     this.moveTo();
   }
 

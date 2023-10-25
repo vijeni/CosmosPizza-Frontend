@@ -17,6 +17,12 @@ export class PessoaService {
     getAll(): Observable<Pessoa[]> {
       return this.http.get<Pessoa[]>(`${this.API}/todos`);
     }
+    getAllClientes(): Observable<Pessoa[]> {
+      return this.http.get<Pessoa[]>(`${this.API}/todos/clientes`);
+    }
+    getAllFuncionarios(): Observable<Pessoa[]> {
+      return this.http.get<Pessoa[]>(`${this.API}/todos/funcionarios`);
+    }
     post(pedido: Pessoa): Observable<Pessoa> {
       return this.http.post<Pessoa>(`${this.API}/cadastrar`, pedido);
     }
@@ -24,6 +30,9 @@ export class PessoaService {
       return this.http.put<Pessoa>(`${this.API}/editar/${id}`, pedido);
     }
     delete(id: number): Observable<Pessoa> {
-      return this.http.delete<Pessoa>(`${this.API}/deletar/${id}`);
+      return this.http.delete<Pessoa>(`${this.API}/desativar/${id}`);
+    }
+    ativar(id: number): Observable<Pessoa> {
+      return this.http.delete<Pessoa>(`${this.API}/ativar/${id}`);
     }
 }
