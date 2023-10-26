@@ -33,22 +33,6 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
-                                </div>
-                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
-                                    <input type="text" [(ngModel)]="pedido.cliente"
-                                        name="cliente" class="text-center form-control form-control-md input-hidden" required
-                                        disabled />
-                                    <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
-                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi class="search-btn" name="search">
-                                        </bi></button>
-
-                                </div>
-                            </div>
-                            <hr class="mx-n3">
-                            <div class="row align-items-center pt-4 pb-3">
-                                <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Funcionário<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
@@ -58,6 +42,22 @@
                                     <p *ngIf="pedido.funcionario" class="m-0 fw-bold pt-2">{{pedido.funcionario.nome}}</p>
                                     <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
                                         (click)="selecionarClienteOrFuncionario(pessoas, false)">Selecionar<bi class="search-btn" name="search">
+                                        </bi></button>
+
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
+                                    <input type="text" [(ngModel)]="pedido.cliente"
+                                        name="cliente" class="text-center form-control form-control-md input-hidden" required
+                                        disabled />
+                                    <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
+                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi class="search-btn" name="search">
                                         </bi></button>
 
                                 </div>

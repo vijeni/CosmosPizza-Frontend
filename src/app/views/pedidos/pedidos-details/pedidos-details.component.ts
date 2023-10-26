@@ -125,7 +125,7 @@ export class PedidosDetailsComponent implements OnInit {
   }
   definirPessoa(pessoaSelecionada: Pessoa) {
     this.modalService.dismissAll()
-    console.log(pessoaSelecionada.tipoPessoa)
+    console.log(pessoaSelecionada)
     if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {
       this.pedido.cliente = pessoaSelecionada;
     } else {
