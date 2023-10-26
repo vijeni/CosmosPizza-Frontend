@@ -98,7 +98,7 @@ import { Pagamento } from './models/enums/pagamento/pagamento';
     NgFor
 
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
