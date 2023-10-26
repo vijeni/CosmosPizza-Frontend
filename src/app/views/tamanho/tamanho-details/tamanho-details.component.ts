@@ -50,7 +50,7 @@ export class TamanhoDetailsComponent {
       next: async (tamanho) => {
         this.tamanho = tamanho;
         this.isErro = false;
-        this.mensagem = 'tamanho cadastrado com sucesso!';
+        this.mensagem = 'Tamanho cadastrado com sucesso!';
         await this.sleep(1000);
         this.injectRouter.navigate(['/web/tamanhos']);
       },

@@ -41,6 +41,7 @@ export class ProdutoListComponent implements OnInit {
 
 
   constructor() {}
+  
   async ngOnInit() {
     this.switchEstado.setValue(true)
     await this.getAll();
