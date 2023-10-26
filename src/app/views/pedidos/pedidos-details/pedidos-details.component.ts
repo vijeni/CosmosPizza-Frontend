@@ -93,7 +93,7 @@ export class PedidosDetailsComponent implements OnInit {
     });
   }
   toggle() {
-    if (this.pedido.delecao != null) {
+    if (this.pedido.delecao == null) {
       if (confirm(`Confirma o cancelamento do pedido ${this.pedido.id}?`)) {
         this.service.cancelar(this.pedido.id).subscribe({
           next: (pedido) => {

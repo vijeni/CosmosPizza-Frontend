@@ -308,19 +308,18 @@
                                         'Nunca editado.'}}</p>
                                 </div>
                             </div>
-                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
+                            <div *ngIf="!modoEditar && id && pedido.delecao" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Status:
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-3">
-                                    <span *ngIf="pedido.delecao" class="badge bg-danger">Desativado</span>
-                                    <span *ngIf="!pedido.delecao" class="badge bg-success">Ativado</span>
+                                    <span class="badge bg-danger">Cancelado</span>
                                 </div>
                             </div>
-                            <div *ngIf="pedido.delecao && modoEditar == null && id" class="row align-items-center py-3">
+                            <div *ngIf="pedido.delecao && !modoEditar && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Desativado em:
+                                    <h6 class="mb-0">Cancelado em:
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
@@ -332,10 +331,10 @@
                                     class="color-white btn btn-warning" (click)="cadastrar()">Confirmar</button>
                                 <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
                                     (click)="editar()">Editar</button>
-                                <button *ngIf="modoEditar == false && id && pedido.delecao === null" type="submit"
-                                    class="btn btn-danger" (click)="toggle()">Desativar</button>
-                                <button *ngIf="modoEditar == false && id && pedido.delecao != null" type="submit"
-                                    class="btn btn-success" (click)="toggle()">Ativar</button>
+                                <button *ngIf="!modoEditar && id && pedido.delecao === null" type="submit"
+                                    class="btn btn-danger" (click)="toggle()">Cancelar</button>
+                                <button *ngIf="!modoEditar && id && pedido.delecao != null" type="submit"
+                                    class="btn btn-success" (click)="toggle()">Reabrir  </button>
                                 <button type="button" id="cancelar" (click)="voltar(100)"
                                     class="btn btn-secondary">Voltar</button>
                             </div>
