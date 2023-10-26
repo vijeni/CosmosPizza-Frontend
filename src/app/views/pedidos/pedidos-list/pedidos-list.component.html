@@ -46,12 +46,13 @@
                     <th class="align-middle text-center col-md-1" scope="row">{{pedido.id}}</th>
                     <td class="align-middle text-center col-md-1" scope="row">{{pedido.cliente.nome}}</td>
                     <td class="align-middle text-center col-md-2" scope="row">{{pedido.funcionario.nome}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataAbertura | date : 'dd/MM/yyyy - hh:mm'}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataConclusao | date : 'dd/MM/yyyy - hh:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataAbertura | date : 'dd/MM/yyyy - HH:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'}}</td>
                     <td class="align-middle text-center col-md-2" scope="row">{{ pedido.valorTotal | currency: 'R$ ' }}</td>
                     <td class="status-cell align-middle text-center col-md-2">
                         <div *ngIf="pedido.delecao" class="estado desativado"></div>
-                        <div *ngIf="!pedido.delecao" class="estado ativado"></div>
+                        <div *ngIf="!pedido.delecao && pedido.dataConclusao " class="estado ativado"></div>
+                        <div *ngIf="!pedido.dataConclusao" class="estado andamento"></div>
                         <div (click)="editar(pedido.id)">
                             <bi class="acoes" name="pen"></bi>
                         </div>

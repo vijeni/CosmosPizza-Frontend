@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
+import { Status } from 'src/app/models/enums/status/status';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { Pedido } from 'src/app/models/pedido/pedido';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
@@ -17,6 +18,7 @@ import { PedidoService } from 'src/app/services/pedido/pedido.service';
 export class PedidosDetailsComponent implements OnInit {
   keys = Object.keys;
   formasPagamento = Pagamento;
+  statuses = Status;
   disabled!: boolean;
   id!: string;
   modoEditar!: boolean;
@@ -26,7 +28,7 @@ export class PedidosDetailsComponent implements OnInit {
   router = inject(Router);
   service = inject(PedidoService);
   modalService = inject(NgbModal);
-  isClienteModal!: boolean
+  isClienteModal!: boolean;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -42,9 +44,9 @@ export class PedidosDetailsComponent implements OnInit {
       } else {
         this.disabled = true;
       }
-    }else{
-      this.pedido.produtos = []
-      this.pedido.pizzas = []
+    } else {
+      this.pedido.produtos = [];
+      this.pedido.pizzas = [];
     }
   }
   // services
@@ -79,7 +81,7 @@ export class PedidosDetailsComponent implements OnInit {
         this.isErro = false;
         this.mensagem = 'Pedido editado com sucesso!';
         this.pedido = pedido;
-        this.voltar(800);
+        this.voltar(1000);
       },
       error: (resposta) => {
         this.isErro = true;
@@ -122,32 +124,31 @@ export class PedidosDetailsComponent implements OnInit {
   abrirModal(template: any) {
     this.modalService.open(template, { size: 'lg' });
   }
-  selecionarClienteOrFuncionario(template: any, isCliente: boolean){
-    this.isClienteModal = isCliente
-    this.abrirModal(template)
+  selecionarClienteOrFuncionario(template: any, isCliente: boolean) {
+    this.isClienteModal = isCliente;
+    this.abrirModal(template);
   }
-  adicionarProduto(template: any){
-    this.abrirModal(template)
+  adicionarProduto(template: any) {
+    this.abrirModal(template);
   }
   definirPessoa(pessoaSelecionada: Pessoa) {
-    this.modalService.dismissAll()
-    if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {
+    this.modalService.dismissAll();
+    if (pessoaSelecionada.tipoPessoa == ('CLIENTE' as unknown as TipoPessoa)) {
       this.pedido.cliente = pessoaSelecionada;
     } else {
       this.pedido.funcionario = pessoaSelecionada;
     }
   }
   definirProduto(produtoSelecionado: Produto) {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
 
     this.pedido.produtos.push(produtoSelecionado);
   }
   definirPizza(pizzaSelecionada: Pizza) {
-    this.modalService.dismissAll()
+    this.modalService.dismissAll();
 
     this.pedido.pizzas.push(pizzaSelecionada);
   }
-
 
   //utils
   voltar(ms: number) {
@@ -160,31 +161,32 @@ export class PedidosDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  calculaTotalProdutos(): number{
-    let valorTotal: number = 0
+  calculaTotalProdutos(): number {
+    let valorTotal: number = 0;
     this.pedido.produtos.forEach((produto) => {
-      valorTotal+=produto.valorUnitario
-    })
-    return valorTotal
+      valorTotal += produto.valorUnitario;
+    });
+    return valorTotal;
   }
-  calculaTotalPizzas(): number{
-    let valorTotal: number = 0
+  calculaTotalPizzas(): number {
+    let valorTotal: number = 0;
     this.pedido.pizzas.forEach((pizza) => {
-      valorTotal+=pizza.tamanho.valor
-    })
-    return valorTotal
+      valorTotal += pizza.tamanho.valor;
+    });
+    return valorTotal;
   }
 
-  calculaValorTotal(){
-    let valorTotal: number = 0
-    let valorEntrega: number = this.pedido.isEntrega? Number(this.pedido.valorEntrega): 0
-    valorTotal += this.calculaTotalProdutos() + this.calculaTotalPizzas() + valorEntrega
-    return valorTotal
+  calculaValorTotal() {
+    let valorTotal: number = 0;
+    let valorEntrega: number = this.pedido.entrega
+      ? Number(this.pedido.valorEntrega)
+      : 0;
+    valorTotal +=
+      this.calculaTotalProdutos() + this.calculaTotalPizzas() + valorEntrega;
+    return valorTotal;
   }
 
-  retirarProduto(index: number){
-    this.pedido.produtos.splice(index, 1)
+  retirarProduto(index: number) {
+    this.pedido.produtos.splice(index, 1);
   }
- 
- 
 }

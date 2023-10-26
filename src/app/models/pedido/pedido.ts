@@ -9,7 +9,7 @@ export class Pedido extends AbstractEntity {
   cliente!: Pessoa;
   funcionario!: Pessoa;
   status!: Status;
-  isEntrega!: boolean;
+  entrega!: boolean;
   valorPedido!: number;
   dataAbertura!: Date;
   dataConclusao!: Date;

@@ -81,7 +81,7 @@
                                 <div class="col-md-5 pe-5">
                                     <input *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
                                         name="dataAbertura" [(ngModel)]="pedido.dataAbertura" required />
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.dataAbertura}}</p>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.dataAbertura | date : 'dd/MM/yyyy - HH:mm'}}</p>
                                 </div>
                             </div>
                             <div class="row align-items-center py-3">
@@ -92,7 +92,29 @@
                                 <div class="col-md-5 pe-5">
                                     <input *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
                                         name="dataConclusao" [(ngModel)]="pedido.dataConclusao" />
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.dataConclusao}}</p>
+                                    <p *ngIf="disabled && pedido.dataConclusao" class="m-0 fw-bold">{{pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                    <span *ngIf="disabled && !pedido.dataConclusao" class="badge bg-warning text-dark"> Em Andamento</span>
+
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Status:
+                                    </h6>
+                                </div>
+                                <div class="col-md-6 pe-5">
+                                    <mat-form-field [(ngModel)]="pedido.status" #status name="status" *ngIf="!disabled" form-control
+                                    form-control-md>
+                                    <mat-label [(ngModel)]="pedido.status">Status</mat-label>
+                                    <mat-select>
+                                        <mat-option *ngFor="let status of keys(statuses)"
+                                            [value]="status">
+                                            {{status}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.status}}</p>
+
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -168,7 +190,7 @@
                                         <tr *ngFor="let pizza of pedido.pizzas; index as i">
                                             <th scope="row" class="align-middle text-center col-md-1">{{pizza.tamanho.nome}}
                                             </th>
-                                            <td class="align-middle text-center col-md-1">{{pizza.sabores}}</td>
+                                            <td class="align-middle text-center col-md-1">{{pizza.tamanho.maximoSabores}}</td>
                                             <td class="align-middle text-center col-md-1">{{pizza.tamanho.valor |
                                                 currency: "R$ "}}</td>
                                             <td
@@ -219,12 +241,11 @@
                                     </h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
-                                    <mat-checkbox [disabled]="disabled" #isEntrega [(ngModel)]="pedido.isEntrega"
+                                    <mat-checkbox [disabled]="disabled" #isEntrega [(ngModel)]="pedido.entrega"
                                         name="isEntrega">Entrega</mat-checkbox>
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.isEntrega}}</p>
                                 </div>
                             </div>
-                            <div *ngIf="pedido.isEntrega" class="row align-items-center py-3">
+                            <div *ngIf="pedido.entrega" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Valor Entrega<span *ngIf="!disabled" style="color:red">*</span>:
                                     </h6>
