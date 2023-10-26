@@ -23,7 +23,10 @@ export class TamanhoService {
     put(id: number, tamanho: Tamanho): Observable<Tamanho> {
       return this.http.put<Tamanho>(`${this.API}/editar/${id}`, tamanho);
     }
-    delete(id: number): Observable<any> {
-      return this.http.delete<any>(`${this.API}/deletar/${id}`);
+    delete(id: number): Observable<Tamanho> {
+      return this.http.delete<Tamanho>(`${this.API}/desativar/${id}`);
+    }
+    ativar(id: number): Observable<Tamanho> {
+      return this.http.delete<Tamanho>(`${this.API}/ativar/${id}`);
     }
 }

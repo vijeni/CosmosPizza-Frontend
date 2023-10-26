@@ -8,7 +8,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PessoasListComponent } from './views/pessoas/pessoas-list/pessoas-list.component';
 import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas-details.component';
 import { IngredienteListComponent } from './views/ingredientes/ingrediente-list/ingrediente-list.component';
-import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 import { PedidosListComponent } from './views/pedidos/pedidos-list/pedidos-list.component';
 import { PedidosDetailsComponent } from './views/pedidos/pedidos-details/pedidos-details.component';
 import { PizzaListComponent } from './views/pizza/pizza-list/pizza-list.component';
@@ -38,11 +37,10 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Pagamento } from './models/enums/pagamento/pagamento';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
-
+import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +63,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PedidosDetailsComponent,
     PessoasDetailsComponent,
     CpfPipe,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     MatCheckboxModule,
@@ -94,11 +92,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NgbTypeaheadModule,
     NgbPaginationModule,
     FormsModule,
-    MatFormFieldModule, 
-    MatSelectModule, 
-    ReactiveFormsModule, 
-    NgFor
-
+    MatFormFieldModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    NgFor,
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent],

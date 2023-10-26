@@ -25,11 +25,11 @@ export class IngredienteListComponent implements OnInit {
     filter = new FormControl('');
     switchEstado = new FormControl(false);
     decimalPipe = inject(DecimalPipe);
-    constructor() {this.getAll()}
+    constructor() {}
   
     async ngOnInit() {
-      
-      let url = this.router.url;
+      await this.getAll()
+      this.switchEstado.setValue(true)
       
       setTimeout(() => {
         this.filter.valueChanges
@@ -51,7 +51,6 @@ export class IngredienteListComponent implements OnInit {
         const term = text.toLowerCase();
         return (
           (ingrediente.nome.toLowerCase().includes(term) ||
-            ingrediente.quantidade.includes(term) ||
             pipe.transform(ingrediente.id).includes(term)) &&
           (!this.switchEstado.value ||
             (ingrediente.delecao === null && this.switchEstado.value))

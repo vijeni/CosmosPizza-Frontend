@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
 import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.service';
@@ -6,10 +6,9 @@ import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.
 @Component({
   selector: 'app-ingredientes-details',
   templateUrl: './ingredientes-details.component.html',
-  styleUrls: ['./ingredientes-details.component.scss']
+  styleUrls: ['./ingredientes-details.component.scss'],
 })
-export class IngredientesDetailsComponent {
-
+export class IngredientesDetailsComponent implements OnInit {
   ingrediente = new Ingrediente();
 
   index!: number;
@@ -22,10 +21,7 @@ export class IngredientesDetailsComponent {
   disabled!: boolean;
   isFuncionario!: boolean;
 
-  constructor(
-    
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     let url = this.injectRouter.url;
@@ -42,8 +38,6 @@ export class IngredientesDetailsComponent {
         this.disabled = true;
       }
     }
-
-  
   }
 
   cadastrar() {
@@ -51,7 +45,7 @@ export class IngredientesDetailsComponent {
       next: async (ingrediente) => {
         this.ingrediente = ingrediente;
         this.isErro = false;
-        this.mensagem = 'ingrediente cadastrado com sucesso!';
+        this.mensagem = 'Ingrediente cadastrado com sucesso!';
         await this.sleep(1000);
         this.injectRouter.navigate(['/web/ingredientes']);
       },
@@ -78,24 +72,36 @@ export class IngredientesDetailsComponent {
     });
   }
 
-  deletar(id: number) {
-    this.service.delete(id).subscribe({
-      next: async (ingrediente) => {
-        this.ingrediente = ingrediente;
-        this.mensagem = 'Ingrediente desativado com sucesso!';
-        await this.sleep(1500);
-        this.injectRouter.navigate(['/web/ingredientes']);
-      },
-      error: async (erro) => {
-        console.log(erro.error);
-        await this.sleep(1500);
-        this.injectRouter.navigate(['/web/ingredientes']);
-        this.mensagem = 'Ingrediente deletado com sucesso!';
-        /*
-      O deletar está funcionando normalmente, mas está retornando um erro de Json no console.
-      */
-      },
-    });
+  deletar() {
+    if (this.ingrediente.delecao == null) {
+      if (
+        confirm(`Confirma desativação do ingrediente ${this.ingrediente.nome}?`)
+      ) {
+        this.service.desativar(this.ingrediente.id).subscribe({
+          next: async (ingrediente) => {
+            this.ingrediente = ingrediente;
+            this.mensagem = 'Ingrediente desativado com sucesso!';
+          },
+          error: async (erro) => {
+            this.isErro = true;
+            this.mensagem = erro.error;
+          },
+        });
+      }
+    } else {
+      if (confirm(`Confirma a ativação do tamanho ${this.ingrediente.nome}?`)) {
+        this.service.ativar(this.ingrediente.id).subscribe({
+          next: async (ingrediente) => {
+            this.ingrediente = ingrediente;
+            this.mensagem = 'Ingrediente ativado com sucesso!';
+          },
+          error: async (erro) => {
+            this.isErro = true;
+            this.mensagem = erro.error;
+          },
+        });
+      }
+    }
   }
 
   getById(id: number) {
@@ -109,7 +115,6 @@ export class IngredientesDetailsComponent {
     });
   }
 
-
   moveTo() {
     window.scrollTo(0, 0);
   }
@@ -120,6 +125,4 @@ export class IngredientesDetailsComponent {
     this.injectRouter.navigate(['/web/ingredientes']);
     this.moveTo();
   }
-
-
 }

@@ -10,11 +10,11 @@ import { ProdutoDetailsComponent } from './views/produto/produto-details/produto
 import { SaborListaComponent } from './views/sabor/sabor-lista/sabor-lista.component';
 import { SaborDetailsComponent } from './views/sabor/sabor-details/sabor-details.component';
 import { IngredienteListComponent } from './views/ingredientes/ingrediente-list/ingrediente-list.component';
-import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 import { PizzaDetailsComponent } from './views/pizza/pizza-details/pizza-details.component';
 import { TamanhoListComponent } from './views/tamanho/tamanho-list/tamanho-list.component';
 import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web/dashboard', pathMatch: 'full' },

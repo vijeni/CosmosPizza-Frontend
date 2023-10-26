@@ -1,38 +1,63 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
-        <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold">Sabores</h5>
-  
-            <button type="button"  [routerLink]="['/web/sabor/novo']" class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Sabor</button>
-  
-        </div>
-        <hr>
-        <table class="table table-striped">
-            <thead>
-                <tr class="sem-borda">
-                    <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-2 text-center">Nome</th>
-                    <th scope="col" class="col-md-1 text-center">Descrição</th>
+        <div *ngIf="!isModal" class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold" >Sabores</h5>
 
+            <button type="button" [routerLink]="['/web/ingrediente/novo']"
+                class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Sabor</button>
+
+        </div>
+        <hr *ngIf="!isModal">
+        
+        <form>
+            <div class="mb-3 row d-flex flex-row justify-content-between">
+                <div class="w-50 d-flex flex-row gap-3">
+                    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer
+                        campo:</label>
+                    <div class="col-xs-3 col-sm-auto">
+                        <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                    </div>
+                </div>
+                <mat-slide-toggle [ngClass]="
+                {'input-hidden': isModal}"  class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                    (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
+            </div>
+        </form>
+
+            <div class="mb-3 resultados">Resultados: {{sabores$.length}}</div>
+        <table class="tabela-principal d-grid">
+            <thead class="d-grid container">
+                <tr class="row">
+                    <th scope="col" [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}" class="col-md-3 text-center">Código</th>
+                    <th [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}"  scope="col" class="col-md-3 text-center">Nome</th>
+                    <th [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}"  scope="col" class="col-md-3 text-center">Descrição</th>
+                    <th *ngIf="!isModal" scope="col" class="col-md-3 text-center">Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="sem-borda"  *ngFor="let sabor of sabores; index as i">
-                    <th class="align-middle text-center col-md-2" scope="row">{{sabor.id}}</th>
-                    <td class="align-middle text-center col-md-2">{{sabor.nome}}</td>
-                    <td class="align-middle text-center col-md-2">{{sabor.descricao}}</td>
-                    <td class="status-cell align-center text-center">
-                      <div *ngIf="sabor.delecao" class="inativo mb-4">
-                          <img src="../../../../assets/tabelas/inativo-icon.svg" alt="Inativo">
-                      </div>
-                      <div *ngIf="!sabor.delecao" class="ativo mb-4">
-                          <img src="../../../../assets/tabelas/ativo-icon.svg" alt="Ativo">
-                      </div>
-                  <bi class="acoes mb-4" type="button" name="pen" (click)="editar(sabor.id)"></bi>
-                  <bi class="acoes mb-4" type="button" name="trash" (click)="toggle(sabor.id)"></bi>
-              </td>
+            <tbody #tabela class="d-grid container">
+                <tr [ngClass]="{'modal-table-tr': isModal}" (click)="selecionar(sabor)" class="row"
+                    *ngFor="let sabor of sabores$ ; index as i">
+                    <th [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}"  class="align-middle text-center col-md-3" scope="row">{{sabor.id}}</th>
+                    <td [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}"  class="align-middle text-center col-md-3">{{ sabor.nome }}</td>
+                    <td [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}"  class="align-middle text-center col-md-3">{{ sabor.descricao }}</td>
+                    <td *ngIf="!isModal" class="status-cell align-middle text-center col-md-3">
+                        <div *ngIf="sabor.delecao" class="estado desativado"></div>
+                        <div *ngIf="!sabor.delecao" class="estado ativado"></div>
+                        <div (click)="editar(sabor.id)">
+                            <bi class="acoes" name="pen"></bi>
+                        </div>
+                        <div *ngIf="sabor.delecao === null" (click)="toggle(sabor.id)">
+                            <bi class="acoes" name="trash"></bi>
+                        </div>
+                        <div *ngIf="sabor.delecao != null" (click)="toggle(sabor.id)">
+                            <bi class="acoes" name="arrow-counterclockwise"></bi>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="sabores.length == 0|| sabores$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+            Nenhum sabor encontrado
+        </div>
     </div>
-  </div>
+</div>

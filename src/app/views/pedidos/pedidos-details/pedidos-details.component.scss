@@ -3,4 +3,12 @@
     vertical-align: middle;
     height: 3rem;
 }
+.pizza-table{
+    cursor: pointer;
+    transition: 300ms;
+}
+.tabela-details .pizza-table:hover {
+    transition: 300ms;
+    background-color: #f8f8f8 !important;
+}
 

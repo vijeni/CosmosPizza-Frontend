@@ -54,7 +54,7 @@ export class ProdutoDetailsComponent implements OnInit {
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Produto cadastrado com sucesso!';
-        this.voltar()
+        this.voltar(1000)
         
       },
       error: (resposta) => {
@@ -64,11 +64,11 @@ export class ProdutoDetailsComponent implements OnInit {
     });
   }
 
-  voltar(){
+  voltar(ms: number){
     this.moveTo()
     setTimeout(() =>{
       this.router.navigate(['/web/produtos'])
-    }, 1500)
+    }, ms)
   }
   moveTo() {
     window.scrollTo(0, 0);
@@ -80,7 +80,7 @@ export class ProdutoDetailsComponent implements OnInit {
         this.isErro = false;
         this.mensagem = 'Produto editado com sucesso!';
         this.produto = produto;
-        this.voltar()        
+        this.voltar(800)        
       },
       error: (resposta) => {
         this.isErro = true;

@@ -1,14 +1,6 @@
 <div class="w-100 h-100 d-flex flex-column align-items-center">
     <div class="w-90">
         <div class="d-flex flex-row justify-content-center align-items-center">
-            <div [ngClass]="
-                    {
-                        'alert alert-success': !isErro && mensagem,
-                        'alert alert-danger': isErro && mensagem
-                    }
-                    " class="alert alert-success" role="alert">
-                {{mensagem}}
-            </div>
             <div class="p-3 bg-white rounded w-100">
                 <form class="card-body">
                     <div class="row align-items-center pt-4 pb-3">
@@ -29,7 +21,8 @@
                             <button type="button" style="height: fit-content;"
                                 class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(tamanhos)">Selecionar
                                 <bi class="search-btn" name="search">
-                                </bi></button>
+                                </bi>
+                            </button>
                         </div>
                     </div>
                     <hr class="mx-n3">
@@ -39,9 +32,10 @@
                                 '0'}}/{{pizza.tamanho? pizza.tamanho.maximoSabores: '0'}}</h5>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end">
-                            <button type="button" style="height: fit-content;"
-                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(sabores)">Adicionar<bi
-                                    class="search-btn" name="search">
+                            <button [ngClass]="{
+                                'bloqueado': !pizza.tamanho || pizza.tamanho.maximoSabores <= pizza.sabores.length
+                            }" type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
+                                (click)="abrirModalSabores(sabores)">Adicionar<bi class="search-btn" name="search">
                                 </bi></button>
                         </div>
                     </div>
@@ -70,6 +64,14 @@
                             class="text-align-center alert alert-secondary" role="alert">
                             Nenhum sabor adicionado
                         </div>
+                        <div [ngClass]="
+                        {
+                            'alert alert-success': !isErro && mensagem,
+                            'alert alert-danger': isErro && mensagem
+                        }
+                        " class="alert alert-success" role="alert">
+                            {{mensagem}}
+                        </div>  
                     </div>
                     <hr class="mx-n3">
                     <div class="row align-items-center py-3">
@@ -82,31 +84,12 @@
                         <div class="col-md-12 pe-5">
                             <textarea *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
                                 name="dataAbertura" [(ngModel)]="pizza.observacao" required></textarea>
-                            <p *ngIf="disabled" class="m-0 fw-bold">{{pizza.observacao}}</p>
+                            <p *ngIf="disabled" class="m-0">{{pizza.observacao? pizza.observacao: "Nenhuma observação"}}</p>
                         </div>
                     </div>
                     <hr class="mx-n3">
-                    <!-- <div class="row align-items-center py-3">
-                                <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Pagamento<span *ngIf="!disabled" style="color:red">*</span>:
-                                    </h6>
-                                </div>
-                                <div class="col-md-3 pe-5">
-                                    <mat-form-field #formaPagamento name="formaPagamento" *ngIf="!disabled" form-control
-                                        form-control-md>
-                                        <mat-label>Forma de Pagamento</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
-                                                [value]="formaPagamento">
-                                                {{formaPagamento}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.formaPagamento}}</p>
-                                </div>
-                            </div> -->
                     <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                        <button type="submit" class="color-white btn btn-warning"
+                        <button *ngIf="!disabled" type="submit" class="color-white btn btn-warning"
                             (click)="confirmar()">Confirmar</button>
                     </div>
                 </form>
@@ -116,11 +99,11 @@
 </div>
 <ng-template #tamanhos let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <h4 class="modal-title">Selecionar Tamanho</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-tamanho-list></app-tamanho-list>
+        <app-tamanho-list [isModal]="true" (tamanhoSelecionado)="definirTamanho($event)"></app-tamanho-list>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
@@ -128,11 +111,11 @@
 </ng-template>
 <ng-template #sabores let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <h4 class="modal-title">Selecionar Sabor</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-sabor-lista></app-sabor-lista>
+        <app-sabor-lista [isModal]="true" (saborSelecionado)="definirSabor($event)"></app-sabor-lista>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>

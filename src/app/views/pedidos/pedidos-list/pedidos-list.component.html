@@ -1,5 +1,5 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
-    <div class="w-90">
+    <div class="w-95">
         <div class="d-flex justify-content-between header">
             <h5 class="m-0 fw-bold">Pedidos</h5>
             <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
@@ -32,10 +32,10 @@
             <thead class="tabela-principal d-grid container">
                 <tr class="row">
                     <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-1 text-center">Cliente</th>
-                    <th scope="col" class="col-md-2 text-center">Funcionário</th>
+                    <th scope="col" class="col-md-2 text-center">Cliente</th>
                     <th scope="col" class="col-md-2 text-center">Data Abertura</th>
                     <th scope="col" class="col-md-2 text-center">Data Conclusão</th>
+                    <th scope="col" class="col-md-1 text-center">Entrega</th>
                     <th scope="col" class="col-md-2 text-center">Valor</th>
                     <th scope="col" class=" col-md-2 text-center">Status</th>
                 </tr>
@@ -44,15 +44,19 @@
                 <tr [routerLink]="['/web/pedido/', pedido.id]" class="row"
                     *ngFor="let pedido of pedidos$">
                     <th class="align-middle text-center col-md-1" scope="row">{{pedido.id}}</th>
-                    <td class="align-middle text-center col-md-1" scope="row">{{pedido.cliente.nome}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.funcionario.nome}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.cliente.nome}}</td>
                     <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataAbertura | date : 'dd/MM/yyyy - HH:mm'}}</td>
-                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'}}</td>
+                    <td class="align-middle text-center col-md-2" scope="row">{{pedido.dataConclusao? (pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'): ''}}
+                        <span *ngIf="pedido.dataConclusao == null && pedido.delecao == null" class="badge bg-warning text-dark">{{pedido.status}}</span>
+                        <span *ngIf="pedido.dataConclusao == null && pedido.delecao != null" class="badge bg-danger text-dark">CANCELADO</span>
+                    </td>
+                    <td *ngIf="pedido.entrega" class="d-flex justify-content-center align-middle text-center col-md-1" scope="row"> <bi class="acoes" name="check-circle-fill"></bi></td>
+                    <td *ngIf="!pedido.entrega" class="d-flex justify-content-center align-middle text-center col-md-1" scope="row"><bi class="acoes" name="check-circle-fill"></bi></td>
                     <td class="align-middle text-center col-md-2" scope="row">{{ pedido.valorTotal | currency: 'R$ ' }}</td>
                     <td class="status-cell align-middle text-center col-md-2">
-                        <div *ngIf="pedido.delecao" class="estado desativado"></div>
+                        <div *ngIf="pedido.delecao && pedido.dataConclusao == null" class="estado desativado"></div>
                         <div *ngIf="!pedido.delecao && pedido.dataConclusao " class="estado ativado"></div>
-                        <div *ngIf="!pedido.dataConclusao" class="estado andamento"></div>
+                        <div *ngIf="!pedido.dataConclusao && pedido.delecao == null" class="estado andamento"></div>
                         <div (click)="editar(pedido.id)">
                             <bi class="acoes" name="pen"></bi>
                         </div>

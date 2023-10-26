@@ -1,14 +1,13 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
-        <div class="d-flex justify-content-between header">
+        <div *ngIf="!isModal" class="d-flex justify-content-between header">
             <h5 class="m-0 fw-bold" >Tamanhos</h5>
 
             <button type="button" [routerLink]="['/web/tamanho/novo']"
-                class="fw-bold btn btn-warning color-white" id="novo-produto">Criar novo tamanho padrão</button>
+                class="fw-bold btn btn-warning color-white" id="novo-produto">Criar novo Tamanho</button>
 
         </div>
-        <hr>
-        
+        <hr *ngIf="!isModal">
         <form>
             <div class="mb-3 row d-flex flex-row justify-content-between">
                 <div class="w-50 d-flex flex-row gap-3">
@@ -18,44 +17,48 @@
                         <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
                     </div>
                 </div>
-                <mat-slide-toggle class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                <mat-slide-toggle [ngClass]="
+                {'input-hidden': isModal}" class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
                     (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
             </div>
         </form>
 
-            <div class="mb-3 resultados">Resultados: {{tamanho$.length}}</div>
-        <table class="d-grid">
+        <div class="mb-3 resultados">Resultados: {{tamanho$.length}}</div>
+        <table class="tabela-principal d-grid">
             <thead class="d-grid container">
                 <tr class="row">
-                    <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-3 text-center">Nome</th>
-                    <th scope="col" class="col-md-2 text-center">Quantidade</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}"  scope="col" class="text-center">Código</th>
+                    <th scope="col" class="text-center col-md-3">Nome</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" scope="col" class="text-center">Sabores</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" scope="col" class="text-center">Valor</th>
+                    <th *ngIf="!isModal" scope="col" class="col-md-3 text-center">Ações</th>
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/tamanhos/', tamanho.id]" class="row"
+                <tr [ngClass]="{'modal-table-tr': isModal}" (click)="selecionar(tamanho)" class="row"
                     *ngFor="let tamanho of tamanho$ ; index as i">
-                    <th class="align-middle text-center col-md-1" scope="row">{{tamanho.id}}</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" class="align-middle text-center col-md-2" scope="row">{{tamanho.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ tamanho.nome }}</td>
-                    <td class="align-middle text-center col-md-2">{{ tamanho.valor }}</td>
-                    <td class="status-cell align-middle text-center col-md-4">
+                    <td [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" class="align-middle text-center col-md-2">{{ tamanho.maximoSabores }}</td>
+                    <td [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" class="align-middle text-center col-md-2">{{ tamanho.valor | currency: "R$ "}}</td>
+                    <td *ngIf="!isModal" class="status-cell align-middle text-center gap-2 col-md-3">
                         <div *ngIf="tamanho.delecao" class="estado desativado"></div>
                         <div *ngIf="!tamanho.delecao" class="estado ativado"></div>
                         <div (click)="editar(tamanho.id)">
                             <bi class="acoes" name="pen"></bi>
                         </div>
-                        <div *ngIf="tamanho.delecao === null" (click)="deletar(tamanho.id)">
+                        <div *ngIf="tamanho.delecao === null" (click)="toggle(tamanho.id)">
                             <bi class="acoes" name="trash"></bi>
                         </div>
-                        <div *ngIf="tamanho.delecao != null" (click)="deletar(tamanho.id)">
+                        <div *ngIf="tamanho.delecao != null" (click)="toggle(tamanho.id)">
                             <bi class="acoes" name="arrow-counterclockwise"></bi>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="tamanhos.length || tamanho$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
-            Nenhum tamanho padrão encontrado
+        <div *ngIf="tamanhos.length == 0 || tamanho$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+            Nenhum tamanho encontrado
         </div>
     </div>
 </div>
