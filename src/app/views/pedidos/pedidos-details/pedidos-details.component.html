@@ -38,6 +38,21 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
+                                    <input type="text" [(ngModel)]="pedido.cliente"
+                                        name="cliente" class="text-center form-control form-control-md input-hidden" required
+                                        disabled />
+                                    <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
+                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi class="search-btn" name="search">
+                                        </bi></button>
+
+                                </div>
+                            </div>
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Funcionário<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
@@ -52,20 +67,6 @@
                                 </div>
                             </div>
                             <!-- <hr class="mx-n3"> -->
-                            <div class="row align-items-center pt-4 pb-3">
-                                <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
-                                </div>
-                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
-                                    <input type="text" [(ngModel)]="pedido.cliente"
-                                        name="cliente" class="text-center form-control form-control-md input-hidden" required
-                                        disabled />
-                                    <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
-                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi class="search-btn" name="search">
-                                        </bi></button>
-                                </div>
-                            </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
@@ -91,14 +92,36 @@
                                 </div>
                             </div>
                             <hr class="mx-n3">
-                            <div class="row align-items-center pt-4 pb-3">
-                                <div class="col-md-6 ps-5">
-                                    <h5 class="mb-0 fw-bold">Produtos e Pizzas</h5>
+                            <div class="row align-items-center justify-content-between pt-4 pb-3 mb-3">
+                                <div class="col-md-4 ps-5">
+                                    <h5 class="mb-0 fw-bold">Produtos</h5>
+                                </div>
+                                <div class="col-md-4 pe-5">
+                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="adicionarProduto(produtos)">Adicionar<bi class="search-btn" name="search">
+                                        </bi></button>
                                 </div>
                             </div>
-                            <table class="table table-stripped">
-                                <thead></thead>
-                            </table>
+                            <div>
+                                <table class="table table-stripped tabela-details">
+                                    <thead>
+                                        <th scope="col"class="col-md-1 text-center">Código</th>
+                                        <th scope="col"class="col-md-1 text-center">Descrição</th>
+                                        <th scope="col"class="col-md-1 text-center">Valor</th>
+                                        <th scope="col"class="col-md-1 text-center">Ação</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let produto of pedido.produtos">
+                                            <th scope="row" class="align-middle text-center col-md-1">{{produto.id}}</th>
+                                            <td class="align-middle text-center col-md-1">{{produto.descricao}}</td>
+                                            <td class="align-middle text-center col-md-1">{{produto.valorUnitario | currency: "R$ "}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="!pedido.produtos || pedido.produtos.length == 0" class="text-align-center alert alert-secondary" role="alert">
+                                    Nenhum produto adicionado
+                                </div>
+                            </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
@@ -209,6 +232,18 @@
     </div>
     <div class="modal-body">
         <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal" (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #produtos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Produto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!-- <app-produtos-list [isModal]="true" [isClienteModal]="isClienteModal" (pessoaSelecionada)="definirPessoa($event)"></app-produtos-list> -->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>

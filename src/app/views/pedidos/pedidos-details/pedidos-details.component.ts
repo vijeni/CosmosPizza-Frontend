@@ -115,12 +115,14 @@ export class PedidosDetailsComponent implements OnInit {
   }
   // modal
   abrirModal(template: any) {
-    this.mensagem = '';
-    this.pedido.cliente = new Pessoa();
     this.modalService.open(template, { size: 'lg' });
   }
   selecionarClienteOrFuncionario(template: any, isCliente: boolean){
     this.isClienteModal = isCliente
+    this.abrirModal(template)
+  }
+  adicionarProduto(template: any){
+    console.log(this.pedido.cliente)
     this.abrirModal(template)
   }
   definirPessoa(pessoaSelecionada: Pessoa) {
