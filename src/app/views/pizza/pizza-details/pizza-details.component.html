@@ -1,1 +1,170 @@
-<p>pizza-details works!</p>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="container">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <div class="col-xl-9">
+                    <div [ngClass]="
+                    {
+                        'alert alert-success': !isErro && mensagem,
+                        'alert alert-danger': isErro && mensagem
+                    }
+                    " class="alert alert-success" role="alert">
+                        {{mensagem}}
+                    </div>
+                    <div class="card shadow p-3 bg-white rounded">
+                        <form class="card-body">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-4">
+                                        <h5 class="mb-0 fw-bold">Tamanho</h5>
+                                    </div>
+                                </div>
+                                <hr class="mx-n3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Tamanho<span *ngIf="!disabled" style="color:red">*</span>:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
+                                    <input type="text" [(ngModel)]="pizza.tamanho" name="tamanho"
+                                        class="text-center form-control form-control-md input-hidden" required
+                                        disabled />
+                                    <p *ngIf="pizza.tamanho" class="m-0 fw-bold pt-2">{{pizza.tamanho.nome}} - {{pizza.tamanho.maximoSabores}} sabores</p>
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="abrirModal(tamanhos)">Selecionar<bi
+                                            class="search-btn" name="search">
+                                        </bi></button>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center justify-content-between pt-4 pb-3 mb-3">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 fw-bold">Sabores - {{pizza.sabores? pizza.sabores.length: '0'}}/{{pizza.tamanho? pizza.tamanho.maximoSabores: '0'}}</h5>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-end">
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="abrirModal(sabores)">Adicionar<bi class="search-btn"
+                                            name="search">
+                                        </bi></button>
+                                </div>
+                            </div>
+                            <div class="pb-3">
+                                <table *ngIf="pizza.sabores.length != 0" class="table table-stripped tabela-details">
+                                    <thead>
+                                        <th scope="col" class="col-md-1 text-center">Código</th>
+                                        <th scope="col" class="col-md-1 text-center">Nome</th>
+                                        <th scope="col" class="col-md-1 text-center">Descrição</th>
+                                        <th scope="col" class="col-md-1 text-center">Ação</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let sabor of pizza.sabores; index as i">
+                                            <th scope="row" class="align-middle text-center col-md-1">{{sabor.id}}
+                                            </th>
+                                            <td class="align-middle text-center col-md-1">{{sabor.nome}}</td>
+                                            <td class="align-middle text-center col-md-1">{{sabor.descricao}}</td>
+                                            <td
+                                                (click)="retirarSabor(i)"
+                                                class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
+                                                <bi class="acoes" name="trash"></bi>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="!pizza.sabores || pizza.sabores.length == 0"
+                                    class="text-align-center alert alert-secondary" role="alert">
+                                    Nenhum sabor adicionado
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-4">
+                                        <h5 class="mb-0 fw-bold">Observações</h5>
+                                    </div>
+                                </div>
+                                <!-- <hr class="mx-n3"> -->
+                                <div class="col-md-12 pe-5">
+                                    <textarea *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
+                                        name="dataAbertura" [(ngModel)]="pizza.observacao" required></textarea>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pizza.observacao}}</p>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <!-- <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Pagamento<span *ngIf="!disabled" style="color:red">*</span>:
+                                    </h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <mat-form-field #formaPagamento name="formaPagamento" *ngIf="!disabled" form-control
+                                        form-control-md>
+                                        <mat-label>Forma de Pagamento</mat-label>
+                                        <mat-select>
+                                            <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
+                                                [value]="formaPagamento">
+                                                {{formaPagamento}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.formaPagamento}}</p>
+                                </div>
+                            </div> -->
+                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                                <button type="submit" class="color-white btn btn-warning" (click)="confirmar()">Confirmar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #tamanhos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-tamanho-list></app-tamanho-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #sabores let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-sabor-lista></app-sabor-lista>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<!-- <ng-template #tamanhos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal"
+            (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #sabores let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Produto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-produto-list [isModal]="true" (produtoSelecionado)="definirProduto($event)"></app-produto-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template> -->
