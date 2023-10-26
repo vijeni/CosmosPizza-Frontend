@@ -242,16 +242,7 @@
                             </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0">Tipo | Status:</h6>
-                                </div>
                                 <div class="col-md-9 pe-5">
-                                    <td class="align-start text-center">
-                                        <form #form="ngForm">
-                                    <td class="align-middle text-center">
-                                        <p class="m-0 fw-bold">{{pessoa.tipoPessoa}}</p>
-
-                                    </td>
                                     <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
                                         <div class="col-md-4 ps-5">
                                             <h6 class="mb-0">Data de Criação:
@@ -293,8 +284,6 @@
                                             <p class="mb-0">{{pessoa.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
                                         </div>
                                     </div>
-                                    </form>
-                                    </td>
                                 </div>
                             </div>
                             <hr class="mx-n3">
