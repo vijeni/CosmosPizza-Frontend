@@ -23,21 +23,31 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
   providers: [DecimalPipe],
 })
 export class PessoasListComponent implements OnInit {
+  // comm de modal
   @Output() pessoaSelecionada = new EventEmitter<Pessoa>();
   @Input() isModal: boolean = false;
-  @Input() isCliente: boolean = true;
+  @Input() isClienteModal: boolean = true;
+
+  //pessoas
   pessoas: Pessoa[] = [];
   pessoas$: Pessoa[] = [];
   pessoa = new Pessoa();
   index!: number;
+
+  // services e pipes
   service = inject(PessoaService);
   router = inject(Router);
+  decimalPipe = inject(DecimalPipe);
+
+  // form controls de filtros
+  filter = new FormControl('');
+  switchEstado = new FormControl(false);
+
+  // controle
   isFuncionario!: boolean;
   isErro!: boolean;
   mensagem: string = '';
-  filter = new FormControl('');
-  decimalPipe = inject(DecimalPipe);
-  switchEstado = new FormControl(false);
+
   constructor() {}
 
   async ngOnInit() {
@@ -45,10 +55,10 @@ export class PessoasListComponent implements OnInit {
       this.switchEstado.setValue(true);
     }
     let url = this.router.url;
-    if (url.includes('funcionario') || this.isCliente == false) {
+    if (url.includes('funcionario') || this.isClienteModal == false) {
       this.isFuncionario = true;
       await this.getAllFuncionarios();
-    } else if(url.includes('cliente') || this.isCliente == true){
+    } else if(url.includes('cliente') || this.isClienteModal == true){
       this.isFuncionario = false;
       await this.getAllClientes();
     }

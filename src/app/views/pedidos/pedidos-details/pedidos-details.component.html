@@ -155,7 +155,7 @@
                                     class="btn btn-danger" (click)="toggle()">Desativar</button>
                                 <button *ngIf="modoEditar == false && id && pedido.delecao != null" type="submit"
                                     class="btn btn-success" (click)="toggle()">Ativar</button>
-                                <button type="button" id="cancelar" (click)="voltar()"
+                                <button type="button" id="cancelar" (click)="voltar(100)"
                                     class="btn btn-secondary">Voltar</button>
                             </div>
                         </form>
@@ -171,7 +171,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-pessoas-list [isModal]="true" [isCliente]="isCliente" (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
+        <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal" (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>

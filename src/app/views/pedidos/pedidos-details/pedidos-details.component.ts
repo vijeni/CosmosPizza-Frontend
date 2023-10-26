@@ -24,7 +24,7 @@ export class PedidosDetailsComponent implements OnInit {
   router = inject(Router);
   service = inject(PedidoService);
   modalService = inject(NgbModal);
-  isCliente!: boolean
+  isClienteModal!: boolean
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class PedidosDetailsComponent implements OnInit {
       }
     }
   }
-
+  // services
   findById(id: number) {
     this.service.findById(id).subscribe({
       next: (pedido) => {
@@ -55,13 +55,12 @@ export class PedidosDetailsComponent implements OnInit {
     });
     console.log(this.pedido);
   }
-
   cadastrar() {
     this.service.post(this.pedido).subscribe({
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Pedido aberto com sucesso!';
-        this.voltar();
+        this.voltar(800);
       },
       error: (resposta) => {
         this.isErro = true;
@@ -69,54 +68,19 @@ export class PedidosDetailsComponent implements OnInit {
       },
     });
   }
-
-  voltar() {
-    this.moveTo();
-    setTimeout(() => {
-      this.router.navigate(['/web/pedidos']);
-    }, 1500);
-  }
-  moveTo() {
-    window.scrollTo(0, 0);
-  }
-
   editar() {
     this.service.put(this.pedido.id, this.pedido).subscribe({
       next: (pedido) => {
         this.isErro = false;
         this.mensagem = 'Pedido editado com sucesso!';
         this.pedido = pedido;
-        this.voltar();
+        this.voltar(800);
       },
       error: (resposta) => {
         this.isErro = true;
         this.mensagem = resposta.error;
       },
     });
-  }
-  abrirModal(template: any) {
-    this.mensagem = '';
-    this.pedido.cliente = new Pessoa();
-    this.modalService.open(template, { size: 'lg' });
-  }
-  selecionarClienteOrFuncionario(template: any, isCliente: boolean){
-    this.isCliente = isCliente
-    this.abrirModal(template)
-  }
-  definirPessoa(pessoaSelecionada: Pessoa) {
-    this.modalService.dismissAll()
-    console.log(pessoaSelecionada.tipoPessoa)
-    if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {
-      this.pedido.cliente = pessoaSelecionada;
-      console.log('cliente')
-      console.log(this.pedido.cliente)
-      console.log(pessoaSelecionada)
-    } else {
-      this.pedido.funcionario = pessoaSelecionada;
-      console.log('funcionario')
-      console.log(this.pedido.funcionario)
-      console.log(pessoaSelecionada)
-    }
   }
   toggle() {
     if (this.pedido.delecao != null) {
@@ -149,4 +113,38 @@ export class PedidosDetailsComponent implements OnInit {
       }
     }
   }
+  // modal
+  abrirModal(template: any) {
+    this.mensagem = '';
+    this.pedido.cliente = new Pessoa();
+    this.modalService.open(template, { size: 'lg' });
+  }
+  selecionarClienteOrFuncionario(template: any, isCliente: boolean){
+    this.isClienteModal = isCliente
+    this.abrirModal(template)
+  }
+  definirPessoa(pessoaSelecionada: Pessoa) {
+    this.modalService.dismissAll()
+    console.log(pessoaSelecionada.tipoPessoa)
+    if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {
+      this.pedido.cliente = pessoaSelecionada;
+    } else {
+      this.pedido.funcionario = pessoaSelecionada;
+    }
+  }
+
+  //utils
+  voltar(ms: number) {
+    this.moveTo();
+    setTimeout(() => {
+      this.router.navigate(['/web/pedidos']);
+    }, ms);
+  }
+  moveTo() {
+    window.scrollTo(0, 0);
+  }
+
+ 
+  
+ 
 }
