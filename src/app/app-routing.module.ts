@@ -11,6 +11,8 @@ import { SaborListaComponent } from './views/sabor/sabor-lista/sabor-lista.compo
 import { SaborDetailsComponent } from './views/sabor/sabor-details/sabor-details.component';
 import { IngredienteListComponent } from './views/ingredientes/ingrediente-list/ingrediente-list.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
+import { TamanhoListComponent } from './views/tamanho/tamanho-list/tamanho-list.component';
+import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
@@ -44,7 +46,13 @@ const routes: Routes = [
       { path: 'ingrediente/novo', component: IngredientesDetailsComponent},
       { path: 'ingrediente/editar/:id', component: IngredientesDetailsComponent},
       { path: 'ingrediente/toggle/:id', component: IngredientesDetailsComponent},
-      { path: 'ingrediente/:id', component: IngredientesDetailsComponent}
+      { path: 'ingrediente/:id', component: IngredientesDetailsComponent},
+      { path: 'tamanhos', component: TamanhoListComponent},
+      { path: 'tamanho/novo', component: TamanhoDetailsComponent},
+      { path: 'tamanho/editar/:id', component: TamanhoDetailsComponent},
+      { path: 'tamanho/toggle/:id', component: TamanhoDetailsComponent},
+      { path: 'tamanho/:id', component: TamanhoDetailsComponent}
+
     ],
   },
 ];
