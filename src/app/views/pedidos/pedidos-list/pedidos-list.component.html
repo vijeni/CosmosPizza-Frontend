@@ -54,7 +54,7 @@
                     <td *ngIf="!pedido.entrega" class="d-flex justify-content-center align-middle text-center col-md-1" scope="row"><bi class="acoes" name="slash-circle-fill"></bi></td>
                     <td class="align-middle text-center col-md-2" scope="row">{{ pedido.valorTotal | currency: 'R$ ' }}</td>
                     <td class="status-cell align-middle text-center col-md-2">
-                        <div *ngIf="pedido.delecao && pedido.dataConclusao == null" class="estado desativado"></div>
+                        <div *ngIf="pedido.delecao && pedido.dataConclusao == null " class="estado desativado"></div>
                         <div *ngIf="!pedido.delecao && pedido.dataConclusao " class="estado ativado"></div>
                         <div *ngIf="!pedido.dataConclusao && pedido.delecao == null" class="estado andamento"></div>
                         <div (click)="editar(pedido.id)">
