@@ -299,12 +299,14 @@
                             </div>
                             <hr class="mx-n3">
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled"
-                                    (click)="deletar(pessoa.id)" (click)="moveTo()">Desativar</button>
+                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled && pessoa.delecao == null"
+                                    (click)="deletar(pessoa.id)">Desativar</button>
+                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && disabled && pessoa.delecao != null"
+                                    (click)="deletar(pessoa.id)">Ativar</button>
                                 <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id"
-                                    (click)="cadastrar()" (click)="moveTo()">Cadastrar</button>
+                                    (click)="cadastrar()">Cadastrar</button>
                                 <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id"
-                                    (click)="editar(pessoa.id)" (click)="moveTo()">Editar</button>
+                                    (click)="editar(pessoa.id)">Editar</button>
                                 <button type="submit" class="btn btn-secondary" *ngIf="!isFuncionario"
                                     (click)="voltar()">Voltar</button>
                                 <button type="submit" class="btn btn-secondary" *ngIf="isFuncionario"
