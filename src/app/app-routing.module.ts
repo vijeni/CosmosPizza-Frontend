@@ -17,7 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'web/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'web/pedidos', pathMatch: 'full' },
   {
     path: 'web',
     component: IndexComponent,
