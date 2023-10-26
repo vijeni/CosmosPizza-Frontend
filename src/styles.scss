@@ -60,7 +60,7 @@ table.tabela-principal tbody tr {
     margin-block: .5rem
 }
 .tabela-principal tbody tr:hover{
-    background-color: rgba(250, 218, 159, 0.445);
+    background-color: rgba(250, 218, 159, 0.445) !important;
     transition: 500ms;
     height: 5rem;
 }

@@ -152,7 +152,17 @@ export class PedidosDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  calculaTotalProdutos(): number{
+    let valorTotal: number = 0
+    this.pedido.produtos.forEach((produto) => {
+      valorTotal+=produto.valorUnitario
+    })
+    return valorTotal
+  }
+
+  retirarProduto(index: number){
+    this.pedido.produtos.splice(index, 1)
+  }
  
-  
  
 }

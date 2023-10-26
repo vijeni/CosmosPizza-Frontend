@@ -23,7 +23,7 @@
                     <div class="card shadow p-3 bg-white rounded">
                         <form class="card-body">
                             <div class="row align-items-center pt-4 pb-3">
-                                <div class="col-md-4 ps-5">
+                                <div class="col-md-4">
                                     <h5 class="mb-0 fw-bold">Detalhes</h5>
                                 </div>
                             </div>
@@ -97,10 +97,10 @@
                             </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center justify-content-between pt-4 pb-3 mb-3">
-                                <div class="col-md-4 ps-5">
+                                <div class="col-md-4">
                                     <h5 class="mb-0 fw-bold">Produtos</h5>
                                 </div>
-                                <div class="col-md-4 pe-5">
+                                <div class="col-md-4 d-flex justify-content-end">
                                     <button type="button" style="height: fit-content;"
                                         class="btn btn-warning d-flex flex-row gap-3"
                                         (click)="adicionarProduto(produtos)">Adicionar<bi class="search-btn"
@@ -108,8 +108,8 @@
                                         </bi></button>
                                 </div>
                             </div>
-                            <div>
-                                <table class="table table-stripped tabela-details">
+                            <div class="pb-3">
+                                <table *ngIf="pedido.produtos.length != 0" class="table table-stripped tabela-details">
                                     <thead>
                                         <th scope="col" class="col-md-1 text-center">Código</th>
                                         <th scope="col" class="col-md-1 text-center">Descrição</th>
@@ -117,13 +117,15 @@
                                         <th scope="col" class="col-md-1 text-center">Ação</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let produto of pedido.produtos">
+                                        <tr *ngFor="let produto of pedido.produtos; index as i">
                                             <th scope="row" class="align-middle text-center col-md-1">{{produto.id}}
                                             </th>
                                             <td class="align-middle text-center col-md-1">{{produto.descricao}}</td>
                                             <td class="align-middle text-center col-md-1">{{produto.valorUnitario |
                                                 currency: "R$ "}}</td>
-                                            <td class="align-middle text-center col-md-1">
+                                            <td
+                                                (click)="retirarProduto(i)"
+                                                class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
                                                 <bi class="acoes" name="trash"></bi>
                                             </td>
                                         </tr>
@@ -132,6 +134,13 @@
                                 <div *ngIf="!pedido.produtos || pedido.produtos.length == 0"
                                     class="text-align-center alert alert-secondary" role="alert">
                                     Nenhum produto adicionado
+                                </div>
+                                <div>
+                                    <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Selecionados:
+                                        {{pedido.produtos.length}}</div>
+                                    <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Total:
+                                        {{calculaTotalProdutos() | currency: "R$ "}}
+                                    </div>
                                 </div>
                             </div>
                             <hr class="mx-n3">

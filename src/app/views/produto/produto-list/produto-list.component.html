@@ -5,7 +5,7 @@
             <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
                 [routerLink]="['/web/produto/novo']">Novo Produto</button>
         </div>
-        <hr>
+        <hr *ngIf="!isModal">
         <form>
             <div class="mb-3 row d-flex flex-row justify-content-between">
                 <div class="w-50 d-flex flex-row gap-3">
@@ -32,21 +32,21 @@
         <table class="tabela-principal d-grid">
             <thead class="d-grid container">
                 <tr class="row">
-                    <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-3 text-center">Descrição</th>
+                    <th [ngClass]="{'col-md-1': !isModal, 'col-md-2': isModal}"scope="col" class="text-center">Código</th>
+                    <th [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}"scope="col" class="text-center">Descrição</th>
                     <th scope="col" class="col-md-2 text-center">Quantidade</th>
-                    <th scope="col" class="col-md-2 text-center">Valor Unitário</th>
-                    <th scope="col" class=" col-md-4 text-center">Status</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-4': isModal}"scope="col" class="text-center">Valor Unitário</th>
+                    <th *ngIf="!isModal" scope="col" class=" col-md-4 text-center">Status</th>
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr (click)="selecionar(produto)" class="row"
+                <tr [ngClass]="{'modal-table-tr': isModal}" (click)="selecionar(produto)" class="row"
                     *ngFor="let produto of produtos$ ; index as i">
-                    <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
-                    <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
+                    <th [ngClass]="{'col-md-1': !isModal, 'col-md-2': isModal}" class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
+                    <td [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}" class="align-middle text-center col-md-3">{{ produto.descricao }}</td>
                     <td class="align-middle text-center col-md-2">{{ produto.quantidadeEstoque }}</td>
-                    <td class="align-middle text-center col-md-2">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
-                    <td class="status-cell align-middle text-center col-md-4">
+                    <td [ngClass]="{'col-md-2': !isModal, 'col-md-4': isModal}" class="align-middle text-center col-md-2">{{ produto.valorUnitario | currency: 'R$ ' }}</td>
+                    <td *ngIf="!isModal" class="status-cell align-middle text-center col-md-4">
                         <div *ngIf="produto.delecao" class="estado desativado"></div>
                         <div *ngIf="!produto.delecao" class="estado ativado"></div>
                         <div (click)="editar(produto.id)">
