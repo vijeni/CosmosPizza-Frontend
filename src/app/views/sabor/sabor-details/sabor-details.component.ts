@@ -38,7 +38,7 @@ export class SaborDetailsComponent implements OnInit {
   
   
   constructor(private route: ActivatedRoute){
-  
+    
   
   }
   
@@ -54,6 +54,8 @@ export class SaborDetailsComponent implements OnInit {
 
       if (!url.includes('novo')) {
         this.id = this.route.snapshot.paramMap.get('id') as string; //pegando a rota
+          this.getById(Number(this.id));
+
         if (url.includes('editar')) {
           this.modoEditar = true;
         } else if (url.includes('toggle')) {
