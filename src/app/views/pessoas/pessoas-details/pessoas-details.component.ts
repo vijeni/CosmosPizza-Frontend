@@ -74,7 +74,7 @@ export class PessoasDetailsComponent implements OnInit {
         this.isErro = false;
         this.mensagem = 'Pessoa cadastrada com sucesso!';
         await this.sleep(1000);
-        this.injectRouter.navigate(['/web/pessoas']);
+        this.injectRouter.navigate(['/web/clientes']);
       },
       error: (erro) => {
         console.log(erro.error);
@@ -90,7 +90,7 @@ export class PessoasDetailsComponent implements OnInit {
         this.pessoa = pessoas;
         this.mensagem = 'Pessoa editada com sucesso!';
         await this.sleep(1000);
-        this.injectRouter.navigate(['/web/pessoas']);
+        this.injectRouter.navigate(['/web/clientes']);
       },
       error: (erro) => {
         console.log(erro.error);
@@ -105,12 +105,12 @@ export class PessoasDetailsComponent implements OnInit {
         this.pessoa = pessoas;
         this.mensagem = 'Pessoa desativada com sucesso!';
         await this.sleep(1500);
-        this.injectRouter.navigate(['/web/pessoas']);
+        this.injectRouter.navigate(['/web/clientes']);
       },
       error: async (erro) => {
         console.log(erro.error);
         await this.sleep(1500);
-        this.injectRouter.navigate(['/web/pessoas']);
+        this.injectRouter.navigate(['/web/clientes']);
         this.mensagem = 'Pessoa deletada com sucesso!';
         /*
       O deletar está funcionando normalmente, mas está retornando um erro de Json no console.

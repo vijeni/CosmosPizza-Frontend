@@ -39,6 +39,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,10 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     PedidosListComponent,
     PedidosDetailsComponent,
     PessoasDetailsComponent,
-    CpfPipe
+    CpfPipe,
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,6 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule,
     HttpClientModule,
     SidebarComponent,
     BrowserAnimationsModule,
@@ -78,7 +81,6 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     MatSelectModule,
     RouterLink,
     DecimalPipe,
-    NgFor,
     AsyncPipe,
     ReactiveFormsModule,
     NgbTypeaheadModule,
@@ -88,6 +90,12 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     MatSlideToggleModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
+    FormsModule,
+    MatFormFieldModule, 
+    MatSelectModule, 
+    ReactiveFormsModule, 
+    NgFor
+
   ],
   providers: [],
   bootstrap: [AppComponent],
