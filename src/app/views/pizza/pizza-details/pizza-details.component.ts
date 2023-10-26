@@ -38,6 +38,15 @@ export class PizzaDetailsComponent implements OnInit{
   abrirModal(template: any) {
     this.modalRef = this.modalService.open(template, { size: 'lg' });
   }
+  abrirModalSabores(template: any) {
+    if(!this.pizza.tamanho){
+      alert("Escolha o tamanho primeiro!")
+    } else if(this.pizza.tamanho && this.pizza.tamanho.maximoSabores <= this.pizza.sabores.length){
+      alert("Quantidade máxima de sabores escolhida!")
+    }else{
+      this.modalRef = this.modalService.open(template, { size: 'lg' });
+    }
+  }
   definirTamanho(tamanhoSelecionado: Tamanho) {
     this.modalRef.dismiss();
     this.pizza.tamanho = tamanhoSelecionado;

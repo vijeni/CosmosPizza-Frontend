@@ -39,8 +39,10 @@
                                 '0'}}/{{pizza.tamanho? pizza.tamanho.maximoSabores: '0'}}</h5>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end">
-                            <button type="button" style="height: fit-content;"
-                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(sabores)">Adicionar<bi
+                            <button [ngClass]="{
+                                'bloqueado': !pizza.tamanho || pizza.tamanho.maximoSabores <= pizza.sabores.length
+                            }" type="button" style="height: fit-content;"
+                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModalSabores(sabores)">Adicionar<bi
                                     class="search-btn" name="search">
                                 </bi></button>
                         </div>
@@ -97,7 +99,7 @@
 </div>
 <ng-template #tamanhos let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <h4 class="modal-title">Selecionar Tamanho</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
