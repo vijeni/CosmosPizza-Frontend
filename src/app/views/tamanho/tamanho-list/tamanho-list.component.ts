@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit, PipeTransform, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, PipeTransform, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, startWith } from 'rxjs';
@@ -12,6 +12,9 @@ import { TamanhoService } from 'src/app/services/tamanho/tamanho.service';
   styleUrls: ['./tamanho-list.component.scss'],
 })
 export class TamanhoListComponent implements OnInit {
+  // comm de modal
+  @Output() tamanhoSelecionado = new EventEmitter<Tamanho>();
+  @Input() isModal: boolean = false;
   tamanhos: Tamanho[] = [];
   tamanho$: Tamanho[] = [];
   tamanho = new Tamanho();
@@ -43,7 +46,7 @@ export class TamanhoListComponent implements OnInit {
   }
 
   search(text: string, pipe: PipeTransform): Tamanho[] {
-    console.log(this.tamanho$.length)
+    console.log(this.tamanho$.length);
     return this.tamanhos.filter((tamanho) => {
       const term = text.toLowerCase();
       return (
@@ -77,5 +80,12 @@ export class TamanhoListComponent implements OnInit {
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
+  }
+  selecionar(tamanho: Tamanho) {
+    if (this.isModal) {
+      this.tamanhoSelecionado.emit(tamanho);
+    }else{
+      this.router.navigate(['/web/tamanho', tamanho.id])
+    }
   }
 }

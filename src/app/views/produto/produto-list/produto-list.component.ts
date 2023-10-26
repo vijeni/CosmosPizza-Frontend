@@ -107,7 +107,6 @@ export class ProdutoListComponent implements OnInit {
   }
   selecionar(produto: Produto) {
     if (this.isModal) {
-      console.log('aqui')
       this.produtoSelecionado.emit(produto);
     }else{
       this.router.navigate(['/web/produto', produto.id])

@@ -7,9 +7,10 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Pizza } from 'src/app/models/pizza/pizza';
 import { Sabor } from 'src/app/models/sabor/sabor';
+import { Tamanho } from 'src/app/models/tamanho/tamanho';
 
 @Component({
   selector: 'app-pizza-details',
@@ -27,6 +28,8 @@ export class PizzaDetailsComponent implements OnInit{
   router = inject(Router);
   modalService = inject(NgbModal);
   constructor(private route: ActivatedRoute) {}
+  modalRef!: NgbModalRef;
+
 
   ngOnInit() {
     this.pizza.sabores = [] 
@@ -34,6 +37,13 @@ export class PizzaDetailsComponent implements OnInit{
   // modal
   abrirModal(template: any) {
     this.modalService.open(template, { size: 'lg' });
+  }
+  abrirModalTamanho(template: any) {
+   this.modalRef = this.modalService.open(template, { size: 'lg' });
+  }
+  definirTamanho(tamanhoSelecionado: Tamanho) {
+    this.modalRef.dismiss();
+    this.pizza.tamanho = tamanhoSelecionado;
   }
   definirSabor(saborSelecionado: Sabor) {
     this.modalService.dismissAll()

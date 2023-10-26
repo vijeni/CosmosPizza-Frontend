@@ -27,7 +27,7 @@
                             <p *ngIf="pizza.tamanho" class="m-0 fw-bold pt-2">{{pizza.tamanho.nome}} -
                                 {{pizza.tamanho.maximoSabores}} sabores</p>
                             <button type="button" style="height: fit-content;"
-                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(tamanhos)">Selecionar
+                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModalTamanho(tamanhos)">Selecionar
                                 <bi class="search-btn" name="search">
                                 </bi></button>
                         </div>
@@ -120,7 +120,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-tamanho-list></app-tamanho-list>
+        <app-tamanho-list [isModal]="true" (tamanhoSelecionado)="definirTamanho($event)"></app-tamanho-list>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
