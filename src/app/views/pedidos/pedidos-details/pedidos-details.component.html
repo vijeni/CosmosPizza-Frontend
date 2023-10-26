@@ -35,11 +35,14 @@
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
-                                <div class="col-md-8 pe-5">
-                                    <input *ngIf="!disabled" type="text text-center" [(ngModel)]="pedido.cliente"
-                                        name="descricao" class="form-control form-control-md input-hidden" required disabled/>
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.cliente.nome}}</p>
-                                    <button type="button" class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(pessoas)">Selecionar<bi class="search-btn"name="search"></bi></button>
+                                <div class="col-md-8 pe-5 gap-3 d-flex flex-row">
+                                    <input type="text" [(ngModel)]="pedido.cliente"
+                                        name="descricao" class="text-center form-control form-control-md input-hidden" required
+                                        disabled />
+                                    <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
+                                    <button type="button" class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="abrirModal(pessoas)">Selecionar<bi class="search-btn" name="search">
+                                        </bi></button>
 
                                 </div>
                             </div>
@@ -49,7 +52,7 @@
                                     <h6 class="mb-0">Funcionário<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5">
-                                    
+
                                     <input *ngIf="!disabled" type="text text-center" [(ngModel)]="pedido.funcionario"
                                         name="descricao" class="form-control form-control-md" required />
                                     <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.funcionario.nome}}</p>
@@ -58,12 +61,12 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Entrega?<span *ngIf="!disabled"
-                                            style="color:red">*</span>:
+                                    <h6 class="mb-0">Entrega?<span *ngIf="!disabled" style="color:red">*</span>:
                                     </h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
-                                    <mat-checkbox [disabled]="disabled" #isEntrega  [(ngModel)]="pedido.isEntrega" name="isEntrega">Entrega</mat-checkbox>
+                                    <mat-checkbox [disabled]="disabled" #isEntrega [(ngModel)]="pedido.isEntrega"
+                                        name="isEntrega">Entrega</mat-checkbox>
                                     <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.isEntrega}}</p>
                                 </div>
                             </div>
@@ -82,19 +85,20 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Pagamento<span *ngIf="!disabled"
-                                            style="color:red">*</span>:
+                                    <h6 class="mb-0">Pagamento<span *ngIf="!disabled" style="color:red">*</span>:
                                     </h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
-                                    <mat-form-field #formaPagamento name="formaPagamento"    *ngIf="!disabled" form-control form-control-md>
+                                    <mat-form-field #formaPagamento name="formaPagamento" *ngIf="!disabled" form-control
+                                        form-control-md>
                                         <mat-label>Forma de Pagamento</mat-label>
                                         <mat-select>
-                                          <mat-option *ngFor="let formaPagamento of keys(formasPagamento)" [value]="formaPagamento">
-                                            {{formaPagamento}}
-                                          </mat-option>
+                                            <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
+                                                [value]="formaPagamento">
+                                                {{formaPagamento}}
+                                            </mat-option>
                                         </mat-select>
-                                      </mat-form-field>
+                                    </mat-form-field>
                                     <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.formaPagamento}}</p>
                                 </div>
                             </div>
@@ -129,8 +133,7 @@
                                     <span *ngIf="!pedido.delecao" class="badge bg-success">Ativado</span>
                                 </div>
                             </div>
-                            <div *ngIf="pedido.delecao && modoEditar == null && id"
-                                class="row align-items-center py-3">
+                            <div *ngIf="pedido.delecao && modoEditar == null && id" class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Desativado em:
                                     </h6>
@@ -158,20 +161,15 @@
         </div>
     </div>
 </div>
-    <ng-template #pessoas let-modal>
-        <div class="modal-body">
-        <app-pessoas-list></app-pessoas-list>
-        </div>
-        <div class="modal-footer">
+<ng-template #pessoas let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-pessoas-list [isModal]="true" (pessoaSelecionada)="selecionarPessoa($event)"></app-pessoas-list>
+    </div>
+    <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
-        </div>
-    </ng-template>
-    <!-- <ng-template #pessoas let-modal>
-        <div class="modal-body">
-        <app-pessoas-details [isErro]="isErro" [mensagem]="mensagem" [pessoa]="pessoaSelecionada"
-            (pessoaCriada)="salvarEditarPessoa($event)"></app-pessoas-details>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
-        </div>
-    </ng-template> -->
+    </div>
+</ng-template>

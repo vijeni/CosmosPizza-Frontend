@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
+import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { Pedido } from 'src/app/models/pedido/pedido';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
@@ -22,7 +23,7 @@ export class PedidosDetailsComponent implements OnInit {
   pedido = new Pedido();
   router = inject(Router);
   service = inject(PedidoService);
-  modalService = inject(NgbModal)
+  modalService = inject(NgbModal);
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -59,8 +60,7 @@ export class PedidosDetailsComponent implements OnInit {
       next: (produto) => {
         this.isErro = false;
         this.mensagem = 'Pedido aberto com sucesso!';
-        this.voltar()
-        
+        this.voltar();
       },
       error: (resposta) => {
         this.isErro = true;
@@ -69,11 +69,11 @@ export class PedidosDetailsComponent implements OnInit {
     });
   }
 
-  voltar(){
-    this.moveTo()
-    setTimeout(() =>{
-      this.router.navigate(['/web/pedidos'])
-    }, 1500)
+  voltar() {
+    this.moveTo();
+    setTimeout(() => {
+      this.router.navigate(['/web/pedidos']);
+    }, 1500);
   }
   moveTo() {
     window.scrollTo(0, 0);
@@ -85,7 +85,7 @@ export class PedidosDetailsComponent implements OnInit {
         this.isErro = false;
         this.mensagem = 'Pedido editado com sucesso!';
         this.pedido = pedido;
-        this.voltar()        
+        this.voltar();
       },
       error: (resposta) => {
         this.isErro = true;
@@ -98,8 +98,20 @@ export class PedidosDetailsComponent implements OnInit {
     this.pedido.cliente = new Pessoa();
     this.modalService.open(template, { size: 'lg' });
   }
-  selecionarPessoa(pessoaSelecionada: Pessoa){
-    
+  selecionarPessoa(pessoaSelecionada: Pessoa) {
+    this.modalService.dismissAll()
+    console.log(pessoaSelecionada.tipoPessoa)
+    if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {
+      this.pedido.cliente = pessoaSelecionada;
+      console.log('cliente')
+      console.log(this.pedido.cliente)
+      console.log(pessoaSelecionada)
+    } else {
+      this.pedido.funcionario = pessoaSelecionada;
+      console.log('funcionario')
+      console.log(this.pedido.funcionario)
+      console.log(pessoaSelecionada)
+    }
   }
   toggle() {
     if (this.pedido.delecao != null) {

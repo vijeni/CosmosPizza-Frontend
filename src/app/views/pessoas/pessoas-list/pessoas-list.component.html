@@ -10,7 +10,7 @@
                 class="fw-bold btn btn-warning color-white" id="novo-produto">Novo Funcionário</button>
 
         </div>
-        <hr>
+        <hr *ngIf="!isModal">
         <form>
             <div class="mb-3 row d-flex flex-row justify-content-between">
                 <div class="w-50 d-flex flex-row gap-3">
@@ -20,29 +20,32 @@
                         <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
                     </div>
                 </div>
-                <mat-slide-toggle class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                <mat-slide-toggle [ngClass]="
+                {'input-hidden': isModal}
+                " class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
                     (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
+ 
             </div>
         </form>
         <div class="mb-3 resultados">Resultados: {{pessoas$.length}}</div>
         <table class="d-grid">
             <thead class="d-grid container">
                 <tr class="row">
-                    <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-3 text-center">Nome</th>
-                    <th scope="col" class="col-md-2 text-center">Telefone</th>
-                    <th scope="col" class="col-md-2 text-center">CPF</th>
-                    <th scope="col" class=" col-md-4 text-center">Status</th>
+                    <th [ngClass]="{'col-md-1': !isModal, 'col-md-2': isModal}"scope="col" class="text-center">Código</th>
+                    <th [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}" scope="col" class="text-center">Nome</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}"scope="col" class="text-center">Telefone</th>
+                    <th [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}"scope="col" class="text-center">CPF</th>
+                    <th *ngIf="!isModal" scope="col" class=" col-md-4 text-center">Status</th>
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/pessoa/', pessoa.id]" class="row"
+                <tr (click)="selecionar(pessoa)" class="row"
                     *ngFor="let pessoa of pessoas$ ; index as i">
-                    <th class="align-middle text-center col-md-1" scope="row">{{pessoa.id}}</th>
-                    <td class="align-middle text-center col-md-3">{{ pessoa.nome }}</td>
-                    <td class="align-middle text-center col-md-2">{{ pessoa.telefone }}</td>
-                    <td class="align-middle text-center col-md-2">{{ pessoa.cpf | cpf}}</td>
-                    <td class="status-cell align-middle text-center col-md-4">
+                    <th [ngClass]="{'col-md-1': !isModal, 'col-md-2': isModal}" class="align-middle text-center col-md-1" scope="row">{{pessoa.id}}</th>
+                    <td [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}" class="align-middle text-center col-md-3">{{ pessoa.nome }}</td>
+                    <td [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" class="align-middle text-center col-md-2">{{ pessoa.telefone }}</td>
+                    <td [ngClass]="{'col-md-2': !isModal, 'col-md-3': isModal}" class="align-middle text-center col-md-2">{{ pessoa.cpf | cpf}}</td>
+                    <td *ngIf="!isModal" class="status-cell align-middle text-center col-md-4">
                         <div *ngIf="pessoa.delecao" class="estado desativado"></div>
                         <div *ngIf="!pessoa.delecao" class="estado ativado"></div>
                         <div (click)="editar(pessoa.id)">

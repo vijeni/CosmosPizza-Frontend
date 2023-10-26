@@ -1,5 +1,13 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output, PipeTransform } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  PipeTransform,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +24,7 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 })
 export class PessoasListComponent implements OnInit {
   @Output() pessoaSelecionada = new EventEmitter<Pessoa>();
-  @Input() isModal: boolean = false
+  @Input() isModal: boolean = false;
   pessoas: Pessoa[] = [];
   pessoas$: Pessoa[] = [];
   pessoa = new Pessoa();
@@ -32,6 +40,9 @@ export class PessoasListComponent implements OnInit {
   constructor() {}
 
   async ngOnInit() {
+    if (this.isModal) {
+      this.switchEstado.setValue(true);
+    }
     let url = this.router.url;
     if (url.includes('funcionario')) {
       this.isFuncionario = true;
@@ -108,7 +119,15 @@ export class PessoasListComponent implements OnInit {
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
   }
-  selecionar(){
-    this.pessoaSelecionada.emit(this.pessoa);
+  selecionar(pessoa: Pessoa) {
+    if (this.isModal) {
+      this.pessoaSelecionada.emit(pessoa);
+    }else{
+      if(this.pessoa.tipoPessoa == TipoPessoa.CLIENTE){
+        this.router.navigate(['/web/cliente/', pessoa.id])
+      }else{
+        this.router.navigate(['/web/funcionario/', pessoa.id])
+      }
+    }
   }
 }
