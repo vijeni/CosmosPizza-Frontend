@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit, PipeTransform, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, PipeTransform, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, startWith } from 'rxjs';
@@ -13,6 +13,8 @@ import { SaborService } from 'src/app/services/sabor/sabor.service';
   styleUrls: ['./sabor-lista.component.scss'],
 })
 export class SaborListaComponent implements OnInit {
+  @Output() saborSelecionado = new EventEmitter<Sabor>();
+  @Input() isModal: boolean = false;
   sabores: Sabor[] = [];
   sabores$: Sabor[] = [];
   sabor = new Sabor();
@@ -78,5 +80,14 @@ export class SaborListaComponent implements OnInit {
           (sabor.delecao === null && this.switchEstado.value))
       );
     });
+  }
+
+  selecionar(sabor: Sabor){
+    if(this.isModal){
+
+      this.saborSelecionado.emit(sabor)
+    }else{
+      this.router.navigate(['/web/sabor/', sabor.id])
+    }
   }
 }

@@ -195,7 +195,7 @@
                                                 {{pizza.tamanho.maximoSabores}}</td>
                                             <td class="align-middle text-center col-md-1">{{pizza.tamanho.valor |
                                                 currency: "R$ "}}</td>
-                                            <td (click)="retirarProduto(i)"
+                                            <td (click)="retirarPizza(i)"
                                                 class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
                                                 <bi class="acoes" name="trash"></bi>
                                             </td>
@@ -207,7 +207,7 @@
                                     Nenhuma pizza adicionada
                                 </div>
                                 <div>
-                                    <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Selecionados:
+                                    <div *ngIf="pedido.pizzas.length != 0" class="mb-3 fw-bold">Selecionados:
                                         {{pedido.pizzas.length}}</div>
                                     <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Total:
                                         {{calculaTotalPizzas() | currency: "R$ "}}

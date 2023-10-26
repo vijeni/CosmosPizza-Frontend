@@ -189,4 +189,7 @@ export class PedidosDetailsComponent implements OnInit {
   retirarProduto(index: number) {
     this.pedido.produtos.splice(index, 1);
   }
+  retirarPizza(index: number) {
+    this.pedido.pizzas.splice(index, 1);
+  }
 }

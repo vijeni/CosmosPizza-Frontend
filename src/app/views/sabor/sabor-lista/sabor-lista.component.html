@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/sabor/', sabor.id]" class="row"
+                <tr (click)="selecionar(sabor)" class="row"
                     *ngFor="let sabor of sabores$ ; index as i">
                     <th class="align-middle text-center col-md-3" scope="row">{{sabor.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ sabor.nome }}</td>

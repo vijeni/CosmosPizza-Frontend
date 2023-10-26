@@ -1,8 +1,11 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold">Novo Sabor</h5>
-
+            <h5 *ngIf="!id" class="m-0 fw-bold">Novo Sabor</h5>
+            <h5 *ngIf="id && modoEditar" class="m-0 fw-bold">Editar Sabor</h5>
+            <h5 *ngIf="sabor.delecao === null && modoEditar === false" class="m-0 fw-bold">Desativar Sabor</h5>
+            <h5 *ngIf="sabor.delecao != null && modoEditar === false" class="m-0 fw-bold">Ativar Sabor</h5>
+            <h5 *ngIf="id && modoEditar == null" class="m-0 fw-bold">Sabor</h5>
         </div>
         <hr>
         <div *ngIf="!modoEditar" [ngClass]="

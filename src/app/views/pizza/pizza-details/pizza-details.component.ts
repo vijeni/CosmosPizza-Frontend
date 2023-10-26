@@ -36,17 +36,14 @@ export class PizzaDetailsComponent implements OnInit{
   }
   // modal
   abrirModal(template: any) {
-    this.modalService.open(template, { size: 'lg' });
-  }
-  abrirModalTamanho(template: any) {
-   this.modalRef = this.modalService.open(template, { size: 'lg' });
+    this.modalRef = this.modalService.open(template, { size: 'lg' });
   }
   definirTamanho(tamanhoSelecionado: Tamanho) {
     this.modalRef.dismiss();
     this.pizza.tamanho = tamanhoSelecionado;
   }
   definirSabor(saborSelecionado: Sabor) {
-    this.modalService.dismissAll()
+    this.modalRef.dismiss()
     this.pizza.sabores.push(saborSelecionado)
   }
 

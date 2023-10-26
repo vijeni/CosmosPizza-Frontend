@@ -27,7 +27,7 @@
                             <p *ngIf="pizza.tamanho" class="m-0 fw-bold pt-2">{{pizza.tamanho.nome}} -
                                 {{pizza.tamanho.maximoSabores}} sabores</p>
                             <button type="button" style="height: fit-content;"
-                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModalTamanho(tamanhos)">Selecionar
+                                class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(tamanhos)">Selecionar
                                 <bi class="search-btn" name="search">
                                 </bi></button>
                         </div>
@@ -86,25 +86,6 @@
                         </div>
                     </div>
                     <hr class="mx-n3">
-                    <!-- <div class="row align-items-center py-3">
-                                <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Pagamento<span *ngIf="!disabled" style="color:red">*</span>:
-                                    </h6>
-                                </div>
-                                <div class="col-md-3 pe-5">
-                                    <mat-form-field #formaPagamento name="formaPagamento" *ngIf="!disabled" form-control
-                                        form-control-md>
-                                        <mat-label>Forma de Pagamento</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
-                                                [value]="formaPagamento">
-                                                {{formaPagamento}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.formaPagamento}}</p>
-                                </div>
-                            </div> -->
                     <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
                         <button type="submit" class="color-white btn btn-warning"
                             (click)="confirmar()">Confirmar</button>
@@ -128,11 +109,11 @@
 </ng-template>
 <ng-template #sabores let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <h4 class="modal-title">Selecionar Sabor</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-sabor-lista></app-sabor-lista>
+        <app-sabor-lista  [isModal]="true" (saborSelecionado)="definirSabor($event)"></app-sabor-lista>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
