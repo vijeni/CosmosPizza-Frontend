@@ -35,7 +35,7 @@
                                         <td class="align-middle text-center">
                                           <mat-form-field hintLabel="No máx 20 dígitos." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
-                                            <input matInput #input maxlength="20" name="inputNome" [(ngModel)]="sabor.nome" placeholder="Ex: Bacon" class="w-100">
+                                            <input matInput #input maxlength="20" name="input" [(ngModel)]="sabor.nome" placeholder="Ex: Bacon" class="w-100">
                                             <mat-hint align="end">{{input.value.length}}/20</mat-hint>
                                           </mat-form-field>
                                         </td>
@@ -73,7 +73,8 @@
                             <div class="col-md-3 ps-5">
                                 <h6 class="mb-0 text-center"><span style="color:red">*</span>Ingrediente:</h6>
                             </div>
-                            <div class="col-md-9 pe-5">
+                             <!--
+                            <div class="col-md-9 pe-5"> 
                                 <td class="align-middle text-center">
                                     <mat-form-field>
                                         <mat-label>Ingredientes</mat-label>
@@ -90,7 +91,7 @@
                                   </form>      
                             </div>
                         </div>
-
+                            -->
                             <hr class="mx-n3">
 
                             <div class="row align-items-center py-3">

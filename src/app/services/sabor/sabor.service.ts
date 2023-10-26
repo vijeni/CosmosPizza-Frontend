@@ -24,6 +24,6 @@ export class SaborService {
       return this.http.put<Sabor>(`${this.API}/editar/${id}`, pedido);
     }
     delete(id: number): Observable<any> {
-      return this.http.delete<any>(`${this.API}/delete/${id}`);
+      return this.http.delete<any>(`${this.API}/deletar/${id}`);
     }
 }
