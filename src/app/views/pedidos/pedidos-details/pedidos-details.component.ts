@@ -5,6 +5,7 @@ import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { Pedido } from 'src/app/models/pedido/pedido';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
+import Produto from 'src/app/models/produto/produto';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
 @Component({
@@ -40,6 +41,8 @@ export class PedidosDetailsComponent implements OnInit {
       } else {
         this.disabled = true;
       }
+    }else{
+      this.pedido.produtos = []
     }
   }
   // services
@@ -122,17 +125,20 @@ export class PedidosDetailsComponent implements OnInit {
     this.abrirModal(template)
   }
   adicionarProduto(template: any){
-    console.log(this.pedido.cliente)
     this.abrirModal(template)
   }
   definirPessoa(pessoaSelecionada: Pessoa) {
     this.modalService.dismissAll()
-    console.log(pessoaSelecionada)
     if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {
       this.pedido.cliente = pessoaSelecionada;
     } else {
       this.pedido.funcionario = pessoaSelecionada;
     }
+  }
+  definirProduto(produtoSelecionado: Produto) {
+    this.modalService.dismissAll()
+
+    this.pedido.produtos.push(produtoSelecionado);
   }
 
   //utils

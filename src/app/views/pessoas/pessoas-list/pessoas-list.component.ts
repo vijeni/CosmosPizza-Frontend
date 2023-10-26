@@ -51,9 +51,7 @@ export class PessoasListComponent implements OnInit {
   constructor() {}
 
   async ngOnInit() {
-    if (this.isModal) {
-      this.switchEstado.setValue(true);
-    }
+    this.switchEstado.setValue(true);
     let url = this.router.url;
     if (url.includes('funcionario') || this.isClienteModal == false) {
       this.isFuncionario = true;

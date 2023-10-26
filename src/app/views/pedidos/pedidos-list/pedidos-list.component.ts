@@ -1,7 +1,10 @@
 import { DecimalPipe } from '@angular/common';
 import {
   Component,
+  EventEmitter,
+  Input,
   OnInit,
+  Output,
   PipeTransform,
   inject,
 } from '@angular/core';
@@ -10,6 +13,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map, startWith } from 'rxjs';
 import { Pedido } from 'src/app/models/pedido/pedido';
+import Produto from 'src/app/models/produto/produto';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 
@@ -20,16 +24,23 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
   providers: [DecimalPipe]
 })
 export class PedidosListComponent implements OnInit {
+  // pedidos
   pedidos: Pedido[] = [];
   pedidos$: Pedido[] = [];
-  isErro!: boolean;
-  mensagem: string = '';
+
+  //services e pipes
   modalService = inject(NgbModal);
   pedidoService = inject(PedidoService);
-  router = inject(Router);
-  filter = new FormControl('');
-  decimalPipe = inject(DecimalPipe);
   switchEstado = new FormControl(false);
+  decimalPipe = inject(DecimalPipe);
+  router = inject(Router);
+
+  // formcontrol e filtros
+  filter = new FormControl('');
+
+  //controle
+  isErro!: boolean;
+  mensagem: string = '';
 
 
   constructor() {}
@@ -78,6 +89,5 @@ export class PedidosListComponent implements OnInit {
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
-
   }
 }

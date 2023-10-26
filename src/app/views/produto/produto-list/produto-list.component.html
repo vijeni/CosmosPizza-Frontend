@@ -1,6 +1,6 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
-        <div class="d-flex justify-content-between header">
+        <div *ngIf="!isModal" class="d-flex justify-content-between header">
             <h5 class="m-0 fw-bold">Produtos</h5>
             <button type="button" class="fw-bold btn btn-warning color-white" id="novo-produto"
                 [routerLink]="['/web/produto/novo']">Novo Produto</button>
@@ -15,7 +15,8 @@
                         <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
                     </div>
                 </div>
-                <mat-slide-toggle class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                <mat-slide-toggle [ngClass]="
+                {'input-hidden': isModal}" class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
                     (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
             </div>
         </form>
@@ -39,7 +40,7 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/produto/', produto.id]" class="row"
+                <tr (click)="selecionar(produto)" class="row"
                     *ngFor="let produto of produtos$ ; index as i">
                     <th class="align-middle text-center col-md-1" scope="row">{{produto.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ produto.descricao }}</td>

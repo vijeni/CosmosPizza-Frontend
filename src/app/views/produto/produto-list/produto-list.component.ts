@@ -3,7 +3,10 @@ import {
   Component,
   Directive,
   ElementRef,
+  EventEmitter,
+  Input,
   OnInit,
+  Output,
   PipeTransform,
   ViewChild,
   inject,
@@ -21,8 +24,10 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
   styleUrls: ['./produto-list.component.scss'],
   providers: [DecimalPipe],
 })
-export class ProdutoListComponent implements OnInit{
-  @ViewChild('tabela', { static: false }) tabelaBody!: ElementRef;
+export class ProdutoListComponent implements OnInit {
+  // comm de modal
+  @Output() produtoSelecionado = new EventEmitter<Produto>();
+  @Input() isModal: boolean = false;
   produtos: Produto[] = [];
   produtos$: Produto[] = [];
   isErro!: boolean;
@@ -33,33 +38,30 @@ export class ProdutoListComponent implements OnInit{
   filter = new FormControl('');
   decimalPipe = inject(DecimalPipe);
   switchEstado = new FormControl(false);
-  page = 1;
-	pageSize = 2;
-	collectionSize!: number;
+
 
   constructor() {}
   async ngOnInit() {
+    this.switchEstado.setValue(true)
     await this.getAll();
     setTimeout(() => {
-      this.filter.valueChanges.pipe(
-        startWith(''),
-        map((text) => this.search(text as string, this.decimalPipe))
-      ).subscribe({next: (produtosFiltrados) => {
-        this.produtos$ = produtosFiltrados
-      }});
+      this.filter.valueChanges
+        .pipe(
+          startWith(''),
+          map((text) => this.search(text as string, this.decimalPipe))
+        )
+        .subscribe({
+          next: (produtosFiltrados) => {
+            this.produtos$ = produtosFiltrados;
+          },
+        });
     }, 1000);
   }
-  refreshProdutos() {
-		this.produtos = this.produtos.slice(
-			(this.page -1) * this.pageSize,
-			(this.page -1) * this.pageSize + this.pageSize,
-		);
-	}
+  
   async getAll() {
     this.produtoService.getAll().subscribe({
       next: (produtos) => {
         this.produtos = produtos;
-        this.collectionSize = this.produtos.length
       },
       error: (erro) => {
         this.isErro = true;
@@ -91,15 +93,23 @@ export class ProdutoListComponent implements OnInit{
       const term = text.toLowerCase();
       return (
         (produto.descricao.toLowerCase().includes(term) ||
-        pipe.transform(produto.quantidadeEstoque).includes(term) ||
-        pipe.transform(produto.valorUnitario).includes(term) ||
-        pipe.transform(produto.id).includes(term)) &&
-        ((!this.switchEstado.value) || (produto.delecao === null && this.switchEstado.value))
+          pipe.transform(produto.quantidadeEstoque).includes(term) ||
+          pipe.transform(produto.valorUnitario).includes(term) ||
+          pipe.transform(produto.id).includes(term)) &&
+        (!this.switchEstado.value ||
+          (produto.delecao === null && this.switchEstado.value))
       );
     });
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
-
+  }
+  selecionar(produto: Produto) {
+    if (this.isModal) {
+      console.log('aqui')
+      this.produtoSelecionado.emit(produto);
+    }else{
+      this.router.navigate(['/web/produto', produto.id])
+    }
   }
 }

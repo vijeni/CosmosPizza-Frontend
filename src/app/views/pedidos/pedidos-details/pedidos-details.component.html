@@ -41,12 +41,14 @@
                                     <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
-                                    <input type="text" [(ngModel)]="pedido.cliente"
-                                        name="cliente" class="text-center form-control form-control-md input-hidden" required
+                                    <input type="text" [(ngModel)]="pedido.cliente" name="cliente"
+                                        class="text-center form-control form-control-md input-hidden" required
                                         disabled />
                                     <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
-                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi class="search-btn" name="search">
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi
+                                            class="search-btn" name="search">
                                         </bi></button>
 
                                 </div>
@@ -56,12 +58,15 @@
                                     <h6 class="mb-0">Funcionário<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
-                                    <input type="text" [(ngModel)]="pedido.funcionario"
-                                        name="funcionario" class="text-center form-control form-control-md input-hidden" required
+                                    <input type="text" [(ngModel)]="pedido.funcionario" name="funcionario"
+                                        class="text-center form-control form-control-md input-hidden" required
                                         disabled />
-                                    <p *ngIf="pedido.funcionario" class="m-0 fw-bold pt-2">{{pedido.funcionario.nome}}</p>
-                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="selecionarClienteOrFuncionario(pessoas, false)">Selecionar<bi class="search-btn" name="search">
+                                    <p *ngIf="pedido.funcionario" class="m-0 fw-bold pt-2">{{pedido.funcionario.nome}}
+                                    </p>
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="selecionarClienteOrFuncionario(pessoas, false)">Selecionar<bi
+                                            class="search-btn" name="search">
                                         </bi></button>
 
                                 </div>
@@ -70,8 +75,7 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
-                                    <h6 class="mb-0">Abertura<span *ngIf="!disabled"
-                                            style="color:red">*</span>:
+                                    <h6 class="mb-0">Abertura<span *ngIf="!disabled" style="color:red">*</span>:
                                     </h6>
                                 </div>
                                 <div class="col-md-5 pe-5">
@@ -97,28 +101,36 @@
                                     <h5 class="mb-0 fw-bold">Produtos</h5>
                                 </div>
                                 <div class="col-md-4 pe-5">
-                                    <button type="button" style="height: fit-content;" class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="adicionarProduto(produtos)">Adicionar<bi class="search-btn" name="search">
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="adicionarProduto(produtos)">Adicionar<bi class="search-btn"
+                                            name="search">
                                         </bi></button>
                                 </div>
                             </div>
                             <div>
                                 <table class="table table-stripped tabela-details">
                                     <thead>
-                                        <th scope="col"class="col-md-1 text-center">Código</th>
-                                        <th scope="col"class="col-md-1 text-center">Descrição</th>
-                                        <th scope="col"class="col-md-1 text-center">Valor</th>
-                                        <th scope="col"class="col-md-1 text-center">Ação</th>
+                                        <th scope="col" class="col-md-1 text-center">Código</th>
+                                        <th scope="col" class="col-md-1 text-center">Descrição</th>
+                                        <th scope="col" class="col-md-1 text-center">Valor</th>
+                                        <th scope="col" class="col-md-1 text-center">Ação</th>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let produto of pedido.produtos">
-                                            <th scope="row" class="align-middle text-center col-md-1">{{produto.id}}</th>
+                                            <th scope="row" class="align-middle text-center col-md-1">{{produto.id}}
+                                            </th>
                                             <td class="align-middle text-center col-md-1">{{produto.descricao}}</td>
-                                            <td class="align-middle text-center col-md-1">{{produto.valorUnitario | currency: "R$ "}}</td>
+                                            <td class="align-middle text-center col-md-1">{{produto.valorUnitario |
+                                                currency: "R$ "}}</td>
+                                            <td class="align-middle text-center col-md-1">
+                                                <bi class="acoes" name="trash"></bi>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div *ngIf="!pedido.produtos || pedido.produtos.length == 0" class="text-align-center alert alert-secondary" role="alert">
+                                <div *ngIf="!pedido.produtos || pedido.produtos.length == 0"
+                                    class="text-align-center alert alert-secondary" role="alert">
                                     Nenhum produto adicionado
                                 </div>
                             </div>
@@ -231,7 +243,8 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal" (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
+        <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal"
+            (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
@@ -243,7 +256,7 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <!-- <app-produtos-list [isModal]="true" [isClienteModal]="isClienteModal" (pessoaSelecionada)="definirPessoa($event)"></app-produtos-list> -->
+        <app-produto-list [isModal]="true" (produtoSelecionado)="definirProduto($event)"></app-produto-list>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
