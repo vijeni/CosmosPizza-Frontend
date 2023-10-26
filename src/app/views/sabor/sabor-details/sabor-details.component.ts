@@ -1,8 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
 import { Sabor } from 'src/app/models/sabor/sabor';
 import { SaborService } from 'src/app/services/sabor/sabor.service';
-
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgFor} from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.service';
 @Component({
   selector: 'app-sabor-details',
   templateUrl: './sabor-details.component.html',
@@ -11,6 +16,11 @@ import { SaborService } from 'src/app/services/sabor/sabor.service';
 export class SaborDetailsComponent implements OnInit {
 
   sabor= new Sabor(); 
+  toppings = new FormControl('');
+  ingredientesBanco : Ingrediente[] = [];
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
+
 
 
 
@@ -18,10 +28,12 @@ export class SaborDetailsComponent implements OnInit {
   isErro! : boolean;
   mensagem : string = "";
   service = inject(SaborService);
+  serviceIngrediente = inject(IngredientesService);
   injectRouter = inject(Router)
   modoEditar! : boolean;
   id! : string;
   disabled! : boolean;
+  sabores : Sabor[] = [];
   
   
   
@@ -31,8 +43,31 @@ export class SaborDetailsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    
+      this.serviceIngrediente.getAll().subscribe({
+        next:async (ingredientes) => {
+          this.ingredientesBanco = ingredientes;
+        }
+      })
+
+      let url = this.injectRouter.url;
+
+
+      if (!url.includes('novo')) {
+        this.id = this.route.snapshot.paramMap.get('id') as string; //pegando a rota
+        if (url.includes('editar')) {
+          this.modoEditar = true;
+        } else if (url.includes('toggle')) {
+          this.modoEditar = false;
+          this.disabled = true;
+        } else {
+          this.disabled = true;
+        }
+      }
+  
+     
     }
+
+    
   
     cadastrar(){
       this.service.post(this.sabor).subscribe({
@@ -54,11 +89,11 @@ export class SaborDetailsComponent implements OnInit {
     
     editar(id: number){
       this.service.put(id,this.sabor).subscribe({
-        next: async (pessoas) => {
-          this.sabor = this.sabor;
+        next: async (sabor) => {
+          this.sabor = sabor;
           this.mensagem = "Sabor editado com sucesso!" 
           await this.sleep(1000);
-          this.injectRouter.navigate(['/web/sabor']);
+          this.injectRouter.navigate(['/web/sabores']);
         },
         error: (erro) => {
           console.log(erro.error);
@@ -107,14 +142,10 @@ export class SaborDetailsComponent implements OnInit {
      sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
     
      async voltar() {
-      this.injectRouter.navigate(['/web/pessoas']);
-       this.moveTo();
-    }
-    
-    async voltarFuncionario(){
       this.injectRouter.navigate(['/web/sabores']);
        this.moveTo();
     }
+    
   
     
   }

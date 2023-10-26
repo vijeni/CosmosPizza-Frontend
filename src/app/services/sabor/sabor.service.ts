@@ -6,7 +6,7 @@ import { Sabor } from 'src/app/models/sabor/sabor';
   providedIn: 'root',
 })
 export class SaborService {
-    API: string = 'http://localhost:8080/api/produto';
+    API: string = 'http://localhost:8080/api/sabor';
     http = inject(HttpClient);
   
     constructor() {}
@@ -24,6 +24,6 @@ export class SaborService {
       return this.http.put<Sabor>(`${this.API}/editar/${id}`, pedido);
     }
     delete(id: number): Observable<any> {
-      return this.http.get<any>(`${this.API}/delete/${id}`);
+      return this.http.delete<any>(`${this.API}/delete/${id}`);
     }
 }

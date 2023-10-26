@@ -42,6 +42,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { Pagamento } from './models/enums/pagamento/pagamento';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,7 @@ import { Pagamento } from './models/enums/pagamento/pagamento';
     PedidosListComponent,
     PedidosDetailsComponent,
     PessoasDetailsComponent,
-    CpfPipe,
+    CpfPipe
   ],
   imports: [
     MatCheckboxModule,
@@ -72,7 +73,6 @@ import { Pagamento } from './models/enums/pagamento/pagamento';
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule,
     HttpClientModule,
     SidebarComponent,
     BrowserAnimationsModule,
@@ -82,7 +82,6 @@ import { Pagamento } from './models/enums/pagamento/pagamento';
     MatSelectModule,
     RouterLink,
     DecimalPipe,
-    NgFor,
     AsyncPipe,
     ReactiveFormsModule,
     NgbTypeaheadModule,
@@ -92,6 +91,12 @@ import { Pagamento } from './models/enums/pagamento/pagamento';
     MatSlideToggleModule,
     NgbTypeaheadModule,
     NgbPaginationModule,
+    FormsModule,
+    MatFormFieldModule, 
+    MatSelectModule, 
+    ReactiveFormsModule, 
+    NgFor
+
   ],
   providers: [],
   bootstrap: [AppComponent],

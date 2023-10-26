@@ -1,1 +1,133 @@
-<p>sabor-details works!</p>
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold">Novo Sabor</h5>
+
+        </div>
+        <hr>
+        <div *ngIf="!modoEditar" [ngClass]="
+        {
+            'alert alert-success': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " class="alert alert-success" role="alert">
+            {{mensagem}}
+        </div>
+        <div *ngIf="modoEditar && id" [ngClass]="
+        {
+            'alert alert-warning': !isErro && mensagem,
+            'alert alert-danger': isErro && mensagem
+        }
+        " class="alert alert-warning" role="alert">
+            {{mensagem}}
+        </div>
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-9">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0"><span style="color:red">*</span>Nome:</h6>
+                                </div>
+                                <div class="col-md-9 pe-5">
+                                    <form #form="ngForm">
+                                        <td class="align-middle text-center">
+                                          <mat-form-field hintLabel="No máx 20 dígitos." *ngIf="!disabled">
+                                            <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
+                                            <input matInput #input maxlength="20" name="inputNome" [(ngModel)]="sabor.nome" placeholder="Ex: Bacon" class="w-100">
+                                            <mat-hint align="end">{{input.value.length}}/20</mat-hint>
+                                          </mat-form-field>
+                                        </td>
+                                      </form>
+                                      <form #form="ngForm" *ngIf="disabled">
+                                        <td class="align-middle text-center">
+                                            <p *ngIf="disabled" class="m-0 fw-bold">{{sabor.nome}}</p>
+                                        </td>
+                                      </form>
+                                      
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-3 ps-5">
+                                    <h6 class="mb-0 text-center"><span style="color:red">*</span>Descrição:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <td class="align-middle text-center">
+                                        <mat-form-field hintLabel="Com DDD. Ex: (45)" *ngIf="!disabled">
+                                          <mat-label><span style="color:red">*</span>Digite a descrição:</mat-label>
+                                          <input matInput #inputDescricao maxlength="50" [(ngModel)]="sabor.descricao" placeholder="Uma vez um porco" class="w-100">
+                                          <mat-hint align="end">{{inputDescricao.value.length}}/50</mat-hint>
+                                        </mat-form-field>
+                                      </td>
+                                      <form #form="ngForm" *ngIf="disabled">
+                                        <td class="align-middle text-center">
+                                            <p *ngIf="disabled" class="m-0 fw-bold">{{sabor.descricao}}</p>
+                                        </td>
+                                      </form>      
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                            <div class="col-md-3 ps-5">
+                                <h6 class="mb-0 text-center"><span style="color:red">*</span>Ingrediente:</h6>
+                            </div>
+                            <div class="col-md-9 pe-5">
+                                <td class="align-middle text-center">
+                                    <mat-form-field>
+                                        <mat-label>Ingredientes</mat-label>
+                                        <mat-select [formControl]="toppings"  name="nome" multiple>
+                                            <input [(ngModel)]="sabor.ingredientes" />
+                                            <mat-option *ngFor="let ingrediente of ingredientesBanco" [value]="ingrediente">{{ingrediente.nome}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                  </td>
+                                  <form #form="ngForm" *ngIf="disabled">
+                                    <td class="align-middle text-center">
+                                        <p *ngIf="disabled" class="m-0 fw-bold">{{sabor.descricao}}</p>
+                                    </td>
+                                  </form>      
+                            </div>
+                        </div>
+
+                            <hr class="mx-n3">
+
+                            <div class="row align-items-center py-3">
+                            <td>
+                                <form>
+                                    <div>
+                                                <div class="flex-row d-flex col-md-3">
+                                                    <span *ngIf="sabor.delecao" class="badge bg-danger">Desativado</span>
+                                                    <span *ngIf="!sabor.delecao" class="badge bg-success">Ativado</span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="sabor.delecao && modoEditar == null && id"
+                                                class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Desativado em:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{sabor.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
+                                                </div>
+                                            </div>
+                                          </form>
+                                      </td>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(sabor.id)" (click)="moveTo()" >Desativar</button>
+                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
+                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(sabor.id)" (click)="moveTo()" >Editar</button>
+                                <button type="submit" class="btn btn-secondary" (click)="voltar()">Cancelar</button>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
