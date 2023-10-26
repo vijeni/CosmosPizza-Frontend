@@ -25,6 +25,7 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 export class PessoasListComponent implements OnInit {
   @Output() pessoaSelecionada = new EventEmitter<Pessoa>();
   @Input() isModal: boolean = false;
+  @Input() isCliente: boolean = true;
   pessoas: Pessoa[] = [];
   pessoas$: Pessoa[] = [];
   pessoa = new Pessoa();
@@ -44,10 +45,10 @@ export class PessoasListComponent implements OnInit {
       this.switchEstado.setValue(true);
     }
     let url = this.router.url;
-    if (url.includes('funcionario')) {
+    if (url.includes('funcionario') || this.isCliente == false) {
       this.isFuncionario = true;
       await this.getAllFuncionarios();
-    } else {
+    } else if(url.includes('cliente') || this.isCliente == true){
       this.isFuncionario = false;
       await this.getAllClientes();
     }

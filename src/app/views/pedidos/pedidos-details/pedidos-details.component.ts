@@ -24,6 +24,7 @@ export class PedidosDetailsComponent implements OnInit {
   router = inject(Router);
   service = inject(PedidoService);
   modalService = inject(NgbModal);
+  isCliente!: boolean
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -98,7 +99,11 @@ export class PedidosDetailsComponent implements OnInit {
     this.pedido.cliente = new Pessoa();
     this.modalService.open(template, { size: 'lg' });
   }
-  selecionarPessoa(pessoaSelecionada: Pessoa) {
+  selecionarClienteOrFuncionario(template: any, isCliente: boolean){
+    this.isCliente = isCliente
+    this.abrirModal(template)
+  }
+  definirPessoa(pessoaSelecionada: Pessoa) {
     this.modalService.dismissAll()
     console.log(pessoaSelecionada.tipoPessoa)
     if (pessoaSelecionada.tipoPessoa == "CLIENTE" as unknown as TipoPessoa) {

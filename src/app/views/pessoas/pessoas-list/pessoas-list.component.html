@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr (click)="selecionar(pessoa)" class="row"
+                <tr [ngClass]="{'modal-table-tr': isModal}" (click)="selecionar(pessoa)" class="row"
                     *ngFor="let pessoa of pessoas$ ; index as i">
                     <th [ngClass]="{'col-md-1': !isModal, 'col-md-2': isModal}" class="align-middle text-center col-md-1" scope="row">{{pessoa.id}}</th>
                     <td [ngClass]="{'col-md-3': !isModal, 'col-md-4': isModal}" class="align-middle text-center col-md-3">{{ pessoa.nome }}</td>
