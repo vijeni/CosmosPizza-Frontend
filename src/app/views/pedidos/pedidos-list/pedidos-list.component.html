@@ -51,7 +51,7 @@
                         <span *ngIf="pedido.dataConclusao == null && pedido.delecao != null" class="badge bg-danger text-dark">CANCELADO</span>
                     </td>
                     <td *ngIf="pedido.entrega" class="d-flex justify-content-center align-middle text-center col-md-1" scope="row"> <bi class="acoes" name="check-circle-fill"></bi></td>
-                    <td *ngIf="!pedido.entrega" class="d-flex justify-content-center align-middle text-center col-md-1" scope="row"><bi class="acoes" name="check-circle-fill"></bi></td>
+                    <td *ngIf="!pedido.entrega" class="d-flex justify-content-center align-middle text-center col-md-1" scope="row"><bi class="acoes" name="slash-circle-fill"></bi></td>
                     <td class="align-middle text-center col-md-2" scope="row">{{ pedido.valorTotal | currency: 'R$ ' }}</td>
                     <td class="status-cell align-middle text-center col-md-2">
                         <div *ngIf="pedido.delecao && pedido.dataConclusao == null" class="estado desativado"></div>
