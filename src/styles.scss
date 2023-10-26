@@ -41,16 +41,16 @@ body {
 hr{
     color: #bda8a8;
 }
-thead tr th, .resultados{
+table.tabela-principal thead tr th, .resultados{
     color: #ACACAC;
 }
 
-tr{
+table.tabela-principal tr{
     border-style: hidden;
     border-width: 0;
 }
 
-tbody tr {
+table.tabela-principal tbody tr {
     transition: 1000ms;
     cursor: pointer;
     align-items: center;
@@ -59,7 +59,7 @@ tbody tr {
     border-radius: .5rem;
     margin-block: .5rem
 }
-tbody tr:hover{
+.tabela-principal tbody tr:hover{
     background-color: rgba(250, 218, 159, 0.445);
     transition: 500ms;
     height: 5rem;
