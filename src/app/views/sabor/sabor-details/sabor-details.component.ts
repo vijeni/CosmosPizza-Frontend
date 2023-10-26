@@ -5,7 +5,7 @@ import { Sabor } from 'src/app/models/sabor/sabor';
 import { SaborService } from 'src/app/services/sabor/sabor.service';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgFor} from '@angular/common';
-import {MatSelectModule} from '@angular/material/select';
+import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.service';
 @Component({
@@ -14,6 +14,11 @@ import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.
   styleUrls: ['./sabor-details.component.scss']
 })
 export class SaborDetailsComponent implements OnInit {
+
+
+
+
+
 
   sabor= new Sabor(); 
   toppings = new FormControl('');
@@ -76,7 +81,8 @@ export class SaborDetailsComponent implements OnInit {
         next: async (sabor) => {
           this.sabor = sabor;
           this.isErro = false;
-          this.mensagem = "Sabor cadastrado com sucesso!" 
+          this.mensagem = "Sabor cadastrado com sucesso!"
+          console.log(this.sabor)
           await this.sleep(1000);
           this.injectRouter.navigate(['/web/sabores']);
           
@@ -148,6 +154,11 @@ export class SaborDetailsComponent implements OnInit {
        this.moveTo();
     }
     
+    
+  onToppingsSelectionChange(event: any) {
+    this.sabor.ingredientes = event.value;
+  }
+
   
     
   }
