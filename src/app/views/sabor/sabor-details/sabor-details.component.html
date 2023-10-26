@@ -35,7 +35,7 @@
                                         <td class="align-middle text-center">
                                           <mat-form-field hintLabel="No máx 20 dígitos." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
-                                            <input matInput #input maxlength="20" name="input" [(ngModel)]="sabor.nome" placeholder="Ex: Bacon" class="w-100">
+                                            <input matInput #input maxlength="20" name="inputNome" [(ngModel)]="sabor.nome" placeholder="Ex: Bacon" class="w-100">
                                             <mat-hint align="end">{{input.value.length}}/20</mat-hint>
                                           </mat-form-field>
                                         </td>
@@ -73,25 +73,24 @@
                             <div class="col-md-3 ps-5">
                                 <h6 class="mb-0 text-center"><span style="color:red">*</span>Ingrediente:</h6>
                             </div>
-                             <!--
                             <div class="col-md-9 pe-5"> 
-                                <td class="align-middle text-center">
+                                <td class="align-middle text-center" *ngIf="!disabled">
                                     <mat-form-field>
-                                        <mat-label>Ingredientes</mat-label>
-                                        <mat-select [formControl]="toppings"  name="nome" multiple>
-                                            <input [(ngModel)]="sabor.ingredientes" />
-                                            <mat-option *ngFor="let ingrediente of ingredientesBanco" [value]="ingrediente">{{ingrediente.nome}}</mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
+                                      <mat-label>Ingredientes</mat-label>
+                                      <mat-select [formControl]="toppings" name="nome"  (cdkAutofill)="onToppingsSelectionChange($event)">
+                                        <mat-option *ngFor="let ingrediente of ingredientesBanco" [value]="ingrediente">{{ingrediente.nome}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
                                   </td>
-                                  <form #form="ngForm" *ngIf="disabled">
-                                    <td class="align-middle text-center">
-                                        <p *ngIf="disabled" class="m-0 fw-bold">{{sabor.descricao}}</p>
+                                  
+                                  
+                                    <td class="align-middle text-center" *ngIf="disabled" >
+                                        <p *ngFor="let ingrediente of ingredientesBanco" class="m-0 fw-bold">{{ingrediente.nome}}</p>
                                     </td>
-                                  </form>      
+                                       
                             </div>
                         </div>
-                            -->
+                            
                             <hr class="mx-n3">
 
                             <div class="row align-items-center py-3">
