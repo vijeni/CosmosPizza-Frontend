@@ -1,15 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Component, OnInit, PipeTransform, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map, startWith } from 'rxjs';
 import { Ingrediente } from 'src/app/models/ingrediente/ingrediente';
 import { IngredientesService } from 'src/app/services/ingredientes/ingredientes.service';
 
 @Component({
   selector: 'app-ingrediente-list',
   templateUrl: './ingrediente-list.component.html',
-  styleUrls: ['./ingrediente-list.component.scss']
+  styleUrls: ['./ingrediente-list.component.scss'],
+  providers: [DecimalPipe],
 })
-export class IngredienteListComponent {
+export class IngredienteListComponent implements OnInit {
 
     ingredientes: Ingrediente[] = [];
     ingrediente$: Ingrediente[] = [];
@@ -21,13 +24,13 @@ export class IngredienteListComponent {
     mensagem: string = '';
     filter = new FormControl('');
     switchEstado = new FormControl(false);
-    constructor(
-      
-    ) {this.getAll();}
+    decimalPipe = inject(DecimalPipe);
+    constructor() {this.getAll()}
   
     async ngOnInit() {
+      
       let url = this.router.url;
-      /*
+      
       setTimeout(() => {
         this.filter.valueChanges
           .pipe(
@@ -35,28 +38,27 @@ export class IngredienteListComponent {
             map((text) => this.search(text as string, this.decimalPipe))
           )
           .subscribe({
-            next: (pessoasFiltradas) => {
-              this.pessoas$ = pessoasFiltradas;
+            next: (ingredientesFiltrados) => {
+              this.ingrediente$ = ingredientesFiltrados;
             },
           });
       }, 1000);
-      */
+      
     }
-    /*
-    search(text: string, pipe: PipeTransform): Pessoa[] {
-      return this.pessoas.filter((pessoa) => {
+    
+    search(text: string, pipe: PipeTransform): Ingrediente[] {
+      return this.ingredientes.filter((ingrediente) => {
         const term = text.toLowerCase();
         return (
-          (pessoa.nome.toLowerCase().includes(term) ||
-            pessoa.telefone.toLowerCase().includes(term) ||
-            pessoa.cpf.toLowerCase().includes(term) ||
-            pipe.transform(pessoa.id).includes(term)) &&
+          (ingrediente.nome.toLowerCase().includes(term) ||
+            ingrediente.quantidade.includes(term) ||
+            pipe.transform(ingrediente.id).includes(term)) &&
           (!this.switchEstado.value ||
-            (pessoa.delecao === null && this.switchEstado.value))
+            (ingrediente.delecao === null && this.switchEstado.value))
         );
       });
     }
-  */
+  
     async getAll() {
       this.service.getAll().subscribe({
         next: (ingredientes) => {

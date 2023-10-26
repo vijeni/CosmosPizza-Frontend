@@ -8,6 +8,7 @@
 
         </div>
         <hr>
+        
         <form>
             <div class="mb-3 row d-flex flex-row justify-content-between">
                 <div class="w-50 d-flex flex-row gap-3">
@@ -21,7 +22,8 @@
                     (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
             </div>
         </form>
-        <div class="mb-3 resultados">Resultados: {{ingrediente$.length}}</div>
+
+            <div class="mb-3 resultados">Resultados: {{ingrediente$.length}}</div>
         <table class="d-grid">
             <thead class="d-grid container">
                 <tr class="row">
@@ -52,7 +54,7 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="ingrediente$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+        <div *ngIf="ingredientes.length || ingrediente$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
             Nenhum ingrediente encontrado
         </div>
     </div>
