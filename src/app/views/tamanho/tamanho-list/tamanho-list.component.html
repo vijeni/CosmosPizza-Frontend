@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/tamanhos/', tamanho.id]" class="row"
+                <tr [routerLink]="['/web/tamanho/', tamanho.id]" class="row"
                     *ngFor="let tamanho of tamanho$ ; index as i">
                     <th class="align-middle text-center col-md-2" scope="row">{{tamanho.id}}</th>
                     <td class="align-middle text-center col-md-3">{{ tamanho.nome }}</td>

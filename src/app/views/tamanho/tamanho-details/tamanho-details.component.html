@@ -1,9 +1,11 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold" >Novo tamanho</h5>
-
-
+            <h5 *ngIf="!id" class="m-0 fw-bold">Novo Tamanho</h5>
+            <h5 *ngIf="id && modoEditar" class="m-0 fw-bold">Editar Tamanho</h5>
+            <h5 *ngIf="tamanho.delecao === null && modoEditar === false" class="m-0 fw-bold">Desativar Tamanho</h5>
+            <h5 *ngIf="tamanho.delecao != null && modoEditar === false" class="m-0 fw-bold">Ativar Tamanho</h5>
+            <h5 *ngIf="id && modoEditar == null" class="m-0 fw-bold">Tamanho</h5>
         </div>
         <hr>
         <div *ngIf="!modoEditar" [ngClass]="
@@ -34,19 +36,20 @@
                                 <div class="col-md-9 pe-5">
                                     <form #form="ngForm">
                                         <td class="align-middle text-center">
-                                          <mat-form-field hintLabel="No máx 15 dígitos." *ngIf="!disabled">
-                                            <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
-                                            <input matInput #input maxlength="15" name="inputNome" [(ngModel)]="tamanho.nome" placeholder="Ex: Grande" class="w-100">
-                                            <mat-hint align="end">{{input.value.length}}/15</mat-hint>
-                                          </mat-form-field>
+                                            <mat-form-field hintLabel="No máx 15 dígitos." *ngIf="!disabled">
+                                                <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
+                                                <input matInput #input maxlength="15" name="inputNome"
+                                                    [(ngModel)]="tamanho.nome" placeholder="Ex: Grande" class="w-100">
+                                                <mat-hint align="end">{{input.value.length}}/15</mat-hint>
+                                            </mat-form-field>
                                         </td>
-                                      </form>
-                                      <form #form="ngForm" *ngIf="disabled">
+                                    </form>
+                                    <form #form="ngForm" *ngIf="disabled">
                                         <td class="align-middle text-center">
                                             <p *ngIf="disabled" class="m-0 fw-bold">{{tamanho.nome}}</p>
                                         </td>
-                                      </form>
-                                      
+                                    </form>
+
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -69,77 +72,84 @@
                                 </div>
                                 <div class="col-md-3 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field  *ngIf="!disabled">
-                                          <mat-label><span style="color:red">*</span>Digite o máximo de sabores:</mat-label>
-                                          <input  matInput #inputTelefone maxlength="20" [(ngModel)]="tamanho.maximoSabores" type="number" class="w-100">
+                                        <mat-form-field *ngIf="!disabled">
+                                            <mat-label><span style="color:red">*</span>Digite o máximo de
+                                                sabores:</mat-label>
+                                            <input matInput #inputTelefone maxlength="20"
+                                                [(ngModel)]="tamanho.maximoSabores" type="number" class="w-100">
                                         </mat-form-field>
-                                      </td>
-                                      <form #form="ngForm" *ngIf="disabled">
+                                    </td>
+                                    <form #form="ngForm" *ngIf="disabled">
                                         <td class="align-middle text-center">
                                             <p *ngIf="disabled" class="m-0 fw-bold">{{tamanho.maximoSabores}}</p>
                                         </td>
-                                      </form>
+                                    </form>
                                 </div>
                             </div>
 
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Data de Criação:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-4">
-                                                    <p class="mb-0">{{tamanho.cadastro | date : 'dd/MM/yyyy - hh:mm'}}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Data de Edição:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-4">
-                                                    <p class="mb-0">{{tamanho.edicao? (tamanho.edicao | date : 'dd/MM/yyyy - hh:mm'):
-                                                        'Nunca editado.'}}</p>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Status:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-3">
-                                                    <span *ngIf="tamanho.delecao" class="badge bg-danger">Desativado</span>
-                                                    <span *ngIf="!tamanho.delecao" class="badge bg-success">Ativado</span>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="tamanho.delecao && modoEditar == null && id"
-                                                class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Desativado em:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-4">
-                                                    <p class="mb-0">{{tamanho.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
-                                                </div>
-                                            </div>
-                                       </div>   
-                                      
+                                <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Data de Criação:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-4">
+                                        <p class="mb-0">{{tamanho.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Data de Edição:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-4">
+                                        <p class="mb-0">{{tamanho.edicao? (tamanho.edicao | date : 'dd/MM/yyyy -
+                                            HH:mm'):
+                                            'Nunca editado.'}}</p>
+                                    </div>
+                                </div>
+                                <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Status:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-3">
+                                        <span *ngIf="tamanho.delecao" class="badge bg-danger">Desativado</span>
+                                        <span *ngIf="!tamanho.delecao" class="badge bg-success">Ativado</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="tamanho.delecao && modoEditar == null && id"
+                                    class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Desativado em:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-4">
+                                        <p class="mb-0">{{tamanho.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                    </div>
                                 </div>
                             </div>
+
                             <hr class="mx-n3">
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && disabled  && tamanho.delecao == null" (click)="deletar(tamanho.id)" (click)="moveTo()" >Ativar</button>
-                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled && tamanho.delecao != null" (click)="deletar(tamanho.id)" (click)="moveTo()" >Desativar</button>
-                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
-                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(tamanho.id)" (click)="moveTo()" >Editar</button>
-                                <button type="submit" class="btn btn-secondary"  (click)="voltar()">Voltar</button>
-
+                                <button type="submit" class="btn btn-success"
+                                    *ngIf="modoEditar == false && disabled && tamanho.delecao != null" (click)="deletar(tamanho)">Ativar</button>
+                                <button type="submit" class="btn btn-danger"
+                                    *ngIf="modoEditar == false && disabled && tamanho.delecao == null" (click)="deletar(tamanho)">Desativar</button>
+                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()"
+                                    (click)="moveTo()">Cadastrar</button>
+                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id"
+                                    (click)="editar(tamanho.id)" (click)="moveTo()">Editar</button>
+                                <button type="submit" class="btn btn-secondary" (click)="voltar(100)">Voltar</button>
+    
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
+</div>

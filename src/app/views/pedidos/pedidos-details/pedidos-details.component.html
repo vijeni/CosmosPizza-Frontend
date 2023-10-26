@@ -81,7 +81,8 @@
                                 <div class="col-md-5 pe-5">
                                     <input *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
                                         name="dataAbertura" [(ngModel)]="pedido.dataAbertura" required />
-                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.dataAbertura | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.dataAbertura | date : 'dd/MM/yyyy -
+                                        HH:mm'}}</p>
                                 </div>
                             </div>
                             <div class="row align-items-center py-3">
@@ -92,8 +93,10 @@
                                 <div class="col-md-5 pe-5">
                                     <input *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
                                         name="dataConclusao" [(ngModel)]="pedido.dataConclusao" />
-                                    <p *ngIf="disabled && pedido.dataConclusao" class="m-0 fw-bold">{{pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'}}</p>
-                                    <span *ngIf="disabled && !pedido.dataConclusao" class="badge bg-warning text-dark"> Em Andamento</span>
+                                    <p *ngIf="disabled && pedido.dataConclusao" class="m-0 fw-bold">
+                                        {{pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                    <span *ngIf="disabled && !pedido.dataConclusao" class="badge bg-warning text-dark">
+                                        Em Andamento</span>
 
                                 </div>
                             </div>
@@ -104,16 +107,15 @@
                                 </div>
                                 <div class="col-md-8 pe-5">
                                     <mat-form-field [(ngModel)]="pedido.status" *ngIf="!disabled" form-control
-                                    form-control-md>
-                                    <mat-label>Status</mat-label>
-                                    <mat-select [(ngModel)]="pedido.status" #status name="status" >
-                                        <mat-option *ngFor="let status of keys(statuses)"
-                                            [value]="status">
-                                            {{status}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                                <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.status}}</p>
+                                        form-control-md>
+                                        <mat-label>Status</mat-label>
+                                        <mat-select [(ngModel)]="pedido.status" #status name="status">
+                                            <mat-option *ngFor="let status of keys(statuses)" [value]="status">
+                                                {{status}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.status}}</p>
 
                                 </div>
                             </div>
@@ -145,8 +147,7 @@
                                             <td class="align-middle text-center col-md-1">{{produto.descricao}}</td>
                                             <td class="align-middle text-center col-md-1">{{produto.valorUnitario |
                                                 currency: "R$ "}}</td>
-                                            <td
-                                                (click)="retirarProduto(i)"
+                                            <td (click)="retirarProduto(i)"
                                                 class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
                                                 <bi class="acoes" name="trash"></bi>
                                             </td>
@@ -173,8 +174,7 @@
                                 <div class="col-md-4 d-flex justify-content-end">
                                     <button type="button" style="height: fit-content;"
                                         class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="abrirModal(pizzas)">Adicionar<bi class="search-btn"
-                                            name="search">
+                                        (click)="abrirModal(pizzas)">Adicionar<bi class="search-btn" name="search">
                                         </bi></button>
                                 </div>
                             </div>
@@ -188,13 +188,14 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let pizza of pedido.pizzas; index as i">
-                                            <th scope="row" class="align-middle text-center col-md-1">{{pizza.tamanho.nome}}
+                                            <th scope="row" class="align-middle text-center col-md-1">
+                                                {{pizza.tamanho.nome}}
                                             </th>
-                                            <td class="align-middle text-center col-md-1">{{pizza.tamanho.maximoSabores}}</td>
+                                            <td class="align-middle text-center col-md-1">
+                                                {{pizza.tamanho.maximoSabores}}</td>
                                             <td class="align-middle text-center col-md-1">{{pizza.tamanho.valor |
                                                 currency: "R$ "}}</td>
-                                            <td
-                                                (click)="retirarProduto(i)"
+                                            <td (click)="retirarProduto(i)"
                                                 class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
                                                 <bi class="acoes" name="trash"></bi>
                                             </td>
@@ -253,8 +254,9 @@
                                 <div class="flex-row d-flex col-md-3">
                                     <h6 class="mb-0 pt-2 reais"><span *ngIf="!disabled">R$</span><span
                                             *ngIf="disabled">{{pedido.valorEntrega | currency: 'R$ '}}</span></h6>
-                                    <input *ngIf="!disabled" value="0" type="number" class="form-control form-control-md"
-                                        name="valor" [(ngModel)]="pedido.valorEntrega" required />
+                                    <input *ngIf="!disabled" value="0" type="number"
+                                        class="form-control form-control-md" name="valor"
+                                        [(ngModel)]="pedido.valorEntrega" required />
                                 </div>
                             </div>
                             <div class="row align-items-center py-3">
@@ -272,10 +274,10 @@
                                     </h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
-                                    <mat-form-field *ngIf="!disabled" form-control
-                                        form-control-md>
+                                    <mat-form-field *ngIf="!disabled" form-control form-control-md>
                                         <mat-label>Forma de Pagamento</mat-label>
-                                        <mat-select #formaPagamento name="formaPagamento" [(ngModel)]="pedido.formaPagamento">
+                                        <mat-select #formaPagamento name="formaPagamento"
+                                            [(ngModel)]="pedido.formaPagamento">
                                             <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
                                                 [value]="formaPagamento">
                                                 {{formaPagamento}}
@@ -292,7 +294,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{pedido.cadastro | date : 'dd/MM/yyyy - hh:mm'}}
+                                    <p class="mb-0">{{pedido.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
                                     </p>
                                 </div>
                             </div>
@@ -302,7 +304,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{pedido.edicao? (pedido.edicao | date : 'dd/MM/yyyy - hh:mm'):
+                                    <p class="mb-0">{{pedido.edicao? (pedido.edicao | date : 'dd/MM/yyyy - HH:mm'):
                                         'Nunca editado.'}}</p>
                                 </div>
                             </div>
@@ -322,7 +324,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{pedido.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
+                                    <p class="mb-0">{{pedido.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
                                 </div>
                             </div>
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">

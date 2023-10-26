@@ -6,10 +6,9 @@ import { TamanhoService } from 'src/app/services/tamanho/tamanho.service';
 @Component({
   selector: 'app-tamanho-details',
   templateUrl: './tamanho-details.component.html',
-  styleUrls: ['./tamanho-details.component.scss']
+  styleUrls: ['./tamanho-details.component.scss'],
 })
 export class TamanhoDetailsComponent {
-
   tamanho = new Tamanho();
 
   index!: number;
@@ -21,10 +20,7 @@ export class TamanhoDetailsComponent {
   id!: string;
   disabled!: boolean;
 
-  constructor(
-    
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     let url = this.injectRouter.url;
@@ -41,8 +37,6 @@ export class TamanhoDetailsComponent {
         this.disabled = true;
       }
     }
-
-  
   }
 
   cadastrar() {
@@ -51,8 +45,7 @@ export class TamanhoDetailsComponent {
         this.tamanho = tamanho;
         this.isErro = false;
         this.mensagem = 'Tamanho cadastrado com sucesso!';
-        await this.sleep(1000);
-        this.injectRouter.navigate(['/web/tamanhos']);
+        this.voltar(1000);
       },
       error: (erro) => {
         console.log(erro.error);
@@ -67,8 +60,7 @@ export class TamanhoDetailsComponent {
       next: async (tamanho) => {
         this.tamanho = tamanho;
         this.mensagem = 'Tamanho editado com sucesso!';
-        await this.sleep(1000);
-        this.injectRouter.navigate(['/web/tamanho']);
+        this.voltar(800);
       },
       error: (erro) => {
         console.log(erro.error);
@@ -77,30 +69,40 @@ export class TamanhoDetailsComponent {
     });
   }
 
-  deletar(id: number) {
-    this.service.delete(id).subscribe({
-      next: async (tamanho) => {
-        this.tamanho = tamanho;
-        this.mensagem = 'Tamanho desativado com sucesso!';
-        await this.sleep(1500);
-        this.injectRouter.navigate(['/web/tamanho']);
-      },
-      error: async (erro) => {
-        console.log(erro.error);
-        await this.sleep(1500);
-        this.injectRouter.navigate(['/web/tamanho']);
-        this.mensagem = 'Tamanho deletado com sucesso!';
-        /*
-      O deletar está funcionando normalmente, mas está retornando um erro de Json no console.
-      */
-      },
-    });
+  deletar(tamanho: Tamanho) {
+    if (tamanho.delecao == null) {
+      if (confirm(`Confirma desativação do tamanho ${tamanho.nome}?`)) {
+        this.service.delete(tamanho.id).subscribe({
+          next: async (tamanho) => {
+            this.tamanho = tamanho;
+            this.mensagem = 'Tamanho desativado com sucesso!';
+          },
+          error: async (erro) => {
+            this.isErro = true;
+            this.mensagem = erro.error;
+          },
+        });
+      }
+    } else {
+      if (confirm(`Confirma a ativação do tamanho ${tamanho.nome}?`)) {
+        this.service.ativar(tamanho.id).subscribe({
+          next: async (tamanho) => {
+            this.tamanho = tamanho;
+            this.mensagem = 'Tamanho ativado com sucesso!';
+          },
+          error: async (erro) => {
+            this.isErro = true;
+            this.mensagem = erro.error;
+          },
+        });
+      }
+    }
   }
 
   getById(id: number) {
     this.service.findById(id).subscribe({
       next: (tamanho) => {
-        this.tamanho =tamanho;
+        this.tamanho = tamanho;
       },
       error: (erro) => {
         console.log(erro.error);
@@ -108,15 +110,13 @@ export class TamanhoDetailsComponent {
     });
   }
 
-
+  voltar(ms: number) {
+    this.moveTo();
+    setTimeout(() => {
+      this.injectRouter.navigate(['/web/tamanhos']);
+    }, ms);
+  }
   moveTo() {
     window.scrollTo(0, 0);
-  }
-
-  sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-  voltar() {
-    this.injectRouter.navigate(['/web/tamanhos']);
-    this.moveTo();
   }
 }

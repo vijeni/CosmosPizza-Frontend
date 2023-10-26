@@ -35,7 +35,7 @@
                                     <h6 class="mb-0">Descrição<span *ngIf="!disabled" style="color:red">*</span>:</h6>
                                 </div>
                                 <div class="col-md-8 pe-5">
-                                    <input *ngIf="!disabled"  type="text text-center" [(ngModel)]="produto.descricao"
+                                    <input *ngIf="!disabled" type="text text-center" [(ngModel)]="produto.descricao"
                                         name="descricao" class="form-control form-control-md" required />
                                     <p *ngIf="disabled" class="m-0 fw-bold">{{produto.descricao}}</p>
                                 </div>
@@ -86,7 +86,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{produto.cadastro | date : 'dd/MM/yyyy - hh:mm'}}
+                                    <p class="mb-0">{{produto.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
                                     </p>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{produto.edicao? (produto.edicao | date : 'dd/MM/yyyy - hh:mm'):
+                                    <p class="mb-0">{{produto.edicao? (produto.edicao | date : 'dd/MM/yyyy - HH:mm'):
                                         'Nunca editado.'}}</p>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                     </h6>
                                 </div>
                                 <div class="flex-row d-flex col-md-4">
-                                    <p class="mb-0">{{produto.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
+                                    <p class="mb-0">{{produto.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
                                 </div>
                             </div>
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
@@ -125,10 +125,10 @@
                                     class="color-white btn btn-warning" (click)="cadastrar()">Cadastrar</button>
                                 <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
                                     (click)="editar()">Editar</button>
-                                <button *ngIf="modoEditar == false && id && produto.delecao === null" type="submit" class="btn btn-danger"
-                                    (click)="toggleProduto()">Desativar</button>
-                                <button *ngIf="modoEditar == false && id && produto.delecao != null" type="submit" class="btn btn-success"
-                                    (click)="toggleProduto()">Ativar</button>
+                                <button *ngIf="modoEditar == false && id && produto.delecao === null" type="submit"
+                                    class="btn btn-danger" (click)="toggleProduto()">Desativar</button>
+                                <button *ngIf="modoEditar == false && id && produto.delecao != null" type="submit"
+                                    class="btn btn-success" (click)="toggleProduto()">Ativar</button>
                                 <button type="button" id="cancelar" (click)="voltar(100)"
                                     class="btn btn-secondary">Voltar</button>
                             </div>

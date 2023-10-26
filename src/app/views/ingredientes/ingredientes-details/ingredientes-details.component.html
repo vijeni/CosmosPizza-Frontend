@@ -1,7 +1,7 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold" >Novo Ingrediente</h5>
+            <h5 class="m-0 fw-bold">Novo Ingrediente</h5>
 
 
         </div>
@@ -34,19 +34,21 @@
                                 <div class="col-md-9 pe-5">
                                     <form #form="ngForm">
                                         <td class="align-middle text-center">
-                                          <mat-form-field hintLabel="No máx 40 dígitos." *ngIf="!disabled">
-                                            <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
-                                            <input matInput #input maxlength="40" name="inputNome" [(ngModel)]="ingrediente.nome" placeholder="Ex: Vinícius" class="w-100">
-                                            <mat-hint align="end">{{input.value.length}}/40</mat-hint>
-                                          </mat-form-field>
+                                            <mat-form-field hintLabel="No máx 40 dígitos." *ngIf="!disabled">
+                                                <mat-label><span style="color:red">*</span>Diga o nome</mat-label>
+                                                <input matInput #input maxlength="40" name="inputNome"
+                                                    [(ngModel)]="ingrediente.nome" placeholder="Ex: Vinícius"
+                                                    class="w-100">
+                                                <mat-hint align="end">{{input.value.length}}/40</mat-hint>
+                                            </mat-form-field>
                                         </td>
-                                      </form>
-                                      <form #form="ngForm" *ngIf="disabled">
+                                    </form>
+                                    <form #form="ngForm" *ngIf="disabled">
                                         <td class="align-middle text-center">
                                             <p *ngIf="disabled" class="m-0 fw-bold">{{ingrediente.nome}}</p>
                                         </td>
-                                      </form>
-                                      
+                                    </form>
+
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -56,76 +58,81 @@
                                 </div>
                                 <div class="col-md-3 pe-5">
                                     <td class="align-middle text-center">
-                                        <mat-form-field  *ngIf="!disabled">
-                                          <mat-label><span style="color:red">*</span>Digite a quantidade:</mat-label>
-                                          <input  matInput #inputTelefone maxlength="20" [(ngModel)]="ingrediente.quantidade" type="number" class="w-100">
+                                        <mat-form-field *ngIf="!disabled">
+                                            <mat-label><span style="color:red">*</span>Digite a quantidade:</mat-label>
+                                            <input matInput #inputTelefone maxlength="20"
+                                                [(ngModel)]="ingrediente.quantidade" type="number" class="w-100">
                                         </mat-form-field>
-                                      </td>
-                                      <form #form="ngForm" *ngIf="disabled">
+                                    </td>
+                                    <form #form="ngForm" *ngIf="disabled">
                                         <td class="align-middle text-center">
                                             <p *ngIf="disabled" class="m-0 fw-bold">{{ingrediente.quantidade}}</p>
                                         </td>
-                                      </form>
+                                    </form>
                                 </div>
                             </div>
 
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Data de Criação:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-4">
-                                                    <p class="mb-0">{{ingrediente.cadastro | date : 'dd/MM/yyyy - hh:mm'}}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Data de Edição:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-4">
-                                                    <p class="mb-0">{{ingrediente.edicao? (ingrediente.edicao | date : 'dd/MM/yyyy - hh:mm'):
-                                                        'Nunca editado.'}}</p>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Status:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-3">
-                                                    <span *ngIf="ingrediente.delecao" class="badge bg-danger">Desativado</span>
-                                                    <span *ngIf="!ingrediente.delecao" class="badge bg-success">Ativado</span>
-                                                </div>
-                                            </div>
-                                            <div *ngIf="ingrediente.delecao && modoEditar == null && id"
-                                                class="row align-items-center py-3">
-                                                <div class="col-md-4 ps-5">
-                                                    <h6 class="mb-0">Desativado em:
-                                                    </h6>
-                                                </div>
-                                                <div class="flex-row d-flex col-md-4">
-                                                    <p class="mb-0">{{ingrediente.delecao | date : 'dd/MM/yyyy - hh:mm'}}</p>
-                                                </div>
-                                            </div>
-                                       </div>   
-                                      
+                                <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Data de Criação:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-4">
+                                        <p class="mb-0">{{ingrediente.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <hr class="mx-n3">
-                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(ingrediente.id)" (click)="moveTo()" >Desativar</button>
-                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
-                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(ingrediente.id)" (click)="moveTo()" >Editar</button>
-                                <button type="submit" class="btn btn-secondary"  (click)="voltar()">Voltar</button>
-
+                                <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Data de Edição:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-4">
+                                        <p class="mb-0">{{ingrediente.edicao? (ingrediente.edicao | date : 'dd/MM/yyyy -
+                                            HH:mm'):
+                                            'Nunca editado.'}}</p>
+                                    </div>
+                                </div>
+                                <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Status:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-3">
+                                        <span *ngIf="ingrediente.delecao" class="badge bg-danger">Desativado</span>
+                                        <span *ngIf="!ingrediente.delecao" class="badge bg-success">Ativado</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="ingrediente.delecao && modoEditar == null && id"
+                                    class="row align-items-center py-3">
+                                    <div class="col-md-4 ps-5">
+                                        <h6 class="mb-0">Desativado em:
+                                        </h6>
+                                    </div>
+                                    <div class="flex-row d-flex col-md-4">
+                                        <p class="mb-0">{{ingrediente.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                     </div>
+                    <hr class="mx-n3">
+                    <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                        <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled"
+                            (click)="deletar(ingrediente.id)" (click)="moveTo()">Desativar</button>
+                        <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()"
+                            (click)="moveTo()">Cadastrar</button>
+                        <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id"
+                            (click)="editar(ingrediente.id)" (click)="moveTo()">Editar</button>
+                        <button type="submit" class="btn btn-secondary" (click)="voltar()">Voltar</button>
+
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
+</div>
