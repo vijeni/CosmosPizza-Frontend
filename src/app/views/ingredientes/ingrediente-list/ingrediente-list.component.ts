@@ -51,7 +51,6 @@ export class IngredienteListComponent implements OnInit {
         const term = text.toLowerCase();
         return (
           (ingrediente.nome.toLowerCase().includes(term) ||
-            ingrediente.quantidade.includes(term) ||
             pipe.transform(ingrediente.id).includes(term)) &&
           (!this.switchEstado.value ||
             (ingrediente.delecao === null && this.switchEstado.value))

@@ -67,10 +67,10 @@
                             </div>
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
-                                <div class="col-md-3 ps-5">
-                                    <h6 class="mb-0 text-center"><span style="color:red">*</span>Máximo de sabores:</h6>
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0"><span style="color:red">*</span>Máximo de sabores:</h6>
                                 </div>
-                                <div class="col-md-3 pe-5">
+                                <div class="col-md-4 pe-5">
                                     <td class="align-middle text-center">
                                         <mat-form-field *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o máximo de
@@ -131,8 +131,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <hr class="mx-n3">
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
                                 <button type="submit" class="btn btn-success"
                                     *ngIf="modoEditar == false && disabled && tamanho.delecao != null" (click)="deletar(tamanho)">Ativar</button>

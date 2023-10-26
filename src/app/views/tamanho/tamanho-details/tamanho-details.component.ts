@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tamanho } from 'src/app/models/tamanho/tamanho';
 import { TamanhoService } from 'src/app/services/tamanho/tamanho.service';
@@ -8,7 +8,7 @@ import { TamanhoService } from 'src/app/services/tamanho/tamanho.service';
   templateUrl: './tamanho-details.component.html',
   styleUrls: ['./tamanho-details.component.scss'],
 })
-export class TamanhoDetailsComponent {
+export class TamanhoDetailsComponent implements OnInit{
   tamanho = new Tamanho();
 
   index!: number;

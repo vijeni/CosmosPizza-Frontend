@@ -24,20 +24,19 @@
         </form>
 
             <div class="mb-3 resultados">Resultados: {{ingrediente$.length}}</div>
-        <table class="d-grid">
+        <table class="tabela-principal d-grid">
             <thead class="d-grid container">
                 <tr class="row">
-                    <th scope="col" class="col-md-1 text-center">Código</th>
-                    <th scope="col" class="col-md-3 text-center">Nome</th>
-                    <th scope="col" class="col-md-2 text-center">Quantidade</th>
+                    <th scope="col" class="col-md-4 text-center">Código</th>
+                    <th scope="col" class="col-md-4 text-center">Nome</th>
+                    <th scope="col" class="col-md-4 text-center">Ações</th>
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/ingredientes/', ingrediente.id]" class="row"
+                <tr [routerLink]="['/web/ingrediente/', ingrediente.id]" class="row"
                     *ngFor="let ingrediente of ingrediente$ ; index as i">
-                    <th class="align-middle text-center col-md-1" scope="row">{{ingrediente.id}}</th>
-                    <td class="align-middle text-center col-md-3">{{ ingrediente.nome }}</td>
-                    <td class="align-middle text-center col-md-2">{{ ingrediente.quantidade }}</td>
+                    <th class="align-middle text-center col-md-4" scope="row">{{ingrediente.id}}</th>
+                    <td class="align-middle text-center col-md-4">{{ ingrediente.nome }}</td>
                     <td class="status-cell align-middle text-center col-md-4">
                         <div *ngIf="ingrediente.delecao" class="estado desativado"></div>
                         <div *ngIf="!ingrediente.delecao" class="estado ativado"></div>
@@ -54,7 +53,7 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="ingredientes.length || ingrediente$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+        <div *ngIf="ingredientes.length == 0|| ingrediente$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
             Nenhum ingrediente encontrado
         </div>
     </div>
