@@ -61,7 +61,7 @@
                             <bi class="acoes" name="pen"></bi>
                         </div>
                         <div *ngIf="pedido.delecao === null" (click)="toggle(pedido.id)">
-                            <bi class="acoes" name="trash"></bi>
+                            <bi class="acoes" name="check"></bi>
                         </div>
                         <div *ngIf="pedido.delecao != null" (click)="toggle(pedido.id)">
                             <bi class="acoes" name="arrow-counterclockwise"></bi>
