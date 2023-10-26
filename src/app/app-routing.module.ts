@@ -9,6 +9,8 @@ import { PessoasDetailsComponent } from './views/pessoas/pessoas-details/pessoas
 import { ProdutoDetailsComponent } from './views/produto/produto-details/produto-details.component';
 import { SaborListaComponent } from './views/sabor/sabor-lista/sabor-lista.component';
 import { SaborDetailsComponent } from './views/sabor/sabor-details/sabor-details.component';
+import { IngredienteListComponent } from './views/ingredientes/ingrediente-list/ingrediente-list.component';
+import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
@@ -38,6 +40,11 @@ const routes: Routes = [
       { path: 'sabor/editar/:id', component: SaborDetailsComponent },
       { path: 'sabor/toggle/:id', component: SaborDetailsComponent },
       { path: 'sabor/:id', component: SaborDetailsComponent },
+      { path: 'ingredientes', component: IngredienteListComponent},
+      { path: 'ingrediente/novo', component: IngredientesDetailsComponent},
+      { path: 'ingrediente/editar/:id', component: IngredientesDetailsComponent},
+      { path: 'ingrediente/toggle/:id', component: IngredientesDetailsComponent},
+      { path: 'ingrediente/:id', component: IngredientesDetailsComponent}
     ],
   },
 ];
