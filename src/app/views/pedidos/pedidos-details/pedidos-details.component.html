@@ -102,11 +102,11 @@
                                     <h6 class="mb-0">Status:
                                     </h6>
                                 </div>
-                                <div class="col-md-6 pe-5">
-                                    <mat-form-field [(ngModel)]="pedido.status" #status name="status" *ngIf="!disabled" form-control
+                                <div class="col-md-8 pe-5">
+                                    <mat-form-field [(ngModel)]="pedido.status" *ngIf="!disabled" form-control
                                     form-control-md>
-                                    <mat-label [(ngModel)]="pedido.status">Status</mat-label>
-                                    <mat-select>
+                                    <mat-label>Status</mat-label>
+                                    <mat-select [(ngModel)]="pedido.status" #status name="status" >
                                         <mat-option *ngFor="let status of keys(statuses)"
                                             [value]="status">
                                             {{status}}
@@ -272,10 +272,10 @@
                                     </h6>
                                 </div>
                                 <div class="col-md-3 pe-5">
-                                    <mat-form-field #formaPagamento name="formaPagamento" *ngIf="!disabled" form-control
+                                    <mat-form-field *ngIf="!disabled" form-control
                                         form-control-md>
                                         <mat-label>Forma de Pagamento</mat-label>
-                                        <mat-select>
+                                        <mat-select #formaPagamento name="formaPagamento" [(ngModel)]="pedido.formaPagamento">
                                             <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
                                                 [value]="formaPagamento">
                                                 {{formaPagamento}}
