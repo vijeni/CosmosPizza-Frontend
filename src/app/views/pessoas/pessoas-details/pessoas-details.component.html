@@ -288,8 +288,8 @@
                                 <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(pessoa.id)" (click)="moveTo()" >Desativar</button>
                                 <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
                                 <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(pessoa.id)" (click)="moveTo()" >Editar</button>
-                                <button type="submit" class="btn btn-secondary" *ngIf="!isFuncionario" (click)="voltar()">Cancelar</button>
-                                <button type="submit" class="btn btn-secondary" *ngIf="isFuncionario" (click)="voltarFuncionario()">Cancelar</button>
+                                <button type="submit" class="btn btn-secondary" *ngIf="!isFuncionario" (click)="voltar()">Voltar</button>
+                                <button type="submit" class="btn btn-secondary" *ngIf="isFuncionario" (click)="voltarFuncionario()">Voltar</button>
 
                             </div>
 

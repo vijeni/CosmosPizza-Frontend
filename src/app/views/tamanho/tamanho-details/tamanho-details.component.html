@@ -130,10 +130,11 @@
                             </div>
                             <hr class="mx-n3">
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled" (click)="deletar(tamanho.id)" (click)="moveTo()" >Desativar</button>
+                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && disabled  && tamanho.delecao == null" (click)="deletar(tamanho.id)" (click)="moveTo()" >Ativar</button>
+                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled && tamanho.delecao != null" (click)="deletar(tamanho.id)" (click)="moveTo()" >Desativar</button>
                                 <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id" (click)="cadastrar()" (click)="moveTo()" >Cadastrar</button>
                                 <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id" (click)="editar(tamanho.id)" (click)="moveTo()" >Editar</button>
-                                <button type="submit" class="btn btn-secondary"  (click)="voltar()">Cancelar</button>
+                                <button type="submit" class="btn btn-secondary"  (click)="voltar()">Voltar</button>
 
                             </div>
 

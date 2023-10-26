@@ -115,13 +115,8 @@ export class TamanhoDetailsComponent {
 
   sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-  async voltar() {
-    this.injectRouter.navigate(['/web/tamanho']);
+  voltar() {
+    this.injectRouter.navigate(['/web/tamanhos']);
     this.moveTo();
   }
-
-
-
-
-
 }
