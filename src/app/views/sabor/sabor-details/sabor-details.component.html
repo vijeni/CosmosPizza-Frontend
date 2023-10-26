@@ -82,13 +82,11 @@
                                     <td class="align-middle text-center" *ngIf="!disabled">
                                         <mat-form-field>
                                             <mat-label>Ingredientes</mat-label>
-                                            <mat-select [formControl]="toppings" name="nome"
-                                                (cdkAutofill)="onToppingsSelectionChange($event)">
-                                                <mat-option *ngFor="let ingrediente of ingredientesBanco"
-                                                    [value]="ingrediente">{{ingrediente.nome}}</mat-option>
+                                            <mat-select [formControl]="toppings" name="nome"  (cdkAutofill)="onToppingsSelectionChange($event)" multiple>
+                                              <mat-option *ngFor="let ingrediente of ingredientesBanco" [value]="ingrediente">{{ingrediente.nome}}</mat-option>
                                             </mat-select>
-                                        </mat-form-field>
-                                    </td>
+                                          </mat-form-field>
+                                        </td>
 
 
                                     <td class="align-middle text-center" *ngIf="disabled">
