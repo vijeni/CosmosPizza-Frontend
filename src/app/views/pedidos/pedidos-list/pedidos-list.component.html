@@ -41,7 +41,7 @@
                 </tr>
             </thead>
             <tbody #tabela class="d-grid container">
-                <tr [routerLink]="['/web/produto/', pedido.id]" class="row"
+                <tr [routerLink]="['/web/pedido/', pedido.id]" class="row"
                     *ngFor="let pedido of pedidos$">
                     <th class="align-middle text-center col-md-1" scope="row">{{pedido.id}}</th>
                     <td class="align-middle text-center col-md-1" scope="row">{{pedido.cliente.nome}}</td>

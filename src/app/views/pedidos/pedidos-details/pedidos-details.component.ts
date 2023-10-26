@@ -5,6 +5,7 @@ import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
 import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
 import { Pedido } from 'src/app/models/pedido/pedido';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
+import { Pizza } from 'src/app/models/pizza/pizza';
 import Produto from 'src/app/models/produto/produto';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
@@ -43,6 +44,7 @@ export class PedidosDetailsComponent implements OnInit {
       }
     }else{
       this.pedido.produtos = []
+      this.pedido.pizzas = []
     }
   }
   // services
@@ -140,6 +142,12 @@ export class PedidosDetailsComponent implements OnInit {
 
     this.pedido.produtos.push(produtoSelecionado);
   }
+  definirPizza(pizzaSelecionada: Pizza) {
+    this.modalService.dismissAll()
+
+    this.pedido.pizzas.push(pizzaSelecionada);
+  }
+
 
   //utils
   voltar(ms: number) {
@@ -157,6 +165,20 @@ export class PedidosDetailsComponent implements OnInit {
     this.pedido.produtos.forEach((produto) => {
       valorTotal+=produto.valorUnitario
     })
+    return valorTotal
+  }
+  calculaTotalPizzas(): number{
+    let valorTotal: number = 0
+    this.pedido.pizzas.forEach((pizza) => {
+      valorTotal+=pizza.tamanho.valor
+    })
+    return valorTotal
+  }
+
+  calculaValorTotal(){
+    let valorTotal: number = 0
+    let valorEntrega: number = this.pedido.isEntrega? Number(this.pedido.valorEntrega): 0
+    valorTotal += this.calculaTotalProdutos() + this.calculaTotalPizzas() + valorEntrega
     return valorTotal
   }
 

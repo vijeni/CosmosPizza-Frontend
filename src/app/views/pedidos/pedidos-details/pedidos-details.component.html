@@ -151,25 +151,25 @@
                                 <div class="col-md-4 d-flex justify-content-end">
                                     <button type="button" style="height: fit-content;"
                                         class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="adicionarProduto(produtos)">Adicionar<bi class="search-btn"
+                                        (click)="abrirModal(pizzas)">Adicionar<bi class="search-btn"
                                             name="search">
                                         </bi></button>
                                 </div>
                             </div>
                             <div class="pb-3">
-                                <table *ngIf="pedido.produtos.length != 0" class="table table-stripped tabela-details">
+                                <table *ngIf="pedido.pizzas.length != 0" class="table table-stripped tabela-details">
                                     <thead>
-                                        <th scope="col" class="col-md-1 text-center">Código</th>
-                                        <th scope="col" class="col-md-1 text-center">Descrição</th>
+                                        <th scope="col" class="col-md-1 text-center">Tamanho</th>
+                                        <th scope="col" class="col-md-1 text-center">Sabores</th>
                                         <th scope="col" class="col-md-1 text-center">Valor</th>
                                         <th scope="col" class="col-md-1 text-center">Ação</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let produto of pedido.produtos; index as i">
-                                            <th scope="row" class="align-middle text-center col-md-1">{{produto.id}}
+                                        <tr *ngFor="let pizza of pedido.pizzas; index as i">
+                                            <th scope="row" class="align-middle text-center col-md-1">{{pizza.tamanho.nome}}
                                             </th>
-                                            <td class="align-middle text-center col-md-1">{{produto.descricao}}</td>
-                                            <td class="align-middle text-center col-md-1">{{produto.valorUnitario |
+                                            <td class="align-middle text-center col-md-1">{{pizza.sabores}}</td>
+                                            <td class="align-middle text-center col-md-1">{{pizza.tamanho.valor |
                                                 currency: "R$ "}}</td>
                                             <td
                                                 (click)="retirarProduto(i)"
@@ -179,19 +179,40 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div *ngIf="!pedido.produtos || pedido.produtos.length == 0"
+                                <div *ngIf="!pedido.pizzas || pedido.pizzas.length == 0"
                                     class="text-align-center alert alert-secondary" role="alert">
                                     Nenhuma pizza adicionada
                                 </div>
                                 <div>
                                     <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Selecionados:
-                                        {{pedido.produtos.length}}</div>
+                                        {{pedido.pizzas.length}}</div>
                                     <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Total:
-                                        {{calculaTotalProdutos() | currency: "R$ "}}
+                                        {{calculaTotalPizzas() | currency: "R$ "}}
                                     </div>
                                 </div>
                             </div>
                             <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 fw-bold">Pagamento</h5>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Produtos:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <p class="m-0 fw-bold">{{calculaTotalProdutos() | currency: "R$ "}}</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Pizzas:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <p class="m-0 fw-bold">{{calculaTotalPizzas() | currency: "R$ "}}</p>
+                                </div>
+                            </div>
                             <div class="row align-items-center py-3">
                                 <div class="col-md-4 ps-5">
                                     <h6 class="mb-0">Entrega?<span *ngIf="!disabled" style="color:red">*</span>:
@@ -211,8 +232,16 @@
                                 <div class="flex-row d-flex col-md-3">
                                     <h6 class="mb-0 pt-2 reais"><span *ngIf="!disabled">R$</span><span
                                             *ngIf="disabled">{{pedido.valorEntrega | currency: 'R$ '}}</span></h6>
-                                    <input *ngIf="!disabled" type="number" class="form-control form-control-md"
+                                    <input *ngIf="!disabled" value="0" type="number" class="form-control form-control-md"
                                         name="valor" [(ngModel)]="pedido.valorEntrega" required />
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Total:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <p class="m-0 fw-bold">{{calculaValorTotal() | currency: "R$ "}}</p>
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -277,7 +306,7 @@
                             </div>
                             <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
                                 <button *ngIf="modoEditar == null && !id" type="submit"
-                                    class="color-white btn btn-warning" (click)="cadastrar()">Cadastrar</button>
+                                    class="color-white btn btn-warning" (click)="cadastrar()">Confirmar</button>
                                 <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
                                     (click)="editar()">Editar</button>
                                 <button *ngIf="modoEditar == false && id && pedido.delecao === null" type="submit"
@@ -314,6 +343,18 @@
     </div>
     <div class="modal-body">
         <app-produto-list [isModal]="true" (produtoSelecionado)="definirProduto($event)"></app-produto-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #pizzas let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Montar Pizza</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-pizza-details (pizzaSelecionada)="definirPizza($event)"></app-pizza-details>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
