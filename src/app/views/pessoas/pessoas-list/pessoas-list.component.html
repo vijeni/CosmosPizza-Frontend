@@ -1,6 +1,6 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
-        <div class="d-flex justify-content-between header">
+        <div *ngIf="!isModal" class="d-flex justify-content-between header">
             <h5 class="m-0 fw-bold" *ngIf="!isFuncionario">Clientes</h5>
             <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Funcionários</h5>
 

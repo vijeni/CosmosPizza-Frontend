@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
 import { Pedido } from 'src/app/models/pedido/pedido';
+import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
 @Component({
@@ -20,6 +22,7 @@ export class PedidosDetailsComponent implements OnInit {
   pedido = new Pedido();
   router = inject(Router);
   service = inject(PedidoService);
+  modalService = inject(NgbModal)
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -89,6 +92,14 @@ export class PedidosDetailsComponent implements OnInit {
         this.mensagem = resposta.error;
       },
     });
+  }
+  abrirModal(template: any) {
+    this.mensagem = '';
+    this.pedido.cliente = new Pessoa();
+    this.modalService.open(template, { size: 'lg' });
+  }
+  selecionarPessoa(pessoaSelecionada: Pessoa){
+    
   }
   toggle() {
     if (this.pedido.delecao != null) {

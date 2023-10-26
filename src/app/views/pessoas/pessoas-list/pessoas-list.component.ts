@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, inject, OnInit, PipeTransform } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, PipeTransform } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,8 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
   providers: [DecimalPipe],
 })
 export class PessoasListComponent implements OnInit {
+  @Output() pessoaSelecionada = new EventEmitter<Pessoa>();
+  @Input() isModal: boolean = false
   pessoas: Pessoa[] = [];
   pessoas$: Pessoa[] = [];
   pessoa = new Pessoa();
@@ -105,5 +107,8 @@ export class PessoasListComponent implements OnInit {
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
+  }
+  selecionar(){
+    this.pessoaSelecionada.emit(this.pessoa);
   }
 }

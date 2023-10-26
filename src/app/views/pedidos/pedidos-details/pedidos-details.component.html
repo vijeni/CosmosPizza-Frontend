@@ -37,8 +37,10 @@
                                 </div>
                                 <div class="col-md-8 pe-5">
                                     <input *ngIf="!disabled" type="text text-center" [(ngModel)]="pedido.cliente"
-                                        name="descricao" class="form-control form-control-md" required />
+                                        name="descricao" class="form-control form-control-md input-hidden" required disabled/>
                                     <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.cliente.nome}}</p>
+                                    <button type="button" class="btn btn-warning d-flex flex-row gap-3" (click)="abrirModal(pessoas)">Selecionar<bi class="search-btn"name="search"></bi></button>
+
                                 </div>
                             </div>
                             <hr class="mx-n3">
@@ -156,3 +158,20 @@
         </div>
     </div>
 </div>
+    <ng-template #pessoas let-modal>
+        <div class="modal-body">
+        <app-pessoas-list></app-pessoas-list>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+        </div>
+    </ng-template>
+    <!-- <ng-template #pessoas let-modal>
+        <div class="modal-body">
+        <app-pessoas-details [isErro]="isErro" [mensagem]="mensagem" [pessoa]="pessoaSelecionada"
+            (pessoaCriada)="salvarEditarPessoa($event)"></app-pessoas-details>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+        </div>
+    </ng-template> -->
