@@ -73,8 +73,7 @@ export class PessoasDetailsComponent implements OnInit {
         this.pessoa = pessoas;
         this.isErro = false;
         this.mensagem = 'Pessoa cadastrada com sucesso!';
-        await this.sleep(1000);
-        this.injectRouter.navigate(['/web/clientes']);
+        this.voltarFuncionario()
       },
       error: (erro) => {
         console.log(erro.error);
