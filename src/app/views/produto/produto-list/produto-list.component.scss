@@ -1,0 +1,59 @@
+#novo-produto {
+    color: white;
+}
+hr{
+    color: #bda8a8;
+}
+thead tr th, .resultados{
+    color: #ACACAC;
+}
+
+tr{
+    border-style: hidden;
+    border-width: 0;
+}
+
+tbody tr {
+    transition: 1000ms;
+    cursor: pointer;
+    align-items: center;
+    background-color: white;
+    height: 4rem;
+    border-radius: .5rem;
+    margin-block: .5rem
+}
+tbody tr:hover{
+    background-color: rgba(250, 218, 159, 0.445);
+    transition: 500ms;
+    height: 5rem;
+}
+.status-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-inline: 5rem;
+}
+.estado{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+}
+.estado.desativado{
+    background-color: red;
+
+}
+.estado.ativado{
+    background-color: rgb(0, 228, 19);
+}
+.acoes{
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    color: rgb(255, 224, 46)
+}
+
+bi:hover{
+    transition: 500ms;
+    color: rgb(141, 126, 42)
+}

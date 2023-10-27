@@ -1,0 +1,384 @@
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div class="d-flex justify-content-between header">
+            <h5 *ngIf="!id" class="m-0 fw-bold">Novo Pedido</h5>
+            <h5 *ngIf="id && modoEditar" class="m-0 fw-bold">Editar Pedido</h5>
+            <h5 *ngIf="pedido.delecao === null && modoEditar === false" class="m-0 fw-bold">Cancelar Pedido</h5>
+            <h5 *ngIf="pedido.delecao != null && modoEditar === false" class="m-0 fw-bold">Reabrir Pedido</h5>
+            <h5 *ngIf="id && modoEditar == null" class="m-0 fw-bold">Pedido <span class="fw-bold">#{{pedido.id}}</span>
+            </h5>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <div class="col-xl-9">
+                    <div [ngClass]="
+                    {
+                        'alert alert-success': !isErro && mensagem,
+                        'alert alert-danger': isErro && mensagem
+                    }
+                    " class="alert alert-success" role="alert">
+                        {{mensagem}}
+                    </div>
+                    <div class="card shadow p-3 bg-white rounded">
+                        <form class="card-body">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 fw-bold">Detalhes</h5>
+                                </div>
+                            </div>
+                            <div *ngIf="id" class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Código:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 fw-bold">
+                                    # {{pedido.id}}
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Cliente<span *ngIf="!disabled" style="color:red">*</span>:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
+                                    <input type="text" [(ngModel)]="pedido.cliente" name="cliente"
+                                        class="text-center form-control form-control-md input-hidden" required
+                                        disabled />
+                                    <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi
+                                            class="search-btn" name="search">
+                                        </bi></button>
+
+                                </div>
+                            </div>
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Funcionário<span *ngIf="!disabled" style="color:red">*</span>:</h6>
+                                </div>
+                                <div class="col-md-8 pe-5 justify-content-between d-flex flex-row">
+                                    <input type="text" [(ngModel)]="pedido.funcionario" name="funcionario"
+                                        class="text-center form-control form-control-md input-hidden" required
+                                        disabled />
+                                    <p *ngIf="pedido.funcionario" class="m-0 fw-bold pt-2">{{pedido.funcionario.nome}}
+                                    </p>
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="selecionarClienteOrFuncionario(pessoas, false)">Selecionar<bi
+                                            class="search-btn" name="search">
+                                        </bi></button>
+
+                                </div>
+                            </div>
+                            <!-- <hr class="mx-n3"> -->
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Abertura<span *ngIf="!disabled" style="color:red">*</span>:
+                                    </h6>
+                                </div>
+                                <div class="col-md-5 pe-5">
+                                    <input *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
+                                        name="dataAbertura" [(ngModel)]="pedido.dataAbertura" required />
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.dataAbertura | date : 'dd/MM/yyyy -
+                                        HH:mm'}}</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Conclusão:
+                                    </h6>
+                                </div>
+                                <div class="col-md-5 pe-5">
+                                    <input *ngIf="!disabled" type="datetime-local" class="form-control form-control-md"
+                                        name="dataConclusao" [(ngModel)]="pedido.dataConclusao" />
+                                    <p *ngIf="disabled && pedido.dataConclusao" class="m-0 fw-bold">
+                                        {{pedido.dataConclusao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                    <span *ngIf="disabled && !pedido.dataConclusao" class="badge bg-warning text-dark">
+                                        Em Andamento</span>
+
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Status:
+                                    </h6>
+                                </div>
+                                <div class="col-md-8 pe-5">
+                                    <mat-form-field [(ngModel)]="pedido.status" *ngIf="!disabled" form-control
+                                        form-control-md>
+                                        <mat-label>Status</mat-label>
+                                        <mat-select [(ngModel)]="pedido.status" #status name="status">
+                                            <mat-option *ngFor="let status of keys(statuses)" [value]="status">
+                                                {{status}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.status}}</p>
+
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center justify-content-between pt-4 pb-3 mb-3">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 fw-bold">Produtos</h5>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-end">
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="adicionarProduto(produtos)">Adicionar<bi class="search-btn"
+                                            name="search">
+                                        </bi></button>
+                                </div>
+                            </div>
+                            <div class="pb-3">
+                                <table *ngIf="pedido.produtos.length != 0" class="table tabela-details">
+                                    <thead>
+                                        <th scope="col" class="col-md-1 text-center">Código</th>
+                                        <th scope="col" class="col-md-1 text-center">Descrição</th>
+                                        <th scope="col" class="col-md-1 text-center">Valor</th>
+                                        <th scope="col" class="col-md-1 text-center">Ação</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let produto of pedido.produtos; index as i">
+                                            <th scope="row" class="align-middle text-center col-md-1">{{produto.id}}
+                                            </th>
+                                            <td class="align-middle text-center col-md-1">{{produto.descricao}}</td>
+                                            <td class="align-middle text-center col-md-1">{{produto.valorUnitario |
+                                                currency: "R$ "}}</td>
+                                            <td (click)="retirarProduto(i)"
+                                                class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
+                                                <bi class="acoes" name="trash"></bi>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="!pedido.produtos || pedido.produtos.length == 0"
+                                    class="text-align-center alert alert-secondary" role="alert">
+                                    Nenhum produto adicionado
+                                </div>
+                                <div>
+                                    <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Selecionados:
+                                        {{pedido.produtos.length}}</div>
+                                    <div *ngIf="pedido.produtos.length != 0" class="mb-3 fw-bold">Total:
+                                        {{calculaTotalProdutos() | currency: "R$ "}}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center justify-content-between pt-4 pb-3 mb-3">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 fw-bold">Pizzas</h5>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-end">
+                                    <button type="button" style="height: fit-content;"
+                                        class="btn btn-warning d-flex flex-row gap-3"
+                                        (click)="abrirModal(pizzas)">Adicionar<bi class="search-btn" name="search">
+                                        </bi></button>
+                                </div>
+                            </div>
+                            <div class="pb-3">
+                                <table *ngIf="pedido.pizzas.length != 0" class="table table-stripped tabela-details">
+                                    <thead>
+                                        <th scope="col" class="col-md-1 text-center">Tamanho</th>
+                                        <th scope="col" class="col-md-1 text-center">Sabores</th>
+                                        <th scope="col" class="col-md-1 text-center">Valor</th>
+                                        <th scope="col" class="col-md-1 text-center">Ação</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr (click)="detalharPizza(pizzas, pizza)" class="pizza-table" *ngFor="let pizza of pedido.pizzas; index as i">
+                                            <th scope="row" class="align-middle text-center col-md-1">
+                                                {{pizza.tamanho.nome}}
+                                            </th>
+                                            <td class="align-middle text-center col-md-1">
+                                                {{pizza.sabores.length}}</td>
+                                            <td class="align-middle text-center col-md-1">{{pizza.tamanho.valor |
+                                                currency: "R$ "}}</td>
+                                            <td (click)="retirarPizza(i)"
+                                                class="align-middle text-center col-md-1 d-flex w-100 justify-content-center">
+                                                <bi class="acoes" name="trash"></bi>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="!pedido.pizzas || pedido.pizzas.length == 0"
+                                    class="text-align-center alert alert-secondary" role="alert">
+                                    Nenhuma pizza adicionada
+                                </div>
+                                <div>
+                                    <div *ngIf="pedido.pizzas.length != 0" class="mb-3 fw-bold">Selecionados:
+                                        {{pedido.pizzas.length}}</div>
+                                    <div *ngIf="pedido.pizzas.length != 0" class="mb-3 fw-bold">Total:
+                                        {{calculaTotalPizzas() | currency: "R$ "}}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center pt-4 pb-3">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0 fw-bold">Pagamento</h5>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Produtos:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <p class="m-0 fw-bold">{{calculaTotalProdutos() | currency: "R$ "}}</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Pizzas:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <p class="m-0 fw-bold">{{calculaTotalPizzas() | currency: "R$ "}}</p>
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Entrega?<span *ngIf="!disabled" style="color:red">*</span>:
+                                    </h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <mat-checkbox [disabled]="disabled" #isEntrega [(ngModel)]="pedido.entrega"
+                                        name="isEntrega">Entrega</mat-checkbox>
+                                </div>
+                            </div>
+                            <div *ngIf="pedido.entrega" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Entrega<span *ngIf="!disabled" style="color:red">*</span>:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-3">
+                                    <h6 class="mb-0 pt-2 reais"><span *ngIf="!disabled">R$</span><span
+                                            *ngIf="disabled">{{pedido.valorEntrega | currency: 'R$ '}}</span></h6>
+                                    <input *ngIf="!disabled" value="0" type="number"
+                                        class="form-control form-control-md" name="valor"
+                                        [(ngModel)]="pedido.valorEntrega" required />
+                                </div>
+                            </div>
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Valor Total:</h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <p class="m-0 fw-bold">{{calculaValorTotal() | currency: "R$ "}}</p>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Pagamento<span *ngIf="!disabled" style="color:red">*</span>:
+                                    </h6>
+                                </div>
+                                <div class="col-md-3 pe-5">
+                                    <mat-form-field *ngIf="!disabled" form-control form-control-md>
+                                        <mat-label>Forma de Pagamento</mat-label>
+                                        <mat-select #formaPagamento name="formaPagamento"
+                                            [(ngModel)]="pedido.formaPagamento">
+                                            <mat-option *ngFor="let formaPagamento of keys(formasPagamento)"
+                                                [value]="formaPagamento">
+                                                {{formaPagamento}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <p *ngIf="disabled" class="m-0 fw-bold">{{pedido.formaPagamento}}</p>
+                                </div>
+                            </div>
+                            <hr class="mx-n3">
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Data de Criação:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-4">
+                                    <p class="mb-0">{{pedido.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div *ngIf="!modoEditar && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Data de Edição:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-4">
+                                    <p class="mb-0">{{pedido.edicao? (pedido.edicao | date : 'dd/MM/yyyy - HH:mm'):
+                                        'Nunca editado.'}}</p>
+                                </div>
+                            </div>
+                            <div *ngIf="!modoEditar && id && pedido.delecao" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Status:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-3">
+                                    <span class="badge bg-danger">Cancelado</span>
+                                </div>
+                            </div>
+                            <div *ngIf="pedido.delecao && !modoEditar && id" class="row align-items-center py-3">
+                                <div class="col-md-4 ps-5">
+                                    <h6 class="mb-0">Cancelado em:
+                                    </h6>
+                                </div>
+                                <div class="flex-row d-flex col-md-4">
+                                    <p class="mb-0">{{pedido.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                </div>
+                            </div>
+                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                                <button *ngIf="modoEditar == null && !id" type="submit"
+                                    class="color-white btn btn-warning" (click)="cadastrar()">Confirmar</button>
+                                <button *ngIf="modoEditar" type="submit" class="btn btn-edit"
+                                    (click)="editar()">Editar</button>
+                                <button *ngIf="!modoEditar && id && pedido.delecao === null" type="submit"
+                                    class="btn btn-danger" (click)="toggle()">Cancelar</button>
+                                <button *ngIf="!modoEditar && id && pedido.delecao != null" type="submit"
+                                    class="btn btn-success" (click)="toggle()">Reabrir  </button>
+                                <button type="button" id="cancelar" (click)="voltar(100)"
+                                    class="btn btn-secondary">Voltar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #pessoas let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal"
+            (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #produtos let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Produto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-produto-list [isModal]="true" (produtoSelecionado)="definirProduto($event)"></app-produto-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #pizzas let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Montar Pizza</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-pizza-details (pizzaSelecionada)="definirPizza($event)" [pizza]="pizzaDetalhada"></app-pizza-details>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>

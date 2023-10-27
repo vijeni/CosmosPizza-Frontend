@@ -1,0 +1,12 @@
+.tabela-details thead th{
+    background-color: #fada9f;
+    vertical-align: middle;
+    height: 3rem;
+}
+
+.bloqueado, .bloqueado:hover{
+    color: #F8F8F8;
+    border: none;
+    background-color: #ccc9c9;
+    cursor: not-allowed;
+}

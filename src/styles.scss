@@ -1,1 +1,133 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+body,html{
+    height: 100%;
+    width: 100%;
+}
+.w-80{
+    width: 80%;
+}
+.w-90{
+    width: 90%;
+}
+.w-95{
+    width: 95%;
+}
+
+app-pessoas-list, app-produto-list, app-produto-details, app-pessoas-details, app-sabor-lista, app-sabor-details, app-pedidos-list, app-pedidos-details, app-pizza-details{ 
+    width: 100%; 
+}
+
+app-ingrediente-list, app-ingredientes-details,app-tamanho-list, app-tamanho-details{
+    width: 100%;
+}
+
+app-sidebar{
+    height: 500vh;
+    background-color: #fada9f
+}
+
+body {
+    background-color: #F8F8F8;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.text-align-center {
+    text-align: center;
+}
+
+#novo-produto {
+    color: white;
+}
+hr{
+    color: #bda8a8;
+}
+table.tabela-principal thead tr th, .resultados{
+    color: #ACACAC;
+}
+
+table.tabela-principal tr{
+    border-style: hidden;
+    border-width: 0;
+}
+
+table.tabela-principal tbody tr {
+    transition: 1000ms;
+    cursor: pointer;
+    align-items: center;
+    background-color: white;
+    height: 4rem;
+    border-radius: .5rem;
+    margin-block: .5rem
+}
+.tabela-principal tbody tr:hover{
+    background-color: rgba(250, 218, 159, 0.445) !important;
+    transition: 500ms;
+    height: 5rem;
+}
+.status-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-inline: 5rem;
+}
+.estado{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+}
+.estado.desativado{
+    background-color: red;
+
+}
+.estado.ativado{
+    background-color: rgb(0, 228, 19);
+}
+.estado.andamento{
+    background-color: rgb(255, 188, 44);
+}
+.acoes{
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    color: rgb(255, 224, 46)
+}
+
+bi:hover{
+    transition: 500ms;
+    color: rgb(141, 126, 42)
+}
+
+.text-align-right{
+    text-align: right;
+}
+#cancelar{
+    cursor: pointer;
+}
+h6.reais{
+    font-weight: bold;
+    margin-right: .5rem;
+}
+.btn-edit{
+    background-color: orange;
+}
+.input-hidden{
+    display: none;
+    visibility: hidden
+}
+
+.search-btn{
+    width: 20px;
+    width: 20px;
+}
+
+.modal-table-tr{
+    background-color: #F8F8F8 !important;
+}
