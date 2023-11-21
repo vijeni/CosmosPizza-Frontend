@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
 import { Status } from 'src/app/models/enums/status/status';
-import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
+import { Role } from 'src/app/models/enums/role/role';
 import { Pedido } from 'src/app/models/pedido/pedido';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { Pizza } from 'src/app/models/pizza/pizza';
@@ -133,7 +133,7 @@ export class PedidosDetailsComponent implements OnInit {
   }
   definirPessoa(pessoaSelecionada: Pessoa) {
     this.modalService.dismissAll();
-    if (pessoaSelecionada.tipoPessoa == ('CLIENTE' as unknown as TipoPessoa)) {
+    if (pessoaSelecionada.role == ('CLIENTE' as unknown as Role)) {
       this.pedido.cliente = pessoaSelecionada;
     } else {
       this.pedido.funcionario = pessoaSelecionada;

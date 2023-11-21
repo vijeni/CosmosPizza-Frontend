@@ -14,12 +14,16 @@ import { PizzaDetailsComponent } from './views/pizza/pizza-details/pizza-details
 import { TamanhoListComponent } from './views/tamanho/tamanho-list/tamanho-list.component';
 import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho-details.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
+import { LoginComponent } from './core/login/login.component';
+import { rotasGuard } from './guards/rotas.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   {
     path: 'web',
     component: IndexComponent,
+    canActivate: [rotasGuard],
     children: [
       { path: 'pedidos', component: PedidosListComponent },
       { path: 'pedido/novo', component: PedidosDetailsComponent },

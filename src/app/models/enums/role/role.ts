@@ -1,4 +1,4 @@
-export enum TipoPessoa {
+export enum Role {
     FUNCIONARIO,
     CLIENTE
 }
