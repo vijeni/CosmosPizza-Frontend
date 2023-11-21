@@ -46,6 +46,7 @@ export class PedidosListComponent implements OnInit {
   constructor() {}
   async ngOnInit() {
     await this.getAll();
+    this.switchEstado.setValue(true)
     setTimeout(() => {
       this.filter.valueChanges.pipe(
         startWith(''),
@@ -83,7 +84,7 @@ export class PedidosListComponent implements OnInit {
         pedido.funcionario.nome.toLowerCase().includes(term) ||
         pipe.transform(pedido.valorTotal).includes(term) ||
         pipe.transform(pedido.id).includes(term)) &&
-        ((!this.switchEstado.value) || (pedido.dataConclusao === null && this.switchEstado.value))
+        ((!this.switchEstado.value) || (pedido.dataConclusao === null && this.switchEstado.value && pedido.delecao == null))
       );
     });
   }

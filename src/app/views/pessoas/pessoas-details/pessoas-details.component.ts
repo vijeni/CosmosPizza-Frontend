@@ -73,8 +73,7 @@ export class PessoasDetailsComponent implements OnInit {
         this.pessoa = pessoas;
         this.isErro = false;
         this.mensagem = 'Pessoa cadastrada com sucesso!';
-        await this.sleep(1000);
-        this.injectRouter.navigate(['/web/clientes']);
+        this.voltarFuncionario()
       },
       error: (erro) => {
         console.log(erro.error);
@@ -100,23 +99,35 @@ export class PessoasDetailsComponent implements OnInit {
   }
 
   deletar(id: number) {
-    this.service.delete(id).subscribe({
-      next: async (pessoas) => {
-        this.pessoa = pessoas;
-        this.mensagem = 'Pessoa desativada com sucesso!';
-        await this.sleep(1500);
-        this.injectRouter.navigate(['/web/clientes']);
-      },
-      error: async (erro) => {
-        console.log(erro.error);
-        await this.sleep(1500);
-        this.injectRouter.navigate(['/web/clientes']);
-        this.mensagem = 'Pessoa deletada com sucesso!';
-        /*
-      O deletar está funcionando normalmente, mas está retornando um erro de Json no console.
-      */
-      },
-    });
+    if (this.pessoa.delecao != null) {
+      if (confirm(`Confirma a ativação da pessoa ${this.pessoa.id}?`)) {
+        this.service.ativar(this.pessoa.id).subscribe({
+          next: (pessoa) => {
+            this.pessoa = pessoa;
+            this.isErro = false;
+            this.mensagem = 'Pessoa ativada com sucesso!';
+          },
+          error: (resposta) => {
+            this.isErro = true;
+            this.mensagem = resposta.error;
+          },
+        });
+      }
+    } else {
+      if (confirm(`Confirma a desativação do produto ${this.pessoa.id}?`)) {
+        this.service.delete(this.pessoa.id).subscribe({
+          next: (pessoa) => {
+            this.pessoa = pessoa;
+            this.isErro = true;
+            this.mensagem = 'Pessoa desativada com sucesso!';
+          },
+          error: (resposta) => {
+            this.isErro = true;
+            this.mensagem = resposta.error;
+          },
+        });
+      }
+    }
   }
 
   getById(id: number) {

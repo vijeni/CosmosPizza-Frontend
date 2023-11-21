@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 
 import { BootstrapIconsModule } from 'ng-bootstrap-icons';
-import { Trash, Pen, ArrowCounterclockwise, Search } from 'ng-bootstrap-icons/icons';
+import { Check ,SlashCircleFill, CheckCircleFill ,Trash, Pen, ArrowCounterclockwise, Search } from 'ng-bootstrap-icons/icons';
 
 const icons = {
   Pen,
   Trash,
   ArrowCounterclockwise,
-  Search
+  Search,
+  CheckCircleFill,
+  SlashCircleFill,
+  Check
 };
 
 @NgModule({

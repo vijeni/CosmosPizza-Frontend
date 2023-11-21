@@ -29,6 +29,7 @@ export class PedidosDetailsComponent implements OnInit {
   service = inject(PedidoService);
   modalService = inject(NgbModal);
   isClienteModal!: boolean;
+  pizzaDetalhada!: Pizza;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -71,6 +72,7 @@ export class PedidosDetailsComponent implements OnInit {
       },
       error: (resposta) => {
         this.isErro = true;
+        this.moveTo();
         this.mensagem = resposta.error;
       },
     });
@@ -85,12 +87,13 @@ export class PedidosDetailsComponent implements OnInit {
       },
       error: (resposta) => {
         this.isErro = true;
+        this.moveTo();
         this.mensagem = resposta.error;
       },
     });
   }
   toggle() {
-    if (this.pedido.delecao != null) {
+    if (this.pedido.delecao == null) {
       if (confirm(`Confirma o cancelamento do pedido ${this.pedido.id}?`)) {
         this.service.cancelar(this.pedido.id).subscribe({
           next: (pedido) => {
@@ -100,6 +103,7 @@ export class PedidosDetailsComponent implements OnInit {
           },
           error: (resposta) => {
             this.isErro = true;
+            this.moveTo();
             this.mensagem = resposta.error;
           },
         });
@@ -114,6 +118,7 @@ export class PedidosDetailsComponent implements OnInit {
           },
           error: (resposta) => {
             this.isErro = true;
+            this.moveTo();
             this.mensagem = resposta.error;
           },
         });
@@ -121,9 +126,15 @@ export class PedidosDetailsComponent implements OnInit {
     }
   }
   // modal
-  abrirModal(template: any) {
+  abrirModal(template: any, manterObjeto?: boolean) {
+    if(!manterObjeto){
+      console.log('opa')  
+      this.pizzaDetalhada = new Pizza()
+    }
+    console.log(this.pizzaDetalhada)
     this.modalService.open(template, { size: 'lg' });
   }
+
   selecionarClienteOrFuncionario(template: any, isCliente: boolean) {
     this.isClienteModal = isCliente;
     this.abrirModal(template);
@@ -188,5 +199,12 @@ export class PedidosDetailsComponent implements OnInit {
 
   retirarProduto(index: number) {
     this.pedido.produtos.splice(index, 1);
+  }
+  retirarPizza(index: number) {
+    this.pedido.pizzas.splice(index, 1);
+  }
+  detalharPizza(template:any, pizza: Pizza){
+    this.pizzaDetalhada = pizza
+    this.abrirModal(template, true)
   }
 }

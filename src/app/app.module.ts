@@ -39,6 +39,7 @@ import { CpfPipe } from './pipes/cpf.pipe';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Pagamento } from './models/enums/pagamento/pagamento';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 import { LoginComponent } from './core/login/login.component';
 
@@ -64,6 +65,7 @@ import { LoginComponent } from './core/login/login.component';
     PessoasDetailsComponent,
     CpfPipe,
     LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     MatCheckboxModule,

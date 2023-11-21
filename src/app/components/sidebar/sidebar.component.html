@@ -16,105 +16,113 @@
 	</div>
 </div>
 -->
-<div class="flex-shrink-0 p-3 menu"style="width: 280px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none borda-bottom">
-      <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-      <div class="cosmos-logo d-flex flex-column align-items-center"> 
-        <img src="../../../assets/siderbar/logo-pizza.svg" alt="logo-pizza">
+<div class="flex-shrink-0 p-3 menu" style="width: 280px;">
+  <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none borda-bottom">
+    <svg class="bi me-2" width="30" height="24">
+      <use xlink:href="#bootstrap"></use>
+    </svg>
+    <div class="cosmos-logo d-flex flex-column align-items-center">
+      <img src="../../../assets/siderbar/logo-pizza.svg" alt="logo-pizza">
       <span class="fs-5 fw-semibold "><br><span id="trequinho">| </span>Cosmos Pizza</span>
     </div>
-    </a>
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-    <img src="../../../assets/siderbar/home-restaurant.svg" alt="home" height="20vh" id="botao-home">
-    Restaurante
-  </button>
-      </li>
-      <li class="borda-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/clientes']" (click)="moveTo()" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          <img src="../../../assets/siderbar/clientes-icon.svg" height="20hv" alt="">
-          Clientes
-        </button>
-      </li>
-      <li class="borda-top my-3"></li>
+  </a>
+  <ul class="list-unstyled ps-0">
+    <li class="mb-1">
+      <!-- <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        data-bs-target="#dashboard-collapse" aria-expanded="false">
+        <img src="../../../assets/siderbar/home-restaurant.svg" alt="home" height="20vh" id="botao-home">
+        Restaurante
+      </button>
+    </li>
+    <li class="borda-top my-3"></li>
+    <li class="mb-1"> -->
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+        [routerLink]="['/web/clientes']" (click)="moveTo()" data-bs-target="#dashboard-collapse" aria-expanded="false">
+        <img src="../../../assets/siderbar/clientes-icon.svg" height="20hv" alt="">
+        Clientes
+      </button>
+    </li>
+    <li class="borda-top my-3"></li>
 
-      <li class="mb-1">
-        <button class="btn btn-toggle align-items-center rounded collapsed" [routerLink]="['/web/pedidos']" (click)="moveTo()" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          <img src="../../../assets/siderbar/pedidos-icon.svg" height="20vh" alt="">
-          Pedidos
-        </button>
-      </li>
-      <li class="borda-top my-3"></li>
-      <li class="mb-1">
-        <p>
-          <button
-            type="button"
-            class="btn btn-toggle align-items-center rounded collapsed"
-            (click)="cozinhaCollapse = ! cozinhaCollapse"
-            [attr.aria-expanded]="!cozinhaCollapse"
-            aria-controls="cozinhaCollapse"
-          >
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" [routerLink]="['/web/pedidos']"
+        (click)="moveTo()" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+        <img src="../../../assets/siderbar/pedidos-icon.svg" height="20vh" alt="">
+        Pedidos
+      </button>
+    </li>
+    <li class="borda-top my-3"></li>
+    <li class="mb-1">
+      <p>
+        <button type="button" class="btn btn-toggle align-items-center rounded collapsed"
+          (click)="cozinhaCollapse = ! cozinhaCollapse" [attr.aria-expanded]="!cozinhaCollapse"
+          aria-controls="cozinhaCollapse">
           <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
-            Cozinha
-            <img src="../../../assets/siderbar/selecionar-icon.svg" alt="">
-          </button>
-        </p>
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="cozinhaCollapse">
-          <div class="card">
-            <ul>
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/produtos']" (click)="moveTo()" data-bs-target="#account-collapse" aria-expanded="false">
+          Cozinha
+          <img src="../../../assets/siderbar/selecionar-icon.svg" alt="">
+        </button>
+      </p>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="cozinhaCollapse">
+        <div class="card">
+          <ul>
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+              [routerLink]="['/web/produtos']" (click)="moveTo()" data-bs-target="#account-collapse"
+              aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Produtos
             </button>
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" [routerLink]="['/web/ingredientes']" (click)="moveTo()" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+              data-bs-target="#account-collapse" [routerLink]="['/web/ingredientes']" (click)="moveTo()"
+              aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Ingredientes
             </button>
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" [routerLink]="['/web/tamanhos']" (click)="moveTo()" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+              data-bs-target="#account-collapse" [routerLink]="['/web/tamanhos']" (click)="moveTo()"
+              aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Tamanhos
             </button>
-            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/sabores']" (click)="moveTo()" data-bs-target="#account-collapse" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+              [routerLink]="['/web/sabores']" (click)="moveTo()" data-bs-target="#account-collapse"
+              aria-expanded="false">
               <img src="../../../assets/siderbar/cozinha-icon.svg" height="20vh" alt="">
               Sabores
             </button>
-            </ul>
-          </div>
+          </ul>
         </div>
-        <li class="borda-top my-3"></li>
-        <li class="mb-1">
-          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" (click)="moveTo()" data-bs-target="#account-collapse" aria-expanded="false">
-            <img src="../../../assets/siderbar/entregas-icon.svg" height="20vh" alt="">
-            Entregas
-          </button>
-          <li class="borda-top my-3"></li>
-          <li class="mb-1">
-            <p>
-              <button
-                type="button"
-                class="btn btn-toggle align-items-center rounded collapsed"
-                (click)="configuracoesCollapse = ! configuracoesCollapse"
-                [attr.aria-expanded]="!configuracoesCollapse"
-                aria-controls="configuracoesCollapse"
-              >
+      </div>
+    <li class="borda-top my-3"></li>
+    <!-- <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" (click)="moveTo()"
+        data-bs-target="#account-collapse" aria-expanded="false">
+        <img src="../../../assets/siderbar/entregas-icon.svg" height="20vh" alt="">
+        Entregas
+      </button>
+    <li class="borda-top my-3"></li> -->
+    <li class="mb-1">
+      <p>
+        <button type="button" class="btn btn-toggle align-items-center rounded collapsed"
+          (click)="configuracoesCollapse = ! configuracoesCollapse" [attr.aria-expanded]="!configuracoesCollapse"
+          aria-controls="configuracoesCollapse">
+          <img src="../../../assets/siderbar/configuracoes-icon.svg" height="20vh" alt="">
+          Configurações
+          <img src="../../../assets/siderbar/selecionar-icon.svg" alt="">
+        </button>
+      </p>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="configuracoesCollapse">
+        <div class="card">
+          <ul>
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+              [routerLink]="['/web/funcionarios']" (click)="moveTo()" data-bs-target="#account-collapse"
+              aria-expanded="false">
               <img src="../../../assets/siderbar/configuracoes-icon.svg" height="20vh" alt="">
-                Configurações
-                <img src="../../../assets/siderbar/selecionar-icon.svg" alt="">
-              </button>
-            </p>
-            <div #collapse="ngbCollapse" [(ngbCollapse)]="configuracoesCollapse">
-              <div class="card">
-                <ul>
-                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" [routerLink]="['/web/funcionarios']" (click)="moveTo()" data-bs-target="#account-collapse" aria-expanded="false">
-                  <img src="../../../assets/siderbar/configuracoes-icon.svg" height="20vh" alt="">
-                  Funcionários
-                </button>
-              </ul>
-              </div>
-            </div>
-            
-      </li>
-    </ul>
-  </div>
+              Funcionários
+            </button>
+          </ul>
+        </div>
+      </div>
+
+    </li>
+  </ul>
+</div>

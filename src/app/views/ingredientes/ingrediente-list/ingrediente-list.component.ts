@@ -25,11 +25,11 @@ export class IngredienteListComponent implements OnInit {
     filter = new FormControl('');
     switchEstado = new FormControl(false);
     decimalPipe = inject(DecimalPipe);
-    constructor() {this.getAll()}
+    constructor() {}
   
     async ngOnInit() {
-      
-      let url = this.router.url;
+      await this.getAll()
+      this.switchEstado.setValue(true)
       
       setTimeout(() => {
         this.filter.valueChanges
