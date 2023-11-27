@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngredientesDetailsComponent } from './IngredientesDetailsComponent';
+import { IngredientesDetailsComponent } from './ingredientes-details.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('IngredientesDetailsComponent', () => {
   let component: IngredientesDetailsComponent;
@@ -9,6 +11,8 @@ describe('IngredientesDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [IngredientesDetailsComponent],
+      imports: [HttpClientTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(IngredientesDetailsComponent);
     component = fixture.componentInstance;
