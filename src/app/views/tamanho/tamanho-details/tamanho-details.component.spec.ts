@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { TamanhoDetailsComponent } from './tamanho-details.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -30,6 +30,7 @@ describe('TamanhoDetailsComponent', () => {
     let mensagem: string = 'mensagem de erro';
     component.mensagem = mensagem;
     component.isErro = true;
+    component.id = "1";
     fixture.detectChanges();
 
   });
@@ -44,6 +45,22 @@ describe('TamanhoDetailsComponent', () => {
     if(component.isErro){
       expect(elemento).toBeTruthy;
     }
-  })
+  });
+  it('Chamanda a função Cadastrar', fakeAsync(() => {
+    spyOn(component, 'cadastrar');
+    let button = fixture.debugElement.query(By.css('.btn.btn-success')).nativeElement;
+    button.click();
+    tick();
+    expect(component.cadastrar).toHaveBeenCalled();
+  }));
+
+  it('Chamando a função Editar', fakeAsync(() => {
+    component.id = "1";
+    spyOn(component, 'editar');
+    let button = fixture.debugElement.query(By.css('.btn.btn-warning')).nativeElement;
+    button.click();
+    tick();
+    expect(component.editar).toHaveBeenCalledWith(1);
+  }));
   
 });
