@@ -41,6 +41,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Pagamento } from './models/enums/pagamento/pagamento';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
+import { LoginComponent } from './core/login/login.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-
     PedidosDetailsComponent,
     PessoasDetailsComponent,
     CpfPipe,
+    LoginComponent,
     DashboardComponent,
   ],
   imports: [

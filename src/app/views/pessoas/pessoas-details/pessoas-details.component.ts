@@ -10,7 +10,7 @@ import {
 } from '@angular/router';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
-import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
+import { Role } from 'src/app/models/enums/role/role';
 import { FormControl } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { CEPError, NgxViacepService } from '@brunoc/ngx-viacep'; // Importando o serviço
@@ -62,7 +62,7 @@ export class PessoasDetailsComponent implements OnInit {
     }
 
     if (url.includes('funcionario')) {
-      this.pessoa.tipoPessoa = TipoPessoa.FUNCIONARIO;
+      this.pessoa.role = Role.FUNCIONARIO;
       this.isFuncionario = true;
     }
   }

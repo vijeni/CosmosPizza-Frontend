@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { map, startWith } from 'rxjs';
-import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
+import { Role } from 'src/app/models/enums/role/role';
 import { Pessoa } from 'src/app/models/pessoa/pessoa';
 import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 
@@ -56,7 +56,7 @@ export class PessoasListComponent implements OnInit {
     if (url.includes('funcionario') || this.isClienteModal == false) {
       this.isFuncionario = true;
       await this.getAllFuncionarios();
-    } else if(url.includes('cliente') || this.isClienteModal == true){
+    } else if (url.includes('cliente') || this.isClienteModal == true) {
       this.isFuncionario = false;
       await this.getAllClientes();
     }
@@ -131,11 +131,11 @@ export class PessoasListComponent implements OnInit {
   selecionar(pessoa: Pessoa) {
     if (this.isModal) {
       this.pessoaSelecionada.emit(pessoa);
-    }else{
-      if(this.pessoa.tipoPessoa == TipoPessoa.CLIENTE){
-        this.router.navigate(['/web/cliente/', pessoa.id])
-      }else{
-        this.router.navigate(['/web/funcionario/', pessoa.id])
+    } else {
+      if (this.pessoa.role == Role.CLIENTE) {
+        this.router.navigate(['/web/cliente/', pessoa.id]);
+      } else {
+        this.router.navigate(['/web/funcionario/', pessoa.id]);
       }
     }
   }

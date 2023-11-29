@@ -1,21 +1,20 @@
-import { AbstractEntity } from "../abstract-entity/abstract-entity";
-import { Endereco } from "../endereco/endereco"
-import { TipoPessoa } from "../enums/tipo-pessoa/tipo-pessoa";
+import { AbstractEntity } from '../abstract-entity/abstract-entity';
+import { Endereco } from '../endereco/endereco';
+import { Role } from '../enums/role/role';
 
 export class Pessoa extends AbstractEntity {
-    nome!: string
-    cpf!: string
-    telefone!: string
-    endereco!: Endereco;
-    tipoPessoa!: TipoPessoa
+  nome!: string;
+  cpf!: string;
+  telefone!: string;
+  endereco!: Endereco;
+  role!: Role;
 
-    constructor(){
-        super();
-        this.nome = "";
-        this.cpf = "";
-        this.telefone = "";
-        this.tipoPessoa = TipoPessoa.CLIENTE;
-        this.endereco = new Endereco(); 
-    }
-
+  constructor() {
+    super();
+    this.nome = '';
+    this.cpf = '';
+    this.telefone = '';
+    this.role = Role.CLIENTE;
+    this.endereco = new Endereco();
+  }
 }
