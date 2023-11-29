@@ -25,7 +25,14 @@ const routes: Routes = [
     path: 'web',
     component: IndexComponent,
     canActivate: [rotasGuard],
+    data: { isAdmin: false },
     children: [
+      {
+        path: '',
+        component: PedidosListComponent,
+        canActivate: [rotasGuard],
+        data: { isAdmin: false },
+      },
       {
         path: 'pedidos',
         component: PedidosListComponent,
