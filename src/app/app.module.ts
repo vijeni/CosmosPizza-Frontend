@@ -43,6 +43,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 import { LoginComponent } from './core/login/login.component';
 import { httpInterceptorProviders } from './interceptors/http-interceptor.service';
+import { UsuariosListarComponent } from './views/usuarios/usuarios-listar/usuarios-listar.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { httpInterceptorProviders } from './interceptors/http-interceptor.servic
     CpfPipe,
     LoginComponent,
     DashboardComponent,
+    UsuariosListarComponent,
   ],
   imports: [
     MatCheckboxModule,

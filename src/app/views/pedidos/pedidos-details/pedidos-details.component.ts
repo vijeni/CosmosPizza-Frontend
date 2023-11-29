@@ -5,7 +5,7 @@ import { Pagamento } from 'src/app/models/enums/pagamento/pagamento';
 import { Status } from 'src/app/models/enums/status/status';
 import { Role } from 'src/app/models/enums/role/role';
 import { Pedido } from 'src/app/models/pedido/pedido';
-import { Pessoa } from 'src/app/models/pessoa/pessoa';
+import { Cliente, Cliente as Usuario } from 'src/app/models/cliente/cliente';
 import { Pizza } from 'src/app/models/pizza/pizza';
 import Produto from 'src/app/models/produto/produto';
 import { PedidoService } from 'src/app/services/pedido/pedido.service';
@@ -28,7 +28,6 @@ export class PedidosDetailsComponent implements OnInit {
   router = inject(Router);
   service = inject(PedidoService);
   modalService = inject(NgbModal);
-  isClienteModal!: boolean;
   pizzaDetalhada!: Pizza;
   constructor(private route: ActivatedRoute) {}
 
@@ -127,28 +126,26 @@ export class PedidosDetailsComponent implements OnInit {
   }
   // modal
   abrirModal(template: any, manterObjeto?: boolean) {
-    if(!manterObjeto){
-      console.log('opa')  
-      this.pizzaDetalhada = new Pizza()
+    if (!manterObjeto) {
+      this.pizzaDetalhada = new Pizza();
     }
-    console.log(this.pizzaDetalhada)
+    console.log(this.pizzaDetalhada);
     this.modalService.open(template, { size: 'lg' });
   }
 
-  selecionarClienteOrFuncionario(template: any, isCliente: boolean) {
-    this.isClienteModal = isCliente;
+  selecionarClienteOrFuncionario(template: any) {
     this.abrirModal(template);
   }
   adicionarProduto(template: any) {
     this.abrirModal(template);
   }
-  definirPessoa(pessoaSelecionada: Pessoa) {
+  definirCliente(clienteSelecionado: Cliente) {
     this.modalService.dismissAll();
-    if (pessoaSelecionada.role == ('CLIENTE' as unknown as Role)) {
-      this.pedido.cliente = pessoaSelecionada;
-    } else {
-      this.pedido.funcionario = pessoaSelecionada;
-    }
+    this.pedido.cliente = clienteSelecionado;
+  }
+  definirUsuario(usuarioSelecionado: any) {
+    this.modalService.dismissAll();
+    this.pedido.funcionario = usuarioSelecionado;
   }
   definirProduto(produtoSelecionado: Produto) {
     this.modalService.dismissAll();
@@ -203,8 +200,8 @@ export class PedidosDetailsComponent implements OnInit {
   retirarPizza(index: number) {
     this.pedido.pizzas.splice(index, 1);
   }
-  detalharPizza(template:any, pizza: Pizza){
-    this.pizzaDetalhada = pizza
-    this.abrirModal(template, true)
+  detalharPizza(template: any, pizza: Pizza) {
+    this.pizzaDetalhada = pizza;
+    this.abrirModal(template, true);
   }
 }

@@ -1,4 +1,4 @@
-import { PessoaService } from './pessoa.service';
+import { PessoaService } from './cliente.service';
 
 describe('PessoaService', () => {
   it('should create an instance', () => {

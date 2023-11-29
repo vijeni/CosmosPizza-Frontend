@@ -81,7 +81,7 @@ export class PedidosListComponent implements OnInit {
       return (
         (
         pedido.cliente.nome.toLowerCase().includes(term) ||
-        pedido.funcionario.nome.toLowerCase().includes(term) ||
+        pedido.funcionario.username.toLowerCase().includes(term) ||
         pipe.transform(pedido.valorTotal).includes(term) ||
         pipe.transform(pedido.id).includes(term)) &&
         ((!this.switchEstado.value) || (pedido.dataConclusao === null && this.switchEstado.value && pedido.delecao == null))

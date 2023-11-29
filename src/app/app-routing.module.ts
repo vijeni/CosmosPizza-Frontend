@@ -17,6 +17,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 import { LoginComponent } from './core/login/login.component';
 import { rotasGuard } from './guards/rotas.guard';
+import { UsuariosListarComponent } from './views/usuarios/usuarios-listar/usuarios-listar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
@@ -113,24 +114,18 @@ const routes: Routes = [
       },
       {
         path: 'funcionarios',
-        component: PessoasListComponent,
+        component: UsuariosListarComponent,
         canActivate: [rotasGuard],
         data: { isAdmin: false },
       },
       {
-        path: 'funcionario/novo',
+        path: 'cliente/editar/:id',
         component: PessoasDetailsComponent,
         canActivate: [rotasGuard],
         data: { isAdmin: true },
       },
       {
-        path: 'pessoa/editar/:id',
-        component: PessoasDetailsComponent,
-        canActivate: [rotasGuard],
-        data: { isAdmin: true },
-      },
-      {
-        path: 'pessoa/toggle/:id',
+        path: 'cliente/toggle/:id',
         component: PessoasDetailsComponent,
         canActivate: [rotasGuard],
         data: { isAdmin: true },

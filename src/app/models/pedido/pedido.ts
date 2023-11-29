@@ -1,13 +1,14 @@
 import { AbstractEntity } from '../abstract-entity/abstract-entity';
 import { Pagamento } from '../enums/pagamento/pagamento';
 import { Status } from '../enums/status/status';
-import { Pessoa } from '../pessoa/pessoa';
+import { Cliente } from '../cliente/cliente';
 import { Pizza } from '../pizza/pizza';
 import Produto from '../produto/produto';
+import { Usuario } from '../usuario/usuario';
 
 export class Pedido extends AbstractEntity {
-  cliente!: Pessoa;
-  funcionario!: Pessoa;
+  cliente!: Cliente;
+  funcionario!: Usuario;
   status!: Status;
   entrega!: boolean;
   valorPedido!: number;
