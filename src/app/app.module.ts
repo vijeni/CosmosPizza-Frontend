@@ -42,6 +42,7 @@ import { Pagamento } from './models/enums/pagamento/pagamento';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-details/ingredientes-details.component';
 import { LoginComponent } from './core/login/login.component';
+import { httpInterceptorProviders } from './interceptors/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,7 @@ import { LoginComponent } from './core/login/login.component';
     ReactiveFormsModule,
     NgFor,
   ],
-  providers: [DecimalPipe],
+  providers: [DecimalPipe, httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
