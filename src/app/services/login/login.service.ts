@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LoginService {
-  private baseURL = `${environment.apirUrl}/auth`;
+  public baseURL = `${environment.apirUrl}/auth`;
   http = inject(HttpClient);
   constructor() {}
   login(login: Login): Observable<Usuario> {
