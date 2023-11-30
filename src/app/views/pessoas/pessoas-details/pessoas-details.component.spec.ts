@@ -12,9 +12,8 @@ describe('PessoasDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PessoasDetailsComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(PessoasDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -5,6 +5,7 @@ import { Cliente } from 'src/app/models/cliente/cliente';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
+
 })
 export class PessoaService {
   API: string = `${environment.apirUrl}/api/cliente`;

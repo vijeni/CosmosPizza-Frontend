@@ -12,9 +12,8 @@ describe('ProdutoDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ProdutoDetailsComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(ProdutoDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

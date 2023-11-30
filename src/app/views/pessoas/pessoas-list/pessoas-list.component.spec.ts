@@ -12,9 +12,8 @@ describe('PessoasListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PessoasListComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(PessoasListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

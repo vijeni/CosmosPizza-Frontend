@@ -12,9 +12,8 @@ describe('PizzaDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PizzaDetailsComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(PizzaDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -21,9 +21,8 @@ describe('TamanhoListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TamanhoListComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(TamanhoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

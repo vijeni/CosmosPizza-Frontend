@@ -21,9 +21,8 @@ describe('TamanhoDetailsComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TamanhoDetailsComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-      providers: [ActivatedRoute],
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],           providers: [ActivatedRoute],
     });
     fixture = TestBed.createComponent(TamanhoDetailsComponent);
     component = fixture.componentInstance;

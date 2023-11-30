@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient, HttpClientModule } from '@angular/common/http';import { CanActivateFn } from '@angular/router';
 
 import { rotasGuard } from './rotas.guard';
 
@@ -8,7 +9,8 @@ describe('rotasGuard', () => {
       TestBed.runInInjectionContext(() => rotasGuard(...guardParameters));
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({      imports: [HttpClientModule,HttpClientTestingModule]
+});
   });
 
   it('should be created', () => {

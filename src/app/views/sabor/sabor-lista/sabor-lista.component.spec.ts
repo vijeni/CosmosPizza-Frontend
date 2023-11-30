@@ -12,9 +12,8 @@ describe('SaborListaComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SaborListaComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(SaborListaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
