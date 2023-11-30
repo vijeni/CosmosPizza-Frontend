@@ -47,7 +47,7 @@
                                     <p *ngIf="pedido.cliente" class="m-0 fw-bold pt-2">{{pedido.cliente.nome}}</p>
                                     <button type="button" style="height: fit-content;"
                                         class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="selecionarClienteOrFuncionario(pessoas, true)">Selecionar<bi
+                                        (click)="selecionarClienteOrFuncionario(pessoas)">Selecionar<bi
                                             class="search-btn" name="search">
                                         </bi></button>
 
@@ -61,11 +61,12 @@
                                     <input type="text" [(ngModel)]="pedido.funcionario" name="funcionario"
                                         class="text-center form-control form-control-md input-hidden" required
                                         disabled />
-                                    <p *ngIf="pedido.funcionario" class="m-0 fw-bold pt-2">{{pedido.funcionario.nome}}
+                                    <p *ngIf="pedido.funcionario" class="m-0 fw-bold pt-2">
+                                        {{pedido.funcionario.username}}
                                     </p>
                                     <button type="button" style="height: fit-content;"
                                         class="btn btn-warning d-flex flex-row gap-3"
-                                        (click)="selecionarClienteOrFuncionario(pessoas, false)">Selecionar<bi
+                                        (click)="selecionarClienteOrFuncionario(usuarios)">Selecionar<bi
                                             class="search-btn" name="search">
                                         </bi></button>
 
@@ -187,7 +188,8 @@
                                         <th scope="col" class="col-md-1 text-center">Ação</th>
                                     </thead>
                                     <tbody>
-                                        <tr (click)="detalharPizza(pizzas, pizza)" class="pizza-table" *ngFor="let pizza of pedido.pizzas; index as i">
+                                        <tr (click)="detalharPizza(pizzas, pizza)" class="pizza-table"
+                                            *ngFor="let pizza of pedido.pizzas; index as i">
                                             <th scope="row" class="align-middle text-center col-md-1">
                                                 {{pizza.tamanho.nome}}
                                             </th>
@@ -334,7 +336,7 @@
                                 <button *ngIf="!modoEditar && id && pedido.delecao === null" type="submit"
                                     class="btn btn-danger" (click)="toggle()">Cancelar</button>
                                 <button *ngIf="!modoEditar && id && pedido.delecao != null" type="submit"
-                                    class="btn btn-success" (click)="toggle()">Reabrir  </button>
+                                    class="btn btn-success" (click)="toggle()">Reabrir </button>
                                 <button type="button" id="cancelar" (click)="voltar(100)"
                                     class="btn btn-secondary">Voltar</button>
                             </div>
@@ -351,8 +353,19 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <app-pessoas-list [isModal]="true" [isClienteModal]="isClienteModal"
-            (pessoaSelecionada)="definirPessoa($event)"></app-pessoas-list>
+        <app-pessoas-list [isModal]="true" (pessoaSelecionada)="definirCliente($event)"></app-pessoas-list>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+    </div>
+</ng-template>
+<ng-template #usuarios let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Selecionar Pessoa</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-usuarios-listar [isModal]="true" (usuarioSelecionada)="definirUsuario($event)"></app-usuarios-listar>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>

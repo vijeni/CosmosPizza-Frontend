@@ -10,32 +10,29 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
-import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { map, startWith } from 'rxjs';
-import { Role } from 'src/app/models/enums/role/role';
-import { Cliente } from 'src/app/models/cliente/cliente';
-import { PessoaService } from 'src/app/services/cliente/cliente.service';
+import { Usuario } from 'src/app/models/usuario/usuario';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
-  selector: 'app-pessoas-list',
-  templateUrl: './pessoas-list.component.html',
-  styleUrls: ['./pessoas-list.component.scss'],
-  providers: [DecimalPipe],
+  selector: 'app-usuarios-listar',
+  templateUrl: './usuarios-listar.component.html',
+  styleUrls: ['./usuarios-listar.component.scss']
 })
-export class PessoasListComponent implements OnInit {
+export class UsuariosListarComponent implements OnInit{
   // comm de modal
-  @Output() pessoaSelecionada = new EventEmitter<Cliente>();
+  @Output() usuarioSelecionada = new EventEmitter<Usuario>();
   @Input() isModal: boolean = false;
-  @Input() isClienteModal: boolean = true;
+  @Input() isUsuarioModal: boolean = true;
 
-  //pessoas
-  pessoas: Cliente[] = [];
-  pessoas$: Cliente[] = [];
-  pessoa = new Cliente();
+  //usuarios
+  usuarios: Usuario[] = [];
+  usuarios$: Usuario[] = [];
+  usuario = new Usuario();
   index!: number;
 
   // services e pipes
-  service = inject(PessoaService);
+  service = inject(UsuarioService);
   router = inject(Router);
   decimalPipe = inject(DecimalPipe);
 
@@ -53,7 +50,7 @@ export class PessoasListComponent implements OnInit {
   async ngOnInit() {
     this.switchEstado.setValue(true);
     this.isFuncionario = false;
-    await this.getAllClientes();
+    await this.getAllUsuarios();
     setTimeout(() => {
       this.filter.valueChanges
         .pipe(
@@ -61,40 +58,40 @@ export class PessoasListComponent implements OnInit {
           map((text) => this.search(text as string, this.decimalPipe))
         )
         .subscribe({
-          next: (pessoasFiltradas) => {
-            this.pessoas$ = pessoasFiltradas;
+          next: (usuariosFiltradas) => {
+            this.usuarios$ = usuariosFiltradas;
           },
         });
     }, 1000);
   }
-  search(text: string, pipe: PipeTransform): Cliente[] {
-    return this.pessoas.filter((pessoa) => {
+  search(text: string, pipe: PipeTransform): Usuario[] {
+    return this.usuarios.filter((usuario) => {
       const term = text.toLowerCase();
       return (
-        (pessoa.nome.toLowerCase().includes(term) ||
-          pessoa.telefone.toLowerCase().includes(term) ||
-          pessoa.cpf.toLowerCase().includes(term) ||
-          pipe.transform(pessoa.id).includes(term)) &&
+        (usuario.username.toLowerCase().includes(term) ||
+          usuario.cpf.toLowerCase().includes(term) ||
+          usuario.role.toString().toLowerCase().includes(term) ||
+          pipe.transform(usuario.id).includes(term)) &&
         (!this.switchEstado.value ||
-          (pessoa.delecao === null && this.switchEstado.value))
+          (usuario.delecao === null && this.switchEstado.value))
       );
     });
   }
 
   async getAll() {
     this.service.getAll().subscribe({
-      next: (pessoas) => {
-        this.pessoas = pessoas;
+      next: (usuarios) => {
+        this.usuarios = usuarios;
       },
       error: (erro) => {
         console.log(erro.error);
       },
     });
   }
-  async getAllClientes() {
+  async getAllUsuarios() {
     this.service.getAll().subscribe({
-      next: (pessoas) => {
-        this.pessoas = pessoas;
+      next: (usuarios) => {
+        this.usuarios = usuarios;
       },
       error: (erro) => {
         console.log(erro.error);
@@ -103,20 +100,20 @@ export class PessoasListComponent implements OnInit {
   }
 
   editar(id: number) {
-    this.router.navigate(['/web/pessoa/editar', id]);
+    this.router.navigate(['/web/usuario/editar', id]);
   }
 
   toggle(id: number) {
-    this.router.navigate(['/web/pessoa/toggle', id]);
+    this.router.navigate(['/web/usuario/toggle', id]);
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
   }
-  selecionar(pessoa: Cliente) {
+  selecionar(usuario: Usuario) {
     if (this.isModal) {
-      this.pessoaSelecionada.emit(pessoa);
+      this.usuarioSelecionada.emit(usuario);
     } else {
-      this.router.navigate(['/web/cliente/', pessoa.id]);
+      this.router.navigate(['/web/Usuario/', usuario.id]);
     }
   }
 }

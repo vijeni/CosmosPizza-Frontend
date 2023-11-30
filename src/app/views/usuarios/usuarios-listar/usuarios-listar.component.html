@@ -1,0 +1,50 @@
+<div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
+    <div class="w-90">
+        <div *ngIf="!isModal" class="d-flex justify-content-between header">
+            <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Funcionários</h5>
+        </div>
+        <hr *ngIf="!isModal">
+        <form>
+            <div class="mb-3 row d-flex flex-row justify-content-between">
+                <div class="w-50 d-flex flex-row gap-3">
+                    <label for="table-filtering-search" class="col-xs-3 col-sm-auto col-form-label">Procure por qualquer
+                        campo:</label>
+                    <div class="col-xs-3 col-sm-auto">
+                        <input id="table-filtering-search" class="form-control" type="text" [formControl]="filter" />
+                    </div>
+                </div>
+                <mat-slide-toggle [ngClass]="
+                {'input-hidden': isModal}
+                " class="w-25 pt-2" name="estadoAtivo" [formControl]="switchEstado" #estadoAtivo
+                    (change)="filtrarEstado()" color="primary">Mostrar apenas ativos</mat-slide-toggle>
+ 
+            </div>
+        </form>
+        <div class="mb-3 resultados">Resultados: {{usuarios$.length}}</div>
+        <table class="tabela-principal d-grid">
+            <thead class="d-grid container">
+                <tr class="row">
+                    <th scope="col" class="col text-center">Usuário</th>
+                    <th scope="col" class="col text-center">CPF</th>
+                    <th scope="col" class="col text-center">Tipo</th>
+                    <th *ngIf="!isModal" scope="col" class=" col-md-4 text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody #tabela class="d-grid container">
+                <tr [ngClass]="{'modal-table-tr': isModal}" (click)="selecionar(usuario)" class="row"
+                    *ngFor="let usuario of usuarios$ ; index as i">
+                    <td class="align-middle text-center col">{{ usuario.username }}</td>
+                    <td class="align-middle text-center col">{{ usuario.cpf? (usuario.cpf | cpf): ""}}</td>
+                    <td class="align-middle text-center col">{{ usuario.role }}</td>
+                    <td *ngIf="!isModal" class="status-cell align-middle text-center col-md-4">
+                        <div *ngIf="usuario.delecao" class="estado desativado"></div>
+                        <div *ngIf="!usuario.delecao" class="estado ativado"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="usuarios.length == 0 || usuarios$.length == 0" class="mt-5 text-align-center alert alert-secondary" role="alert">
+            Nenhum usuário encontrado
+        </div>
+    </div>
+</div>
