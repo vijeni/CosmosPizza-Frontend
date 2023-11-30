@@ -4,6 +4,7 @@ import { ProdutoDetailsComponent } from './produto-details.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('ProdutoDetailsComponent', () => {
   let component: ProdutoDetailsComponent;
@@ -22,4 +23,6 @@ describe('ProdutoDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+ 
+
 });
