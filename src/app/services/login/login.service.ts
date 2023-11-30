@@ -47,3 +47,5 @@ export class LoginService {
     return hasRole;
   }
 }
+
+export { Login };
