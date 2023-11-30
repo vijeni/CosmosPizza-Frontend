@@ -58,7 +58,8 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Com DDD. Ex: (45)" *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o telefone</mat-label>
-                                            <input matInput #inputTelefone maxlength="20" [(ngModel)]="pessoa.telefone"
+                                            <input matInput #inputTelefone 
+                                            name="telefone" maxlength="20" [(ngModel)]="pessoa.telefone"
                                                 placeholder="Com DDD. Ex: (45)" class="w-100">
                                             <mat-hint align="end">{{inputTelefone.value.length}}/20</mat-hint>
                                         </mat-form-field>
@@ -80,7 +81,8 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Não vamos divulgar para ninguém." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o CPF</mat-label>
-                                            <input matInput #inputCpf maxlength="14" [(ngModel)]="pessoa.cpf"
+                                            <input matInput #inputCpf 
+                                            name="cpf" maxlength="14" [(ngModel)]="pessoa.cpf"
                                                 placeholder="000.000.000-00" [mask]="cpfMask()" class="w-100">
                                             <mat-hint align="end">{{inputCpf.value.length}}/14</mat-hint>
                                         </mat-form-field>
@@ -101,7 +103,9 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O CEP da rua da pessoa." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o CEP</mat-label>
-                                            <input matInput #inputCep maxlength="09" (change)="viaCep()"
+                                            <input matInput #inputCep 
+                                            name="cep"
+                                            maxlength="09" (change)="viaCep()"
                                                 [(ngModel)]="pessoa.endereco.cep" placeholder="CEP" class="w-100">
                                             <mat-hint align="end">{{inputCep.value.length}}/9</mat-hint>
                                         </mat-form-field>
