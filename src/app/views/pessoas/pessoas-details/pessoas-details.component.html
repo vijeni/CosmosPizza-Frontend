@@ -126,7 +126,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Nome da Rua, Avenida ou Travessa." *ngIf="!disabled">
                                             <mat-label>Digite o logradouro</mat-label>
-                                            <input matInput #inputLogradouro maxlength="40" placeholder="Logradouro"
+                                            <input name="logradouro" matInput #inputLogradouro maxlength="40" placeholder="Logradouro"
                                                 [(ngModel)]="pessoa.endereco.logradouro" class="w-100">
                                             <mat-hint align="end">{{inputLogradouro.value.length}}/40</mat-hint>
                                         </mat-form-field>
@@ -147,7 +147,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field *ngIf="!disabled">
                                             <mat-label>Digite o número</mat-label>
-                                            <input matInput #inputNumero
+                                            <input matInput #inputNumero name="numero"
                                                 placeholder="O número de residência, se possuir."
                                                 [(ngModel)]="pessoa.endereco.numero" class="w-100">
                                         </mat-form-field>
@@ -168,7 +168,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O bairro do logradouro" *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o bairro</mat-label>
-                                            <input matInput #inputBairro maxlength="40"
+                                            <input matInput #inputBairro maxlength="40" name="bairro"
                                                 placeholder="O bairro do logradouro"
                                                 [(ngModel)]="pessoa.endereco.bairro" class="w-100">
                                             <mat-hint align="end">{{inputBairro.value.length}}/40</mat-hint>
@@ -191,7 +191,7 @@
                                         <mat-form-field hintLabel="Um complemento do endereço" *ngIf="!disabled">
                                             <mat-label>Digite um complemento:</mat-label>
                                             <input matInput #inputComplemento maxlength="40"
-                                                [(ngModel)]="pessoa.endereco.complemento"
+                                                [(ngModel)]="pessoa.endereco.complemento" name="complemento"
                                                 placeholder="Digite um complemento" class="w-100">
                                             <mat-hint align="end">{{inputComplemento.value.length}}/40</mat-hint>
                                         </mat-form-field>
@@ -212,7 +212,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Um complemento do endereço" *ngIf="!disabled">
                                             <mat-label>Digite a cidade:</mat-label>
-                                            <input matInput #inputCidade maxlength="40" placeholder="A cidade"
+                                            <input matInput #inputCidade maxlength="40" name="cidade" placeholder="A cidade"
                                                 [(ngModel)]="pessoa.endereco.cidade" class="w-100">
                                         </mat-form-field>
                                         <form #form="ngForm" *ngIf="disabled">
@@ -232,7 +232,7 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="A Unidade Federal" *ngIf="!disabled">
                                             <mat-label>Digite a UF:</mat-label>
-                                            <input matInput #inputUf placeholder="Digite a UF"
+                                            <input matInput #inputUf name="uf" placeholder="Digite a UF"
                                                 [(ngModel)]="pessoa.endereco.uf" class="w-100">
                                         </mat-form-field>
                                         <form #form="ngForm" *ngIf="disabled">

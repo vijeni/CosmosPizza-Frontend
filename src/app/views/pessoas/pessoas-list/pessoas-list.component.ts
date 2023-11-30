@@ -103,11 +103,11 @@ export class PessoasListComponent implements OnInit {
   }
 
   editar(id: number) {
-    this.router.navigate(['/web/pessoa/editar', id]);
+    this.router.navigate(['/web/cliente/editar', id]);
   }
 
   toggle(id: number) {
-    this.router.navigate(['/web/pessoa/toggle', id]);
+    this.router.navigate(['/web/cliente/toggle', id]);
   }
   filtrarEstado() {
     this.filter.setValue(this.filter.value);

@@ -25,7 +25,12 @@ export const rotasGuard: CanActivateFn = (route, state) => {
         return true;
       }
     }else{
-      return loginService.isAdmin() || needsAdmin == false
+      if(loginService.isAdmin() || needsAdmin == false){
+        return true
+      }else{
+        alert("Acesso negado!")
+        return false
+      }
     }
   } 
 };
