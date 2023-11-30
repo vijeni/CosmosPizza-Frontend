@@ -1,0 +1,43 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+      
+env:
+  AWS_AKI: ASIAZNGUUBCKQWTEHB7K
+  AWS_SAK: UTfxGJ0Phq7mUr0pLoamruLnxi2nW8utmFBIQEiK
+  AWS_ST: FwoGZXIvYXdzEHgaDGVFQhFS8GLWvRNGCiLIAU73qZMw1TwZFw1FlsMuTx03oBoftiQt7LbywG3FXB/8P2j8htGlt/0qpU5t7QkWXByK8mVYtz0uUgUtek711N7RXkzlp/d8bDUe6cbhrdx4fhjPM2+M3WWQXX7wjKsz4F1IhTr7SqduZna7HytRJUBde8t3h5OSlStcauVUcLeAogjijvJAm/DT5+mYsvR4Mp2eaegHuC9Z1gND/76ETwk2yCznIW1jVV2R095K/wb8sk50k9nTr8UKF6q8Vdw50FpCuT96FoDrKO3a36oGMi2JFpJ2L83JqtACAQ9LGAetSmBvihGEQbjLrNrvEAh3OlP2V+cN8pCCvWIWiAI=
+  AWS_R: us-east-1
+  AWS_U_ECR: 646838487189.dkr.ecr.us-east-1.amazonaws.com
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      
+      - name: Instalar dependências do frontend
+        run: npm install
+      - name: Build depedencias do angular
+        run: npm run build
+      - name: Console.log
+        run: ls -ltr
+      - name: Configure AWS credentials for kubectl
+        run: aws configure set aws_access_key_id $AWS_AKI && aws configure set aws_secret_access_key $AWS_SAK && aws configure set aws_session_token $AWS_ST && aws configure set region $AWS_R
+      - name: Configure AWS credentials for kubectl
+        run: aws ecr get-login-password --region $AWS_R | docker login --username AWS --password-stdin $AWS_U_ECR      
+      - name: Build e Push da imagem Docker do frontend
+        run: |
+          docker build -t npvet-frontend . &&
+          docker tag npvet-frontend:latest $AWS_U_ECR/npvet-frontend:latest &&
+          docker push $AWS_U_ECR/npvet-frontend:latest
