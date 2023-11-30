@@ -1,7 +1,17 @@
-import { Login } from './login.service';
+import { TestBed } from '@angular/core/testing';
+import { LoginService } from './login.service';
 
-describe('Login', () => {
-  it('should create an instance', () => {
-    expect(new Login()).toBeTruthy();
+
+describe('ingrediente', () => {
+  let service: LoginService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(LoginService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });
+

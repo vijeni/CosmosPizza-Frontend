@@ -1,7 +1,16 @@
+import { TestBed } from '@angular/core/testing';
 import { IngredientesService } from './ingredientes.service';
 
-describe('IngredientesService', () => {
-  it('should create an instance', () => {
-    expect(new IngredientesService()).toBeTruthy();
+
+describe('ingrediente', () => {
+  let service: IngredientesService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(IngredientesService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });
