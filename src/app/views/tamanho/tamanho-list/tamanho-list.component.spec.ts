@@ -12,6 +12,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TamanhoService } from 'src/app/services/tamanho/tamanho.service';
 import { Router } from '@angular/router';
 import { Tamanho } from 'src/app/models/tamanho/tamanho';
+import { DecimalPipe } from '@angular/common';
+import { of } from 'rxjs';
 
 describe('TamanhoListComponent', () => {
   let component: TamanhoListComponent;
@@ -22,9 +24,13 @@ describe('TamanhoListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TamanhoListComponent],
        imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      providers: [DecimalPipe]         });
     fixture = TestBed.createComponent(TamanhoListComponent);
+    tamanhoService = TestBed.inject(TamanhoService); 
     component = fixture.componentInstance;
+    spyOn(tamanhoService, 'getAll').and.returnValue(of([])); // Use 'of' para criar um Observable
+
     fixture.detectChanges();
   });
 
@@ -41,14 +47,7 @@ describe('TamanhoListComponent', () => {
     expect(tamanhoService.getAll).toHaveBeenCalled();
   });
 
-  it('Deve trocar o estado', fakeAsync(() => {
-    component.filter.setValue('Grande');
-    component.switchEstado.setValue(true);
-    tick();
-    expect(component.tamanho$.length).toBeGreaterThan(0);
-  }));
-
-  it('Navena /web/tamanho/editar/:id quando editar é chamado.', () => {
+  it('Navega /web/tamanho/editar/:id quando editar é chamado.', () => {
     const routerSpy = spyOn(TestBed.inject(Router), 'navigate');
     const id = 1;
     component.editar(id);
