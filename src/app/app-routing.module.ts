@@ -22,6 +22,7 @@ import { UsuariosListarComponent } from './views/usuarios/usuarios-listar/usuari
 const routes: Routes = [
   { path: '', redirectTo: 'web', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [rotasGuard] },
+  { path: 'logout', component: LoginComponent, canActivate: [rotasGuard] },
   {
     path: 'web',
     component: IndexComponent,
@@ -232,7 +233,17 @@ const routes: Routes = [
         canActivate: [rotasGuard],
         data: { isAdmin: false },
       },
+      {
+        path: '**',
+        redirectTo: '/web',
+        pathMatch: 'full',
+      },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: '/web',
+    pathMatch: 'full',
   },
 ];
 

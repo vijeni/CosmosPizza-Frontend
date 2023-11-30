@@ -17,9 +17,8 @@ export class LoginService {
     return this.http.post<Usuario>(this.baseURL, login);
   }
 
-  logout(): Observable<any> {
+  logout(): any {
     this.removeToken();
-    return this.http.get<any>(this.baseURL + '/logout');
   }
   addToken(token: string) {
     localStorage.setItem('token', token);

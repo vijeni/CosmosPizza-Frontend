@@ -34,20 +34,11 @@
                 <tr [ngClass]="{'modal-table-tr': isModal}" (click)="selecionar(usuario)" class="row"
                     *ngFor="let usuario of usuarios$ ; index as i">
                     <td class="align-middle text-center col">{{ usuario.username }}</td>
+                    <td class="align-middle text-center col">{{ usuario.cpf? (usuario.cpf | cpf): ""}}</td>
                     <td class="align-middle text-center col">{{ usuario.role }}</td>
-                    <td class="align-middle text-center col">{{ usuario.cpf | cpf}}</td>
                     <td *ngIf="!isModal" class="status-cell align-middle text-center col-md-4">
                         <div *ngIf="usuario.delecao" class="estado desativado"></div>
                         <div *ngIf="!usuario.delecao" class="estado ativado"></div>
-                        <div (click)="editar(usuario.id)">
-                            <bi class="acoes" name="pen"></bi>
-                        </div>
-                        <div *ngIf="usuario.delecao === null" (click)="toggle(usuario.id)">
-                            <bi class="acoes" name="trash"></bi>
-                        </div>
-                        <div *ngIf="usuario.delecao != null" (click)="toggle(usuario.id)">
-                            <bi class="acoes" name="arrow-counterclockwise"></bi>
-                        </div>
                     </td>
                 </tr>
             </tbody>

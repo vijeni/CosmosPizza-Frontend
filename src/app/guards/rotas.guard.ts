@@ -14,7 +14,7 @@ export const rotasGuard: CanActivateFn = (route, state) => {
     return true;
   } else if (rota === 'logout') {
     loginService.logout();
-    router.navigate(['/web']);
+    router.navigate(['']);
     return true;
   } else {
     if (token === null) {

@@ -21,6 +21,7 @@ import { TamanhoDetailsComponent } from './views/tamanho/tamanho-details/tamanho
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
+  NgbCollapseModule,
   NgbModule,
   NgbPaginationModule,
   NgbTypeaheadModule,
@@ -30,7 +31,7 @@ import { IconsModule } from './modules/icons.modules';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { DecimalPipe, NgFor, AsyncPipe } from '@angular/common';
 import { MatChipOption, MatChipsModule } from '@angular/material/chips';
 import { NgxViacepModule } from '@brunoc/ngx-viacep';
@@ -44,9 +45,12 @@ import { IngredientesDetailsComponent } from './views/ingredientes/ingredientes-
 import { LoginComponent } from './core/login/login.component';
 import { httpInterceptorProviders } from './interceptors/http-interceptor.service';
 import { UsuariosListarComponent } from './views/usuarios/usuarios-listar/usuarios-listar.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
+    SidebarComponent,
     AppComponent,
     IndexComponent,
     PessoasListComponent,
@@ -79,7 +83,6 @@ import { UsuariosListarComponent } from './views/usuarios/usuarios-listar/usuari
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SidebarComponent,
     BrowserAnimationsModule,
     IconsModule,
     MatFormFieldModule,
@@ -101,6 +104,12 @@ import { UsuariosListarComponent } from './views/usuarios/usuarios-listar/usuari
     MatSelectModule,
     ReactiveFormsModule,
     NgFor,
+    NgbCollapseModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    RouterModule,
   ],
   providers: [DecimalPipe, httpInterceptorProviders],
   bootstrap: [AppComponent],
