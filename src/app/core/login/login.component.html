@@ -1,0 +1,19 @@
+<div class="h-100 w-100 m-0 p-0">
+    <div class="row h-100 w-100 d-flex align-items-center">
+        <div class="col p-0 w-100 h-75 w-75 d-flex align-items-center justify-content-center gap-5 flex-column">
+            <h2 class="mb-5">Acesse agora</h2>
+            <form class="w-100 d-flex align-items-center flex-column gap-4">
+                <div class="d-flex flex-column gap-3 w-100 align-items-center">
+                    <p class="mensagem">{{mensagem}}</p>
+                    <input name="username" [(ngModel)]="login.username" (keydown.enter)="doLogin()" placeholder="Usuário" type="text">
+                    <input name="username" [(ngModel)]="login.password "(keydown.enter)="doLogin()" placeholder="Senha" [type]="password">
+                    <div class="show-password" (click)="showPassword()">
+                        <bi aria-hidden="true" name="eye" *ngIf="!show"></bi>
+                        <bi aria-hidden="true" name="eye-slash" *ngIf="show"></bi>
+                    </div>
+                    <button type="button" (click)="doLogin()" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

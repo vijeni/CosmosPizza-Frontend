@@ -12,9 +12,9 @@ import { FormControl } from '@angular/forms';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { map, startWith } from 'rxjs';
-import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
-import { Pessoa } from 'src/app/models/pessoa/pessoa';
-import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
+import { Role } from 'src/app/models/enums/role/role';
+import { Cliente } from 'src/app/models/cliente/cliente';
+import { PessoaService } from 'src/app/services/cliente/cliente.service';
 
 @Component({
   selector: 'app-pessoas-list',
@@ -24,14 +24,14 @@ import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
 })
 export class PessoasListComponent implements OnInit {
   // comm de modal
-  @Output() pessoaSelecionada = new EventEmitter<Pessoa>();
+  @Output() pessoaSelecionada = new EventEmitter<Cliente>();
   @Input() isModal: boolean = false;
   @Input() isClienteModal: boolean = true;
 
   //pessoas
-  pessoas: Pessoa[] = [];
-  pessoas$: Pessoa[] = [];
-  pessoa = new Pessoa();
+  pessoas: Cliente[] = [];
+  pessoas$: Cliente[] = [];
+  pessoa = new Cliente();
   index!: number;
 
   // services e pipes
@@ -52,14 +52,8 @@ export class PessoasListComponent implements OnInit {
 
   async ngOnInit() {
     this.switchEstado.setValue(true);
-    let url = this.router.url;
-    if (url.includes('funcionario') || this.isClienteModal == false) {
-      this.isFuncionario = true;
-      await this.getAllFuncionarios();
-    } else if(url.includes('cliente') || this.isClienteModal == true){
-      this.isFuncionario = false;
-      await this.getAllClientes();
-    }
+    this.isFuncionario = false;
+    await this.getAllClientes();
     setTimeout(() => {
       this.filter.valueChanges
         .pipe(
@@ -73,7 +67,7 @@ export class PessoasListComponent implements OnInit {
         });
     }, 1000);
   }
-  search(text: string, pipe: PipeTransform): Pessoa[] {
+  search(text: string, pipe: PipeTransform): Cliente[] {
     return this.pessoas.filter((pessoa) => {
       const term = text.toLowerCase();
       return (
@@ -98,17 +92,7 @@ export class PessoasListComponent implements OnInit {
     });
   }
   async getAllClientes() {
-    this.service.getAllClientes().subscribe({
-      next: (pessoas) => {
-        this.pessoas = pessoas;
-      },
-      error: (erro) => {
-        console.log(erro.error);
-      },
-    });
-  }
-  async getAllFuncionarios() {
-    this.service.getAllFuncionarios().subscribe({
+    this.service.getAll().subscribe({
       next: (pessoas) => {
         this.pessoas = pessoas;
       },
@@ -128,15 +112,11 @@ export class PessoasListComponent implements OnInit {
   filtrarEstado() {
     this.filter.setValue(this.filter.value);
   }
-  selecionar(pessoa: Pessoa) {
+  selecionar(pessoa: Cliente) {
     if (this.isModal) {
       this.pessoaSelecionada.emit(pessoa);
-    }else{
-      if(this.pessoa.tipoPessoa == TipoPessoa.CLIENTE){
-        this.router.navigate(['/web/cliente/', pessoa.id])
-      }else{
-        this.router.navigate(['/web/funcionario/', pessoa.id])
-      }
+    } else {
+      this.router.navigate(['/web/cliente/', pessoa.id]);
     }
   }
 }

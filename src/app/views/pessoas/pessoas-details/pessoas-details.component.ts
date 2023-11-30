@@ -1,18 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import {
-  RouterModule,
-  RouterLink,
   Router,
   ActivatedRoute,
 } from '@angular/router';
-import { Pessoa } from 'src/app/models/pessoa/pessoa';
-import { PessoaService } from 'src/app/services/pessoa/pessoa.service';
-import { TipoPessoa } from 'src/app/models/enums/tipo-pessoa/tipo-pessoa';
-import { FormControl } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
+import { Cliente } from 'src/app/models/cliente/cliente';
+import { PessoaService } from 'src/app/services/cliente/cliente.service';
+
 import { CEPError, NgxViacepService } from '@brunoc/ngx-viacep'; // Importando o serviço
 import { EMPTY, catchError } from 'rxjs';
 import { Endereco, EnderecoInterface } from 'src/app/models/endereco/endereco';
@@ -28,7 +21,7 @@ import { provideNgxMask } from 'ngx-mask';
   providers: [provideNgxMask()],
 })
 export class PessoasDetailsComponent implements OnInit {
-  pessoa = new Pessoa();
+  pessoa = new Cliente();
 
   index!: number;
   isErro!: boolean;
@@ -38,7 +31,6 @@ export class PessoasDetailsComponent implements OnInit {
   modoEditar!: boolean;
   id!: string;
   disabled!: boolean;
-  isFuncionario!: boolean;
 
   constructor(
     private viacep: NgxViacepService,
@@ -60,11 +52,6 @@ export class PessoasDetailsComponent implements OnInit {
         this.disabled = true;
       }
     }
-
-    if (url.includes('funcionario')) {
-      this.pessoa.tipoPessoa = TipoPessoa.FUNCIONARIO;
-      this.isFuncionario = true;
-    }
   }
 
   cadastrar() {
@@ -73,7 +60,7 @@ export class PessoasDetailsComponent implements OnInit {
         this.pessoa = pessoas;
         this.isErro = false;
         this.mensagem = 'Pessoa cadastrada com sucesso!';
-        this.voltarFuncionario()
+        this.voltar();
       },
       error: (erro) => {
         console.log(erro.error);
@@ -170,11 +157,6 @@ export class PessoasDetailsComponent implements OnInit {
 
   async voltar() {
     this.injectRouter.navigate(['/web/clientes']);
-    this.moveTo();
-  }
-
-  async voltarFuncionario() {
-    this.injectRouter.navigate(['/web/funcionarios']);
     this.moveTo();
   }
 

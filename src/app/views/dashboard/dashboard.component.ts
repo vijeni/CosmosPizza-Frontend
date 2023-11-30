@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { Pessoa } from '../../models/pessoa/pessoa';
+import { Cliente } from '../../models/cliente/cliente';
 import Produto from '../../models/produto/produto';
 
 @Component({
@@ -10,7 +10,7 @@ import Produto from '../../models/produto/produto';
 })
 export class DashboardComponent implements OnInit {
   public chart: any;
-  pessoa = new Pessoa();
+  pessoa = new Cliente();
   produto = new Produto();
   pessoas: [] = [];
   produtos: [] = [];

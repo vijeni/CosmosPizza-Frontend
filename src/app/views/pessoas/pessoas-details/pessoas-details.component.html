@@ -1,8 +1,7 @@
 <div class="w-100 h-100 d-flex flex-column pt-5 align-items-center">
     <div class="w-90">
         <div class="d-flex justify-content-between header">
-            <h5 class="m-0 fw-bold" *ngIf="!isFuncionario">Novo Cliente</h5>
-            <h5 class="m-0 fw-bold" *ngIf="isFuncionario">Novo Funcionario</h5>
+            <h5 class="m-0 fw-bold">Novo Cliente</h5>
 
         </div>
         <hr>
@@ -59,7 +58,8 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Com DDD. Ex: (45)" *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o telefone</mat-label>
-                                            <input matInput #inputTelefone maxlength="20" [(ngModel)]="pessoa.telefone"
+                                            <input matInput #inputTelefone 
+                                            name="telefone" maxlength="20" [(ngModel)]="pessoa.telefone"
                                                 placeholder="Com DDD. Ex: (45)" class="w-100">
                                             <mat-hint align="end">{{inputTelefone.value.length}}/20</mat-hint>
                                         </mat-form-field>
@@ -81,7 +81,8 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="Não vamos divulgar para ninguém." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o CPF</mat-label>
-                                            <input matInput #inputCpf maxlength="14" [(ngModel)]="pessoa.cpf"
+                                            <input matInput #inputCpf 
+                                            name="cpf" maxlength="14" [(ngModel)]="pessoa.cpf"
                                                 placeholder="000.000.000-00" [mask]="cpfMask()" class="w-100">
                                             <mat-hint align="end">{{inputCpf.value.length}}/14</mat-hint>
                                         </mat-form-field>
@@ -102,7 +103,9 @@
                                     <td class="align-middle text-center">
                                         <mat-form-field hintLabel="O CEP da rua da pessoa." *ngIf="!disabled">
                                             <mat-label><span style="color:red">*</span>Digite o CEP</mat-label>
-                                            <input matInput #inputCep maxlength="09" (change)="viaCep()"
+                                            <input matInput #inputCep 
+                                            name="cep"
+                                            maxlength="09" (change)="viaCep()"
                                                 [(ngModel)]="pessoa.endereco.cep" placeholder="CEP" class="w-100">
                                             <mat-hint align="end">{{inputCep.value.length}}/9</mat-hint>
                                         </mat-form-field>
@@ -243,63 +246,69 @@
                             <hr class="mx-n3">
                             <div class="row align-items-center py-3">
                                 <div class="col-md-9 pe-5">
-                                    <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                        <div class="col-md-4 ps-5">
-                                            <h6 class="mb-0">Data de Criação:
-                                            </h6>
-                                        </div>
-                                        <div class="flex-row d-flex col-md-4">
-                                            <p class="mb-0">{{pessoa.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                        <div class="col-md-4 ps-5">
-                                            <h6 class="mb-0">Data de Edição:
-                                            </h6>
-                                        </div>
-                                        <div class="flex-row d-flex col-md-4">
-                                            <p class="mb-0">{{pessoa.edicao? (pessoa.edicao | date : 'dd/MM/yyyy -
-                                                HH:mm'):
-                                                'Nunca editado.'}}</p>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
-                                        <div class="col-md-4 ps-5">
-                                            <h6 class="mb-0">Status:
-                                            </h6>
-                                        </div>
-                                        <div class="flex-row d-flex col-md-3">
-                                            <span *ngIf="pessoa.delecao" class="badge bg-danger">Desativado</span>
-                                            <span *ngIf="!pessoa.delecao" class="badge bg-success">Ativado</span>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="pessoa.delecao && modoEditar == null && id"
-                                        class="row align-items-center py-3">
-                                        <div class="col-md-4 ps-5">
-                                            <h6 class="mb-0">Desativado em:
-                                            </h6>
-                                        </div>
-                                        <div class="flex-row d-flex col-md-4">
-                                            <p class="mb-0">{{pessoa.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
-                                        </div>
-                                    </div>
+                                    <td class="align-start text-center">
+                                        <form #form="ngForm">
+                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Data de Criação:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{pessoa.cadastro | date : 'dd/MM/yyyy - HH:mm'}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Data de Edição:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{pessoa.edicao? (pessoa.edicao | date : 'dd/MM/yyyy
+                                                        -
+                                                        HH:mm'):
+                                                        'Nunca editado.'}}</p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="modoEditar == null && id" class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Status:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-3">
+                                                    <span *ngIf="pessoa.delecao"
+                                                        class="badge bg-danger">Desativado</span>
+                                                    <span *ngIf="!pessoa.delecao"
+                                                        class="badge bg-success">Ativado</span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="pessoa.delecao && modoEditar == null && id"
+                                                class="row align-items-center py-3">
+                                                <div class="col-md-4 ps-5">
+                                                    <h6 class="mb-0">Desativado em:
+                                                    </h6>
+                                                </div>
+                                                <div class="flex-row d-flex col-md-4">
+                                                    <p class="mb-0">{{pessoa.delecao | date : 'dd/MM/yyyy - HH:mm'}}</p>
+                                                </div>
+                                            </div>
+                                        </form>
                                 </div>
-                            </div>
-                            <hr class="mx-n3">
-                            <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
-                                <button type="submit" class="btn btn-danger" *ngIf="!modoEditar && disabled && pessoa.delecao == null"
-                                    (click)="deletar(pessoa.id)">Desativar</button>
-                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && disabled && pessoa.delecao != null"
-                                    (click)="deletar(pessoa.id)">Ativar</button>
-                                <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id"
-                                    (click)="cadastrar()">Cadastrar</button>
-                                <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id"
-                                    (click)="editar(pessoa.id)">Editar</button>
-                                <button type="submit" class="btn btn-secondary" *ngIf="!isFuncionario"
-                                    (click)="voltar()">Voltar</button>
-                                <button type="submit" class="btn btn-secondary" *ngIf="isFuncionario"
-                                    (click)="voltarFuncionario()">Voltar</button>
+                                <hr class="mx-n3">
+                                <div class="px-5 gap-4 d-flex flex-row justify-content-center py-4">
+                                    <button type="submit" class="btn btn-danger"
+                                        *ngIf="!modoEditar && disabled && pessoa.delecao == null"
+                                        (click)="deletar(pessoa.id)">Desativar</button>
+                                    <button type="submit" class="btn btn-success"
+                                        *ngIf="!modoEditar && disabled && pessoa.delecao != null"
+                                        (click)="deletar(pessoa.id)">Ativar</button>
+                                    <button type="submit" class="btn btn-success" *ngIf="!modoEditar && !id"
+                                        (click)="cadastrar()">Cadastrar</button>
+                                    <button type="submit" class="btn btn-warning" *ngIf="modoEditar && id"
+                                        (click)="editar(pessoa.id)">Editar</button>
+                                    <button type="submit" class="btn btn-secondary" (click)="voltar()">Voltar</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -307,4 +316,3 @@
             </div>
         </div>
     </div>
-</div>

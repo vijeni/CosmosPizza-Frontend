@@ -2,11 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Sabor } from 'src/app/models/sabor/sabor';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class SaborService {
-    API: string = 'http://localhost:8080/api/sabor';
+  API: string = `${environment.apirUrl}/api/sabor`;
     http = inject(HttpClient);
   
     constructor() {}

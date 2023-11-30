@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
@@ -9,10 +9,6 @@ import { RouterLink, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  imports: [NgbCollapseModule, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, RouterModule // Adicione o RouterModule aos imports do módulo
-],
-  standalone: true,
-
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {

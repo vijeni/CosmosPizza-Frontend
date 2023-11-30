@@ -21,12 +21,8 @@ body,html{
     width: 95%;
 }
 
-app-pessoas-list, app-produto-list, app-produto-details, app-pessoas-details, app-sabor-lista, app-sabor-details, app-pedidos-list, app-pedidos-details, app-pizza-details{ 
+app-pessoas-list, app-produto-list, app-produto-details, app-pessoas-details, app-sabor-lista, app-sabor-details, app-pedidos-list, app-pedidos-details, app-pizza-details, app-ingrediente-list, app-ingredientes-details,app-tamanho-list, app-tamanho-details, app-usuarios-listar{ 
     width: 100%; 
-}
-
-app-ingrediente-list, app-ingredientes-details,app-tamanho-list, app-tamanho-details{
-    width: 100%;
 }
 
 app-sidebar{
