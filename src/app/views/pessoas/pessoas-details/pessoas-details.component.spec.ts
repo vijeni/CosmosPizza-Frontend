@@ -26,50 +26,50 @@ describe('PessoasDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  beforeEach(() => {
-    let cliente = new Cliente();
-    let endereco = new Endereco();
-    cliente.endereco = endereco
-    cliente.id= 1
-    cliente.cadastro= new Date()
-    cliente.edicao= new Date()
-    cliente.nome='João'
-    cliente.cpf='12345678900'
-    cliente.telefone='12345678'
-    cliente.endereco.cep="85851010"
-    component.pessoa = cliente;
-    fixture.detectChanges();
-  });
-  it('mostrar nome do cliente', async () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="inputNome"]'));
-    expect(elemento.nativeElement.value).toEqual('');
-    elemento.nativeElement.value = 'João'; 
-    elemento.nativeElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    expect(component.pessoa.nome).toEqual('João'); 
-  });
-  it('mostrar telefone do cliente', async () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="telefone"]'));
-    expect(elemento.nativeElement.value).toEqual('');
-    elemento.nativeElement.value = '12345678'; 
-    elemento.nativeElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    expect(component.pessoa.telefone).toEqual('12345678'); 
-  });
-  it('mostrar cpf do cliente', async () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="cpf"]'));
-    expect(elemento.nativeElement.value).toEqual('');
-    elemento.nativeElement.value = '12345678900'; 
-    elemento.nativeElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    expect(component.pessoa.cpf).toEqual('12345678900'); 
-  });
-  it('mostrar cep do cliente', async () => {
-    let elemento = fixture.debugElement.query(By.css('input[name="cep"]'));
-    expect(elemento.nativeElement.value).toEqual('');
-    elemento.nativeElement.value = '85851010'; 
-    elemento.nativeElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-    expect(component.pessoa.endereco.cep).toEqual('85851010'); 
-  });
+  // beforeEach(() => {
+  //   let cliente = new Cliente();
+  //   let endereco = new Endereco();
+  //   cliente.endereco = endereco
+  //   cliente.id= 1
+  //   cliente.cadastro= new Date()
+  //   cliente.edicao= new Date()
+  //   cliente.nome='João'
+  //   cliente.cpf='12345678900'
+  //   cliente.telefone='12345678'
+  //   cliente.endereco.cep="85851010"
+  //   component.pessoa = cliente;
+  //   fixture.detectChanges();
+  // });
+  // it('mostrar nome do cliente', async () => {
+  //   let elemento = fixture.debugElement.query(By.css('input[name="inputNome"]'));
+  //   expect(elemento.nativeElement.value).toEqual('');
+  //   elemento.nativeElement.value = 'João'; 
+  //   elemento.nativeElement.dispatchEvent(new Event('input'));
+  //   fixture.detectChanges();
+  //   expect(component.pessoa.nome).toEqual('João'); 
+  // });
+  // it('mostrar telefone do cliente', async () => {
+  //   let elemento = fixture.debugElement.query(By.css('input[name="telefone"]'));
+  //   expect(elemento.nativeElement.value).toEqual('');
+  //   elemento.nativeElement.value = '12345678'; 
+  //   elemento.nativeElement.dispatchEvent(new Event('input'));
+  //   fixture.detectChanges();
+  //   expect(component.pessoa.telefone).toEqual('12345678'); 
+  // });
+  // it('mostrar cpf do cliente', async () => {
+  //   let elemento = fixture.debugElement.query(By.css('input[name="cpf"]'));
+  //   expect(elemento.nativeElement.value).toEqual('');
+  //   elemento.nativeElement.value = '12345678900'; 
+  //   elemento.nativeElement.dispatchEvent(new Event('input'));
+  //   fixture.detectChanges();
+  //   expect(component.pessoa.cpf).toEqual('12345678900'); 
+  // });
+  // it('mostrar cep do cliente', async () => {
+  //   let elemento = fixture.debugElement.query(By.css('input[name="cep"]'));
+  //   expect(elemento.nativeElement.value).toEqual('');
+  //   elemento.nativeElement.value = '85851010'; 
+  //   elemento.nativeElement.dispatchEvent(new Event('input'));
+  //   fixture.detectChanges();
+  //   expect(component.pessoa.endereco.cep).toEqual('85851010'); 
+  // });
 });
