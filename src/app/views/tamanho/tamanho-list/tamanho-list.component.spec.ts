@@ -1,7 +1,13 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { TamanhoListComponent } from './tamanho-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TamanhoService } from 'src/app/services/tamanho/tamanho.service';
 import { Router } from '@angular/router';
@@ -12,11 +18,10 @@ describe('TamanhoListComponent', () => {
   let fixture: ComponentFixture<TamanhoListComponent>;
   let tamanhoService: TamanhoService;
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TamanhoListComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(TamanhoListComponent);
@@ -40,7 +45,7 @@ describe('TamanhoListComponent', () => {
   it('Deve trocar o estado', fakeAsync(() => {
     component.filter.setValue('Grande');
     component.switchEstado.setValue(true);
-    tick(); 
+    tick();
     expect(component.tamanho$.length).toBeGreaterThan(0);
   }));
 
@@ -57,7 +62,4 @@ describe('TamanhoListComponent', () => {
     component.toggle(id);
     expect(routerSpy).toHaveBeenCalledWith(['/web/tamanho/toggle', id]);
   });
-
-  
-
 });

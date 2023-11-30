@@ -5,12 +5,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent],
-    imports: [HttpClientTestingModule, RouterTestingModule],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    })
+  );
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -28,6 +29,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('CosmosPizza-Frontend app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain(
+      'CosmosPizza-Frontend app is running!'
+    );
   });
 });
