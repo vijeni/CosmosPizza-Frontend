@@ -34,7 +34,7 @@ export class PizzaDetailsComponent implements OnInit{
 
   ngOnInit() {
     console.log(this.pizza)
-    if(!this.pizza.tamanho){
+    if(!this.pizza.tamanho || this.pizza.tamanho == undefined){
       this.pizza.sabores = [] 
     }else{
       this.disabled = true

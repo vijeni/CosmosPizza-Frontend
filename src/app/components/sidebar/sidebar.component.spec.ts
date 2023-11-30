@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { SidebarComponent } from './sidebar.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -11,9 +12,8 @@ describe('SidebarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [SidebarComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+       imports: [HttpClientTestingModule, RouterTestingModule, NgbCollapse ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],      declarations: [SidebarComponent],
     });
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;

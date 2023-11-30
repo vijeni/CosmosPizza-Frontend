@@ -12,9 +12,8 @@ describe('IngredienteListComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [IngredienteListComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-    });
+       imports: [HttpClientTestingModule, RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],         });
     fixture = TestBed.createComponent(IngredienteListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

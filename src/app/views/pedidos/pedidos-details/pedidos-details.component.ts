@@ -29,7 +29,12 @@ export class PedidosDetailsComponent implements OnInit {
   service = inject(PedidoService);
   modalService = inject(NgbModal);
   pizzaDetalhada!: Pizza;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+    this.pedido = new Pedido();
+    this.pedido.produtos = [];
+    this.pedido.pizzas = [];
+  }
+  
 
   ngOnInit() {
     let url = this.router.url;
